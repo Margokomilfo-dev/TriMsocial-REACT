@@ -1,0 +1,16 @@
+.friends_photo {
+    width: 70px;
+    height: 70px;
+    background-color: grey; 
+    border-radius: 100%;
+}
+.friends_photo img{
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+}
+.friends_name {
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 10px;
+}

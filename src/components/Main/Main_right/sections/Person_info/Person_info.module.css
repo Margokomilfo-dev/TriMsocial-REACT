@@ -1,0 +1,33 @@
+.main_info {
+    margin: 0 auto;
+}
+.fio {
+    font-size: 24px;
+    font-weight: 500;
+}
+.nick {
+    font-size: 16px;
+    padding: 0 10px;
+}
+.nickname {
+    font-style: italic;
+    font-weight: 500;
+}
+
+.status textarea {
+    width: calc(100% - 20px);
+    margin: 10px 0;
+    border: none;
+    border-radius: 20px;
+    resize: none;
+    padding: 10px;
+    font-size: 16px;
+    background-color: rgba(214,214,214,.3);
+    outline: none;
+}
+.titles {
+    display: inline-block;
+    padding: 2px 0;
+    width: 200px;
+    color: #808080;
+}

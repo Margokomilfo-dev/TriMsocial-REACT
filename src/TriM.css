@@ -1,0 +1,12 @@
+.container {
+}
+.wrapper{
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px solid white;
+}
+.main_wrapper {
+    width: 85%;
+}

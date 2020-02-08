@@ -1,0 +1,10 @@
+.last_seen_wrapper {
+    display: flex;
+    justify-content: flex-end;   
+ }
+ 
+.last_seen {
+    color: #808080;
+    font-size: 14px;
+    margin: 10px 0;
+}
