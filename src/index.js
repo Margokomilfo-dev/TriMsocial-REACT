@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import store from './redux/data';
+import store from './redux/store';
 import './index.css';
 import TriM from './TriM';
 import { BrowserRouter } from 'react-router-dom';

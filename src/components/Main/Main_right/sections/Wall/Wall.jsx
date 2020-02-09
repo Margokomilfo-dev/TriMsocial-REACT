@@ -2,7 +2,7 @@ import React from 'react'
 import s from './Wall.module.css'
 import Post from './Post/Post'
 import { createRef } from 'react'
-import { onPostTextChangeActionCreator, addPostActionCreator } from '../../../../../redux/data'
+import { onPostTextChangeActionCreator, addPostActionCreator } from '../../../../../redux/main_reducer'
 
 
 let Wall = (props) => { 

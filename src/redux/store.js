@@ -1,7 +1,5 @@
-let addPost = 'ADD-POST',
-    onPostTextChange = 'ON-POST-TEXT-CHANGE',
-    addMess = 'ADD-MESS',
-    onMessTextChange = 'ON-MESS-TEXT-CHANGE'
+import mainReducer from "./main_reducer";
+import messageReducer from "./message_reducer";
 
 let store = {
     _data: {
@@ -55,36 +53,12 @@ let store = {
     getData() { return this._data },
 
     dispatch(action) {
-        if (action.type === addPost){
-            let newPostData = {
-                header: 'some text...',
-                content: this._data.mainPage.newPostText,
-                data: '22.22.22'
-            }
-            this._data.mainPage.postData.unshift(newPostData);
-            this._data.mainPage.newPostText = '';
-            this._callSubscriber(this._data);
-        }else if (action.type === onPostTextChange){
-            this._data.mainPage.newPostText = action.text; 
-            this._callSubscriber(this._data);  
-        }else if (action.type === addMess){
-            let newMesData = {
-                message: this._data.messagePage.newMessageText
-            }
-            this._data.messagePage.messageData.push(newMesData);
-            this._data.messagePage.newMessageText = '';
-            this._callSubscriber(this._data);
-        }else if (action.type === onMessTextChange){
-            this._data.messagePage.newMessageText = action.text; 
+        this._data.mainPage = mainReducer(this._data.mainPage, action);
+        this._data.messagePage = messageReducer(this._data.messagePage, action);
         this._callSubscriber(this._data); 
-        }
     },
 };
 
-export const addPostActionCreator = () => ({type: addPost});
-export const onPostTextChangeActionCreator = (newPostText) => ({type: onPostTextChange, text: newPostText});
-export const addMessActionCreator = () => ({type: addMess});
-export const onMessTextChangeActionCreator = (newMessageText) => ({type: onMessTextChange, text: newMessageText});
 
 window.store = store;
 export default store; 

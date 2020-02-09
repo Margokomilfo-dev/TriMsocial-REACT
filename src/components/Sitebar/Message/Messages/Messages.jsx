@@ -2,7 +2,7 @@
 import React from 'react'
 import s from './Messages.module.css'
 import User_messages from './User_messages/User_messages'
-import { addMessActionCreator, onMessTextChangeActionCreator } from '../../../../redux/data';
+import { addMessActionCreator, onMessTextChangeActionCreator } from '../../../../redux/message_reducer';
 
 let Messages = (props) => {
     let textMessPoint = React.createRef();
