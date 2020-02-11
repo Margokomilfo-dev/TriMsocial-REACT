@@ -5,33 +5,33 @@ let Person_info = (props) => {
     return (
         <div className = {s.section_person_info}>
             <div className = {s.main_info}>
-                <div className = {s.fio}> {props.data.fio} <span className = {s.first_surname}> {props.data.first_surname} </span></div>
-                <div className = {s.nick}>nick-name: <span className = {s.nickname}>{props.data.nickname}</span> </div>
+                <div className = {s.fio}> {props.state.fio} <span className = {s.first_surname}> {props.state.first_surname} </span></div>
+                <div className = {s.nick}>nick-name: <span className = {s.nickname}>{props.state.nickname}</span> </div>
                 <div className={s.status}>
-                    <textarea name="message" rows="2" cols="65" placeholder="Status..." >{props.data.status}</textarea>
+                    <textarea name="message" rows="2" cols="65" placeholder="Status..." >{props.state.status}</textarea>
                 </div> 
 
                 <hr/>
 
                 <div>
                     <span className = {s.titles}> Birthday:</span> 
-                    <span className = {s.birthday_date}>{props.data.birthday_date}</span>
+                    <span className = {s.birthday_date}>{props.state.birthday_date}</span>
                 </div>
                 <div>
                     <span className = {s.titles}> Relationship:</span> 
-                    <span className = {s.relatonship}>{props.data.relationship}</span>
+                    <span className = {s.relatonship}>{props.state.relationship}</span>
                 </div>
                 <div>
                     <span className = {s.titles}> Country:</span> 
-                    <span className = {s.country}>{props.data.country}</span>
+                    <span className = {s.country}>{props.state.country}</span>
                 </div>
                 <div>
                     <span className = {s.titles}> City:</span> 
-                    <span className = {s.city}>{props.data.city}</span>
+                    <span className = {s.city}>{props.state.city}</span>
                 </div>
                 <div>
                     <span className = {s.titles}> Profession:</span> 
-                    <span className = {s.profession}>{props.data.profession}</span>
+                    <span className = {s.profession}>{props.state.profession}</span>
                 </div>
                 
                 <hr/>

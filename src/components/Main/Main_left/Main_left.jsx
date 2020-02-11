@@ -13,7 +13,7 @@ let Main_left = (props) => {
             </div> {/*section*/}
 
             <div className={s.section}>
-                <FriendsSec data={props}/>
+                <FriendsSec state={props}/>
             </div> {/*section*/}  
             
         </div>

@@ -17,22 +17,22 @@ let inicialization = {
     ],
 }
 
-let messageReducer = (data = inicialization, action) => {
+let messageReducer = (state = inicialization, action) => {
     switch (action.type) {
         case ADD_MESS:
             let newMesData = {
-                message: data.newMessageText
+                message: state.newMessageText
             }
-            data.messageData.push(newMesData);
-            data.newMessageText = '';
-            return data;
+            state.messageData.push(newMesData);
+            state.newMessageText = '';
+            return state;
 
         case ON_MESS_TEXT_CHANGE:
-            data.newMessageText = action.text; 
-            return data;
+            state.newMessageText = action.text; 
+            return state;
 
         default:
-            return data;
+            return state;
     }
 }
 

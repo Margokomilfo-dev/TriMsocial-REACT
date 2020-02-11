@@ -1,23 +1,22 @@
 import React from 'react'
 import s from './Wall.module.css'
 import Post from './Post/Post'
-import { createRef } from 'react'
-import { onPostTextChangeActionCreator, addPostActionCreator } from '../../../../../redux/main_reducer'
+
 
 
 let Wall = (props) => { 
-
-    let postItems = props.data.postData.map( p => <Post header={p.header} content={p.content} data={p.data} />)
+    let postItems = props.postData.map( p => <Post header={p.header} content={p.content} state={p.state} />)
    
 //------------------------------------------------    
     let textPostPoint = React.createRef();
     let addPost = () => {
-        textPostPoint.current.value === '' ? alert('Empty field! Try to write down again!') :  props.dispatch(addPostActionCreator());
+        textPostPoint.current.value === '' ? alert('Empty field! Try to write down again!') :  props.addPost();
     }
 
     let onPostTextChange = (text) => {
+
         let newPostText = textPostPoint.current.value;
-        props.dispatch(onPostTextChangeActionCreator(newPostText));
+        props.onPostTextChange(newPostText);
     }
 //------------------------------------------------
     return (

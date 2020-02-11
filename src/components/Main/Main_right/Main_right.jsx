@@ -3,7 +3,7 @@ import React from 'react'
 import s from './Main_right.module.css'
 import Person_info from './sections/Person_info/Person_info'
 import Statistic from './sections/Statistic/Statistic'
-import Wall from './sections/Wall/Wall'
+import WallContainer from './sections/Wall/WallContainer'
 
 let Main_right = (props) => {
     debugger
@@ -12,7 +12,7 @@ let Main_right = (props) => {
         <div className = {s.main_right}>
 
             <div className = {s.section}>
-                <Person_info data = {props.personData}/>
+                <Person_info state = {props.personData}/>
             </div> {/*section*/}
                     
 
@@ -21,9 +21,10 @@ let Main_right = (props) => {
             </div> {/*section*/}
 
             <div className = {s.section}>
-               <Wall data = {props} 
-                    newPostText={props.newPostText}
-                    dispatch = {props.dispatch} />
+               <WallContainer state = {props.state}
+                                postData = {props.postData}
+                                dispatch = {props.dispatch} 
+                            />
             </div> {/*section*/}
         </div>
     )

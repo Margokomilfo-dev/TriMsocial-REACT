@@ -11,10 +11,11 @@ debugger
             <div className = {s.main_wrapper}>
                <Main_left  friendData = {props.mainPage.friendData}/>
 
-               <Main_right postData = {props.mainPage.postData} 
-                            personData = {props.mainPage.personData} 
-                            newPostText={props.mainPage.newPostText}
-                            dispatch = {props.dispatch} />
+               <Main_right  state = {props.state}
+                            personData = {props.mainPage.personData}
+                            postData = {props.mainPage.postData}
+                            dispatch = {props.dispatch} 
+                            />
                 
             </div> {/*main_wrapper*/}   
         </div> 

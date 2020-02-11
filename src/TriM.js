@@ -25,9 +25,10 @@ function TriM(props) {
         <Sitebar />
         <div className='main_wrapper'>
           <Last_seen last_seen = 'Online...' />
-          <Route path = '/profile' render = {() => <Main mainPage = {props.data.mainPage} 
-                                                          dispatch = {props.dispatch} />} />
-          <Route path = '/message' render = {() => <Message messagePage = {props.data.messagePage} 
+          <Route path = '/profile' render = {() => <Main mainPage = {props.state.mainPage} 
+                                                         state ={props.state}
+                                                         dispatch = {props.dispatch}/> } />
+          <Route path = '/message' render = {() => <Message messagePage = {props.state.messagePage} 
                                                           dispatch = {props.dispatch} />} />
           <Route path = '/photos' render = {() => <Photos />} />  
           <Route path = '/friends' render = {() => <Friends />}/> 

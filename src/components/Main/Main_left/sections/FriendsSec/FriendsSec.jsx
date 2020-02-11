@@ -3,7 +3,7 @@ import s from './FriendsSec.module.css'
 import Friend from './Friend/Friend'
 
 let FriendsSec = (props) => {
-     let friendsData = props.data.friendData.map(f => <Friend src={f.src} alt={f.alt} name={f.name} />)
+     let friendsData = props.state.friendData.map(f => <Friend src={f.src} alt={f.alt} name={f.name} />)
 
      return (
           <div className={s.friendsSec}>

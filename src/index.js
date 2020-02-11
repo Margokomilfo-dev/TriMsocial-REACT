@@ -6,10 +6,10 @@ import './index.css';
 import TriM from './TriM';
 import { BrowserRouter } from 'react-router-dom';
 
-let rerenderTriM = (data) => {
+let rerenderTriM = (state) => {
     ReactDOM.render(
         <BrowserRouter>
-            <TriM data={data} 
+            <TriM state={state} 
                 dispatch={store.dispatch.bind(store)}/>
         </BrowserRouter>, document.getElementById('root'));
 }
