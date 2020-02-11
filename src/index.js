@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import store from './redux/store';
+import store from './redux/store_redux';
 import './index.css';
 import TriM from './TriM';
 import { BrowserRouter } from 'react-router-dom';
@@ -14,6 +14,10 @@ let rerenderTriM = (data) => {
         </BrowserRouter>, document.getElementById('root'));
 }
 
-rerenderTriM(store.getData());
-store.subscribe(rerenderTriM);
+rerenderTriM(store.getState());
+
+store.subscribe(() => {
+    let state = store.getState()
+    rerenderTriM(state);
+});
 
