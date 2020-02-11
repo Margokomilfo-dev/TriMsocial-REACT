@@ -4,7 +4,7 @@ import Post from './Post/Post'
 
 
 
-let Wall = (props) => { 
+let Wall = (props) => {
     let postItems = props.postData.map( p => <Post header={p.header} content={p.content} state={p.state} />)
    
 //------------------------------------------------    

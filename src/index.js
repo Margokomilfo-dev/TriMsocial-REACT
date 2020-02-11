@@ -9,8 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 let rerenderTriM = (state) => {
     ReactDOM.render(
         <BrowserRouter>
-            <TriM state={state} 
-                dispatch={store.dispatch.bind(store)}/>
+            <TriM store = {store} state={state} dispatch={store.dispatch.bind(store)}/>
         </BrowserRouter>, document.getElementById('root'));
 }
 

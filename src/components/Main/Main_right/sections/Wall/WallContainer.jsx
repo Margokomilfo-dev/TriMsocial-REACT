@@ -4,18 +4,18 @@ import Wall from './Wall'
 
 
 let WallContainer = (props) => {
-
+    let state = props.store.getState() ;
     //------------------------------------------------    
     let addPost = () => {
-        props.dispatch(addPostActionCreator());
+        props.store.dispatch(addPostActionCreator());
     }
 
     let postTextChange = (text) => {
-        props.dispatch(onPostTextChangeActionCreator(text));
+        props.store.dispatch(onPostTextChangeActionCreator(text));
     }
     //------------------------------------------------
     return (
-        <Wall addPost={addPost} onPostTextChange={postTextChange} postData = {props.postData} />
+        <Wall addPost={addPost} onPostTextChange={postTextChange} postData = {state.mainPage.postData} />
     )
 }
 

@@ -17,7 +17,6 @@ import Groups from './components/Sitebar/Groups/Groups.jsx'
 
 
 function TriM(props) {
-  debugger
   return (
     <div className='container'>
       <Header />
@@ -25,9 +24,8 @@ function TriM(props) {
         <Sitebar />
         <div className='main_wrapper'>
           <Last_seen last_seen = 'Online...' />
-          <Route path = '/profile' render = {() => <Main mainPage = {props.state.mainPage} 
-                                                         state ={props.state}
-                                                         dispatch = {props.dispatch}/> } />
+          <Route path = '/profile' render = {() => <Main store = {props.store}
+                                                         state ={props.state} />} />
           <Route path = '/message' render = {() => <Message messagePage = {props.state.messagePage} 
                                                           dispatch = {props.dispatch} />} />
           <Route path = '/photos' render = {() => <Photos />} />  

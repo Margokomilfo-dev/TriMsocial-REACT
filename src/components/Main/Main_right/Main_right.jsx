@@ -6,8 +6,6 @@ import Statistic from './sections/Statistic/Statistic'
 import WallContainer from './sections/Wall/WallContainer'
 
 let Main_right = (props) => {
-    debugger
-    console.log(props)
     return (
         <div className = {s.main_right}>
 
@@ -21,10 +19,7 @@ let Main_right = (props) => {
             </div> {/*section*/}
 
             <div className = {s.section}>
-               <WallContainer state = {props.state}
-                                postData = {props.postData}
-                                dispatch = {props.dispatch} 
-                            />
+               <WallContainer   store = {props.store}/>
             </div> {/*section*/}
         </div>
     )
