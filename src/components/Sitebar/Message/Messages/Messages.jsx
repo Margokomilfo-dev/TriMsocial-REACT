@@ -5,18 +5,19 @@ import User_messages from './User_messages/User_messages'
 import { addMessActionCreator, onMessTextChangeActionCreator } from '../../../../redux/message_reducer';
 
 let Messages = (props) => {
-    let textMessPoint = React.createRef();
 
+    let messageItems = props.messageData.map(m => <User_messages message={m.message} />)
+    let textMessPoint = React.createRef();
     let addMess = () => {
-        textMessPoint.current.value === '' ? alert('Empty field! Try to write down again!') :  props.dispatch(addMessActionCreator());
+        textMessPoint.current.value === '' ? alert('Empty field! Try to write down again!') :  props.addMess();
     }
     
     let onMessTextChange = (text) => {
         let newMessageText = textMessPoint.current.value;
-        props.dispatch(onMessTextChangeActionCreator(newMessageText));
+        props.onMessTextChange(newMessageText);
     }
     
-    let messageItems = props.messageData.map(m => <User_messages message={m.message} />)
+
     return (
         <div className={s.messages_wrapper}>
             <div className={s.messages}>

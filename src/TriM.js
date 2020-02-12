@@ -26,7 +26,8 @@ function TriM(props) {
           <Last_seen last_seen = 'Online...' />
           <Route path = '/profile' render = {() => <Main store = {props.store}
                                                          state ={props.state} />} />
-          <Route path = '/message' render = {() => <Message messagePage = {props.state.messagePage} 
+          <Route path = '/message' render = {() => <Message store = {props.store}
+                                                          messagePage = {props.state.messagePage}
                                                           dispatch = {props.dispatch} />} />
           <Route path = '/photos' render = {() => <Photos />} />  
           <Route path = '/friends' render = {() => <Friends />}/> 
