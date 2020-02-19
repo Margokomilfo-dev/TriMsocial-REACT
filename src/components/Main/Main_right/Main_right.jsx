@@ -19,7 +19,7 @@ let Main_right = (props) => {
             </div> {/*section*/}
 
             <div className = {s.section}>
-               <WallContainer   store = {props.store}/>
+               <WallContainer />
             </div> {/*section*/}
         </div>
     )

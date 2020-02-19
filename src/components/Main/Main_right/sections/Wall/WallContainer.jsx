@@ -1,22 +1,23 @@
 import React from 'react'
 import { onPostTextChangeActionCreator, addPostActionCreator } from '../../../../../redux/main_reducer'
 import Wall from './Wall'
+import {connect} from "react-redux";
 
 
-let WallContainer = (props) => {
-    let state = props.store.getState() ;
-    //------------------------------------------------    
-    let addPost = () => {
-        props.store.dispatch(addPostActionCreator());
+
+const mapStateToProps = (state) => {
+    return {
+        postData : state.mainPage.postData,
+        newPostText : state.mainPage.newPostText
     }
-
-    let postTextChange = (text) => {
-        props.store.dispatch(onPostTextChangeActionCreator(text));
-    }
-    //------------------------------------------------
-    return (
-        <Wall addPost={addPost} onPostTextChange={postTextChange} postData = {state.mainPage.postData} />
-    )
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addPost: () => { dispatch(addPostActionCreator())},
+        postTextChange: (text) => {dispatch(onPostTextChangeActionCreator(text))}
+    }
+}
+
+const WallContainer = connect(mapStateToProps, mapDispatchToProps)(Wall)
 
 export default WallContainer

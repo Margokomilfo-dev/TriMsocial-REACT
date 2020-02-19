@@ -7,7 +7,7 @@ let Message = (props) => {
     return (
         <div className={s.message}>
             <Users userData={props.userData}/>
-            <MessagesContainer store = {props.store} />
+            <MessagesContainer />
         </div>
     )
 }

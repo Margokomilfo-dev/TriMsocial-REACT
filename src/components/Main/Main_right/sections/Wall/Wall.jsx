@@ -5,7 +5,8 @@ import Post from './Post/Post'
 
 
 let Wall = (props) => {
-    let postItems = props.postData.map( p => <Post header={p.header} content={p.content} state={p.state} />)
+    debugger
+    let postItems = props.postData.map( p => <Post header={p.header} content={p.content} state={p.state} key={p.id} />)
    
 //------------------------------------------------    
     let textPostPoint = React.createRef();
@@ -16,7 +17,7 @@ let Wall = (props) => {
     let onPostTextChange = (text) => {
 
         let newPostText = textPostPoint.current.value;
-        props.onPostTextChange(newPostText);
+        props.postTextChange(newPostText);
     }
 //------------------------------------------------
     return (

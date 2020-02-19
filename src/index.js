@@ -5,18 +5,20 @@ import store from './redux/store_redux';
 import './index.css';
 import TriM from './TriM';
 import { BrowserRouter } from 'react-router-dom';
+import {Provider} from "react-redux";
 
-let rerenderTriM = (state) => {
-    ReactDOM.render(
+// let rerenderTriM = () => {
+     ReactDOM.render(
         <BrowserRouter>
-            <TriM store = {store} state={state} dispatch={store.dispatch.bind(store)}/>
+            <Provider store={store}>
+                <TriM state={store.getState()} dispatch={store.dispatch.bind(store)}/>
+            </Provider>
         </BrowserRouter>, document.getElementById('root'));
-}
+// }
 
-rerenderTriM(store.getState());
+// rerenderTriM();
 
-store.subscribe(() => {
-    let state = store.getState()
-    rerenderTriM(state);
-});
-
+// store.subscribe(() => {
+//     rerenderTriM();
+// });
+//

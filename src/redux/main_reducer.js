@@ -30,19 +30,25 @@ let inicialization = {
 
 let mainReducer = (state = inicialization, action) => {
     switch (action.type) {
-        case ADD_POST:
+        case ADD_POST: {
             let newPostData = {
                 header: 'some text...',
                 content: state.newPostText,
                 data: '22.22.22'
             }
-            state.postData.unshift(newPostData);
-            state.newPostText = '';
-            return state;
+            return{
+                ...state,
+                postData: [newPostData, ...state.postData],
+                newPostText: ''
+            };
+        }
 
-        case ON_POST_TEXT_CHANGE:
-            state.newPostText = action.text;
-            return state;
+        case ON_POST_TEXT_CHANGE: {
+            return {
+                ...state,
+                newPostText: action.text
+             }
+        }
 
         default:
             return state;

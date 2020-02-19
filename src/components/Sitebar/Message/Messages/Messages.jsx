@@ -6,7 +6,7 @@ import { addMessActionCreator, onMessTextChangeActionCreator } from '../../../..
 
 let Messages = (props) => {
 
-    let messageItems = props.messageData.map(m => <User_messages message={m.message} />)
+    let messageItems = props.messageData.map(m => <User_messages message={m.message} key={m.id}/>)
     let textMessPoint = React.createRef();
     let addMess = () => {
         textMessPoint.current.value === '' ? alert('Empty field! Try to write down again!') :  props.addMess();
