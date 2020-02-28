@@ -4,7 +4,7 @@ import './TriM.js'
 import './TriM.css'
 import Header from './components/Header/Header.jsx'
 import Sitebar from './components/Sitebar/Sitebar.jsx'
-import { Route, BrowserRouter } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import Last_seen from './components/Last_seen/Last_seen.jsx'
 import Main from './components/Main/Main.jsx'
 import Message from './components/Sitebar/Message/Message.jsx'
@@ -14,6 +14,7 @@ import News from './components/Sitebar/News/News.jsx'
 import Music from './components/Sitebar/Music/Music.jsx'
 import Muvies from './components/Sitebar/Muvies/Muvies.jsx'
 import Groups from './components/Sitebar/Groups/Groups.jsx'
+import AllUsersContainer from "./components/Sitebar/AllUsers/AllUsersContainer";
 
 
 function TriM(props) {
@@ -28,6 +29,8 @@ function TriM(props) {
                                                          state ={props.state} />} />
           <Route path = '/message' render = {() => <Message store = {props.store}
                                                             userData = {props.state.messagePage.userData}/>} />
+
+          <Route path = '/users' render = {() => <AllUsersContainer />} />
           <Route path = '/photos' render = {() => <Photos />} />  
           <Route path = '/friends' render = {() => <Friends />}/> 
           <Route path = '/news' render = {() => <News />}/> 

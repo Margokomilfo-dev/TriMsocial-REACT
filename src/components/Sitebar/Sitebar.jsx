@@ -8,12 +8,17 @@ import news from './../../icons/news.png'
 import music  from './../../icons/music.png'
 import muvie from './../../icons/muvie.png'
 import group from './../../icons/group.png'
+import allUsers from './../../icons/allUsers1.png'
 import { NavLink } from 'react-router-dom'
 
 let Sitebar = () => {
     return (
         <div className = {s.sitebar}>
             <div className = {s.items}>
+                <div className = {s.item}>
+                    <img src={allUsers} alt={"users"}/>
+                    <NavLink to='/users' activeClassName = {s.activeLink}>ALL users</NavLink>
+                </div>
                 <div className = {s.item}>
                     <img src={profile} alt={"profile"}/>
                     <NavLink to='/profile' activeClassName = {s.activeLink}>Profile</NavLink>
@@ -45,7 +50,8 @@ let Sitebar = () => {
                 <div className = {s.item}>
                     <img src={group} alt={"group"}/>
                     <NavLink to='/groups' activeClassName = {s.activeLink}>Groups</NavLink>
-                </div> 
+                </div>
+
             </div>  
         </div>
     )
