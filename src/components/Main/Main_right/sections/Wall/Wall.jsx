@@ -5,8 +5,7 @@ import Post from './Post/Post'
 
 
 let Wall = (props) => {
-    debugger
-    let postItems = props.postData.map( p => <Post header={p.header} content={p.content} state={p.state} key={p.id} />)
+    let postItems = props.postData.map( p => <Post header={p.header} content={p.content} state={p.state} key={p.id} profile={props.profile}/>)
    
 //------------------------------------------------    
     let textPostPoint = React.createRef();

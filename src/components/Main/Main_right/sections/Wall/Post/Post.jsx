@@ -1,13 +1,18 @@
 import React from 'react'
 import s from './Post.module.css'
-import photo from './ava.jpg'
+import noPhoto from './noPhoto.png'
+import Loader from "../../../../../common/Loader/Loader";
 
 let Post = (props) => {
+    debugger
+    if (!props.profile) {
+        return  <Loader />
+    }
     return (
         <div className={s.post_wrapper}>
             <div className={s.post_item}>
                 <div className={s.left_wrapper}>
-                    <img src={photo} alt="ava" />
+                    <img src={props.profile.photos.small != null ? props.profile.photos.small : noPhoto} alt={noPhoto}/>
                 </div>
 
                 <div className={s.right_wrapper}>

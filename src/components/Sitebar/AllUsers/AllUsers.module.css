@@ -76,3 +76,6 @@
     font-weight: 500;
     font-style: italic;
 }
+.selectedPage {
+    font-weight: 600;
+}

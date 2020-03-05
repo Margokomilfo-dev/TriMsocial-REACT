@@ -5,9 +5,14 @@
     border-radius: 20px;
     background-size: cover;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.img {
+    height: 350px;
 }
 .photo img {
-    height: 100%;
     width: 100%;
     border-radius: 20px;
 
@@ -28,6 +33,7 @@
     border: none;
     border-radius: 15px;
     box-shadow: 0 4px #999;
+    margin-bottom: 10px;
   }
   
 .button:hover {

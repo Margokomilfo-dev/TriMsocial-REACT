@@ -1,5 +1,7 @@
 let ADD_POST = 'ADD-POST',
-    ON_POST_TEXT_CHANGE = 'ON-POST-TEXT-CHANGE';
+    POST_TEXT_CHANGE = 'POST-TEXT-CHANGE',
+    SET_USER_PROFILE = 'SET_USER_PROFILE';
+
 
 let inicialization = {
     personData:
@@ -25,7 +27,8 @@ let inicialization = {
             { src: '', alt: '', name: 'Margo' },
             { src: '', alt: '', name: 'Leo' },
             { src: '', alt: '', name: 'Vladimir' }
-        ]
+        ],
+    profile: false
 }
 
 let mainReducer = (state = inicialization, action) => {
@@ -43,11 +46,17 @@ let mainReducer = (state = inicialization, action) => {
             };
         }
 
-        case ON_POST_TEXT_CHANGE: {
+        case POST_TEXT_CHANGE: {
             return {
                 ...state,
-                newPostText: action.text
+                newPostText: action.newPostText
              }
+        }
+        case SET_USER_PROFILE: {
+            return {
+                ...state,
+                profile: action.profile
+            }
         }
 
         default:
@@ -55,6 +64,7 @@ let mainReducer = (state = inicialization, action) => {
     }
 }
 
-export const addPostActionCreator = () => ({ type: ADD_POST });
-export const onPostTextChangeActionCreator = (newPostText) => ({ type: ON_POST_TEXT_CHANGE, text: newPostText });
+export const addPost = () => ({ type: ADD_POST });
+export const postTextChange = (newPostText) => ({ type: POST_TEXT_CHANGE, newPostText });
+export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 export default mainReducer;

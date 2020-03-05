@@ -1,9 +1,16 @@
 import React from 'react'
-import { onPostTextChangeActionCreator, addPostActionCreator } from '../../../../../redux/main_reducer'
+import { postTextChange, addPost } from '../../../../../redux/main_reducer'
 import Wall from './Wall'
 import {connect} from "react-redux";
+import Main from "../../../Main";
 
-
+class WallContainer extends React.Component {
+    render(){
+        return(
+            <Wall {...this.props} profile={this.props.profile}/>
+        )
+    }
+}
 
 const mapStateToProps = (state) => {
     return {
@@ -11,13 +18,6 @@ const mapStateToProps = (state) => {
         newPostText : state.mainPage.newPostText
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addPost: () => { dispatch(addPostActionCreator())},
-        postTextChange: (text) => {dispatch(onPostTextChangeActionCreator(text))}
-    }
-}
 
-const WallContainer = connect(mapStateToProps, mapDispatchToProps)(Wall)
+export default connect(mapStateToProps, {addPost, postTextChange})(WallContainer)
 
-export default WallContainer

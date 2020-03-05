@@ -1,6 +1,9 @@
 let FOLLOW = 'FOLLOW',
     UNFOLLOW = 'UNFOLLOW',
-    SETUSERS = 'SETUSERS'
+    SETUSERS = 'SETUSERS',
+    SETCURRENTPAGE = 'SETCURRENTPAGE',
+    SETUSERSTOTALCOUNT = 'SETUSERSTOTALCOUNT',
+    TOGGLEISLOADER = 'TOGGLEISLOADER'
 
 let inicialization = {
     users: [
@@ -12,7 +15,12 @@ let inicialization = {
         //     followed: true, fullname: 'Mia', nickname: 'Mija', status: 'I am a little-boss', localisation: {country: 'Poland', cityname: 'Wroclaw'}  },
         // {id: 4, photolink: 'https://img.favpng.com/15/3/24/kion-simba-lion-nala-disney-junior-png-favpng-yPCg6Bur9WV3jCagMjxL54mn1.jpg',
         //     followed: false, fullname: 'Leo', nickname: 'Lev ', status: 'I am a little-boss, too', localisation: {country: 'Poland', cityname: 'Wroclaw'}  },
-    ]
+    ],
+    countUsersOnPage: 5,
+    totalUsersCount: '',
+    currentPage: 1,
+    countPages: '',
+    isLoader: false
 }
 
 const usersReducer = (state = inicialization, action) => {
@@ -44,7 +52,25 @@ const usersReducer = (state = inicialization, action) => {
         }
         case SETUSERS: {
             return {
-                ...state, users: [...state.users, ...action.users]
+                ...state,
+                users: action.users
+            }
+        }
+        case SETCURRENTPAGE: {
+                return {
+                    ...state,
+                    currentPage: action.page
+                }
+        }case SETUSERSTOTALCOUNT: {
+                return {
+                    ...state,
+                    totalUsersCount: action.count
+                }
+        }
+        case TOGGLEISLOADER: {
+            return{
+                ...state,
+                isLoader: action.isLoader
             }
         }
         default:
@@ -52,7 +78,11 @@ const usersReducer = (state = inicialization, action) => {
     }
 }
 
-export const followAC = (userid) => ({type: FOLLOW, userid});
-export const unfollowAC = (userid) => ({type: UNFOLLOW, userid});
-export const setUsersAC = (users) => ({type: SETUSERS, users})
+export const follow = (userid) => ({type: FOLLOW, userid});
+export const unfollow = (userid) => ({type: UNFOLLOW, userid});
+export const setUsers = (users) => ({type: SETUSERS, users});
+export const setCurrentPage = (page) => ({type: SETCURRENTPAGE, page});
+export const setUsersTotalCount = (count) => ({type: SETUSERSTOTALCOUNT, count});
+export const toggleIsLoader = (isLoader) => ({type: TOGGLEISLOADER, isLoader})
+
 export default usersReducer;

@@ -9,7 +9,7 @@ let Main_left = (props) => {
         <div className={s.main_left}>
 
             <div className={s.section}>
-                <Ava />
+                <Ava profile={props.profile}/>
             </div> {/*section*/}
 
             <div className={s.section}>
