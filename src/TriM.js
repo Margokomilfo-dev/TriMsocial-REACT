@@ -25,7 +25,7 @@ function TriM(props) {
         <Sitebar />
         <div className='main_wrapper'>
           <Last_seen last_seen = 'Online...' />
-          <Route path = '/profile' render = {() => <MainContainer store = {props.store}
+          <Route path = '/profile/:userId?' render = {() => <MainContainer store = {props.store}
                                                          state ={props.state} />} />
           <Route path = '/message' render = {() => <Message store = {props.store}
                                                             userData = {props.state.messagePage.userData}/>} />

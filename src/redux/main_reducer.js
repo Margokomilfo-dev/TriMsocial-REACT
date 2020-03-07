@@ -28,7 +28,7 @@ let inicialization = {
             { src: '', alt: '', name: 'Leo' },
             { src: '', alt: '', name: 'Vladimir' }
         ],
-    profile: false
+    profile: null
 }
 
 let mainReducer = (state = inicialization, action) => {

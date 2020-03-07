@@ -6,7 +6,6 @@ import Statistic from './sections/Statistic/Statistic'
 import WallContainer from './sections/Wall/WallContainer'
 
 let Main_right = (props) => {
-    debugger
     return (
         <div className = {s.main_right}>
 

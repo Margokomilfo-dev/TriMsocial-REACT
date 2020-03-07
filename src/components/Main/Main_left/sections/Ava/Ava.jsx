@@ -5,7 +5,6 @@ import noPhoto from './noPhoto.png'
 
 
 let Ava = (props) => {
-    debugger
     return (
         <div className = {s.photo}>
             <div className={s.img}>

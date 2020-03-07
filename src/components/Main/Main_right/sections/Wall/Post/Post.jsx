@@ -4,7 +4,6 @@ import noPhoto from './noPhoto.png'
 import Loader from "../../../../../common/Loader/Loader";
 
 let Post = (props) => {
-    debugger
     if (!props.profile) {
         return  <Loader />
     }
