@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-pascal-case */
 import React from 'react'
 import s from './Main_right.module.css'
 import Person_info from './sections/Person_info/Person_info'

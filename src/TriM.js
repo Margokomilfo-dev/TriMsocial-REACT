@@ -2,7 +2,6 @@
 import React from 'react'
 import './TriM.js'
 import './TriM.css'
-import Header from './components/Header/Header.jsx'
 import Sitebar from './components/Sitebar/Sitebar.jsx'
 import { Route } from 'react-router-dom'
 import Last_seen from './components/Last_seen/Last_seen.jsx'
@@ -15,12 +14,13 @@ import Muvies from './components/Sitebar/Muvies/Muvies.jsx'
 import Groups from './components/Sitebar/Groups/Groups.jsx'
 import AllUsersContainer from "./components/Sitebar/AllUsers/AllUsersContainer";
 import MainContainer from "./components/Main/MainContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 
 function TriM(props) {
   return (
     <div className='container'>
-      <Header />
+      <HeaderContainer />
       <div className='wrapper'>
         <Sitebar />
         <div className='main_wrapper'>
