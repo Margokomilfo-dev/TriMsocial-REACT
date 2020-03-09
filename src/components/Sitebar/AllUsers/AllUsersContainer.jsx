@@ -9,7 +9,7 @@ class AllUsersContainer extends React.Component {
     componentDidMount() {
         if (this.props.users.length === 0) {
             this.props.toggleIsLoader(true)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.countUsersOnPage}`)
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.countUsersOnPage}`, {withCredentials: true})
                 .then(response => {
                     this.props.toggleIsLoader(false)
                     this.props.setUsers(response.data.items)
