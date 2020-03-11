@@ -3,6 +3,7 @@ import s from './AllUsers.module.css'
 import photo from './pic/nophoto.png'
 import {NavLink} from "react-router-dom";
 import * as axios from "axios";
+import {allUsersAPI} from "../../../api/api";
 
 const AllUsers = (props) => {
     let pages = [],
@@ -24,26 +25,31 @@ const AllUsers = (props) => {
                         </div>
                         <div>
                             {u.followed
-                                ? <button className={`${s.unfollow} ${s.button}`} onClick={() => {
+                                ? <button disabled={props.followingInProcess.some(id => id === u.id)} className={`${s.unfollow} ${s.button}`} onClick={() => {
+                                    props.toggleFollowingInProcess(true, u.id)
+                                    let id = `${u.id}`;
 
-                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {withCredentials: true, headers: {
-                                            "API-KEY" : "40ffb3ac-7a26-461e-9d58-b5b7054c7f94"}}
-                                    )
-                                        .then(response => {
-                                            if (response.data.resultCode === 0 ) {
-                                                props.unfollow(u.id);
-                                            }
-                                        })
+                                    allUsersAPI.followDelete(id).then(response => {
+                                        if (response.resultCode === 0 ) {
+                                            props.unfollow(u.id);
+                                        }
+                                        props.toggleFollowingInProcess(false, u.id)
+                                    });
+
+
                                 }}>Unfollow</button>
-                                : <button className={`${s.follow} ${s.button}`} onClick={() => {
+                                : <button  disabled={props.followingInProcess.some(id => id === u.id)} className={`${s.follow} ${s.button}`} onClick={() => {
+                                    props.toggleFollowingInProcess(true, u.id)
+                                    let id = `${u.id}`;
 
-                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{}, {withCredentials: true, headers: {
-                                            "API-KEY" : "40ffb3ac-7a26-461e-9d58-b5b7054c7f94"}})
-                                        .then(response => {
-                                            if (response.data.resultCode === 0) {
-                                                props.follow(u.id);
-                                            }
-                                        })
+                                    allUsersAPI.followPost(id).then(response => {
+                                        if (response.resultCode === 0) {
+                                            props.follow(u.id);
+                                        }
+                                        props.toggleFollowingInProcess(false, u.id)
+                                    });
+
+
                                 }}>Follow</button>
                             }
                         </div>
@@ -71,7 +77,7 @@ const AllUsers = (props) => {
             </div>
         </div>
     )
-}
+};
 
 
 export default AllUsers

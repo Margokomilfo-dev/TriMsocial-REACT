@@ -1,35 +1,42 @@
 import React from 'react'
 import {connect} from "react-redux"
-import {follow, setCurrentPage, setUsers, setUsersTotalCount, toggleIsLoader, unfollow} from "../../../redux/users_reducer";
+import {
+    follow,
+    toggleFollowingInProcess,
+    setCurrentPage,
+    setUsers,
+    setUsersTotalCount,
+    toggleIsLoader,
+    unfollow
+} from "../../../redux/users_reducer";
 import * as axios from "axios";
 import AllUsers from "./AllUsers";
 import Loader from "../../common/Loader/Loader";
+import {allUsersAPI} from "../../../api/api";
 
 class AllUsersContainer extends React.Component {
     componentDidMount() {
         if (this.props.users.length === 0) {
             this.props.toggleIsLoader(true)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.countUsersOnPage}`, {withCredentials: true})
-                .then(response => {
-                    this.props.toggleIsLoader(false)
-                    this.props.setUsers(response.data.items)
-                    this.props.setUsersTotalCount(response.data.totalCount)
-                })
+
+            allUsersAPI.getAllUsers(this.props.currentPage, this.props.countUsersOnPage).then(response => {
+                this.props.toggleIsLoader(false)
+                this.props.setUsers(response.items)
+                this.props.setUsersTotalCount(response.totalCount)
+            })
         }
     }
-
     onPageChanged = (pageNamber) => {
         this.props.setCurrentPage(pageNamber);
-        this.props.toggleIsLoader(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNamber}&count=${this.props.countUsersOnPage}`, {withCredentials: true})
-            .then(response => {
+        this.props.toggleIsLoader(true);
+
+        allUsersAPI.getAllUsers(pageNamber, this.props.countUsersOnPage).then(response => {
                 this.props.toggleIsLoader(false)
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(response.items)
             })
-    }
+    };
 
     render() {
-
         return <>
             {this.props.isLoader ? <Loader/> : null}
 
@@ -39,7 +46,9 @@ class AllUsersContainer extends React.Component {
                       follow={this.props.follow}
                       unfollow={this.props.unfollow}
                       currentPage={this.props.currentPage}
-                      onPageChanged={this.onPageChanged}/>
+                      onPageChanged={this.onPageChanged}
+                      toggleFollowingInProcess={this.props.toggleFollowingInProcess}
+                      followingInProcess={this.props.followingInProcess}/>
         </>
     }
 }
@@ -51,17 +60,10 @@ let mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         countPages: state.usersPage.countPages,
         currentPage: state.usersPage.currentPage,
-        isLoader: state.usersPage.isLoader
+        isLoader: state.usersPage.isLoader,
+        followingInProcess: state.usersPage.followingInProcess
     }
 }
 
-// let mapDispatchToProps = (dispatch) => {
-//     return {
-//         follow: (userid) => {
-//             dispatch(follow(userid))
-//         }
-//     }
-// }
-
 export default connect(mapStateToProps,
-    {follow, unfollow, setUsers, setCurrentPage, setUsersTotalCount, toggleIsLoader })(AllUsersContainer)
+    {follow, unfollow, setUsers, setCurrentPage, setUsersTotalCount, toggleIsLoader, toggleFollowingInProcess })(AllUsersContainer)

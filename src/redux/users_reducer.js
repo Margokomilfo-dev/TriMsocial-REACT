@@ -3,24 +3,17 @@ let FOLLOW = 'FOLLOW',
     SETUSERS = 'SETUSERS',
     SETCURRENTPAGE = 'SETCURRENTPAGE',
     SETUSERSTOTALCOUNT = 'SETUSERSTOTALCOUNT',
-    TOGGLEISLOADER = 'TOGGLEISLOADER'
+    TOGGLEISLOADER = 'TOGGLEISLOADER',
+    TOGGLE_FOLLOWING_IN_PROCESS = 'TOGGLE_FOLLOWING_IN_PROCESS'
 
 let inicialization = {
-    users: [
-        // {id: 1, photolink: 'https://www.bing.com/th/id/OIP.kDkPa9Ugku-r8Q3c_9OUuAAAAA?w=116&h=300&c=7&o=5&pid=1.7',
-        //     followed: false, fullname: 'Margo', nickname: 'margoshka', status: 'I am a boss', localisation: {country: 'Poland', cityname: 'Wroclaw'}  },
-        // {id: 2, photolink: 'https://www.bing.com/th?id=OIP.TXege_wKXD1x4Tr_kHT__QHaKh&pid=Api&rs=1',
-        //     followed: true, fullname: 'Kate', nickname: 'katushka', status: 'I am a boss, too', localisation: {country: 'Poland', cityname: 'Krakow'}  },
-        // {id: 3, photolink: 'https://i.insider.com/5aa10ca0d877e618008b4678?width=1100&format=jpeg&auto=webp',
-        //     followed: true, fullname: 'Mia', nickname: 'Mija', status: 'I am a little-boss', localisation: {country: 'Poland', cityname: 'Wroclaw'}  },
-        // {id: 4, photolink: 'https://img.favpng.com/15/3/24/kion-simba-lion-nala-disney-junior-png-favpng-yPCg6Bur9WV3jCagMjxL54mn1.jpg',
-        //     followed: false, fullname: 'Leo', nickname: 'Lev ', status: 'I am a little-boss, too', localisation: {country: 'Poland', cityname: 'Wroclaw'}  },
-    ],
+    users: [],
     countUsersOnPage: 5,
     totalUsersCount: '',
     currentPage: 1,
     countPages: '',
-    isLoader: false
+    isLoader: true,
+    followingInProcess: []
 }
 
 const usersReducer = (state = inicialization, action) => {
@@ -73,6 +66,14 @@ const usersReducer = (state = inicialization, action) => {
                 isLoader: action.isLoader
             }
         }
+        case TOGGLE_FOLLOWING_IN_PROCESS: {
+            return{
+                ...state,
+                followingInProcess: action.isLoader
+                    ? [...state.followingInProcess, action.userId]
+                    : state.followingInProcess.filter(id => id != action.userId)
+            }
+        }
         default:
             return state;
     }
@@ -83,6 +84,7 @@ export const unfollow = (userid) => ({type: UNFOLLOW, userid});
 export const setUsers = (users) => ({type: SETUSERS, users});
 export const setCurrentPage = (page) => ({type: SETCURRENTPAGE, page});
 export const setUsersTotalCount = (count) => ({type: SETUSERSTOTALCOUNT, count});
-export const toggleIsLoader = (isLoader) => ({type: TOGGLEISLOADER, isLoader})
+export const toggleIsLoader = (isLoader) => ({type: TOGGLEISLOADER, isLoader});
+export const toggleFollowingInProcess = (isLoader, userId) => ({type: TOGGLE_FOLLOWING_IN_PROCESS, isLoader, userId});
 
 export default usersReducer;
