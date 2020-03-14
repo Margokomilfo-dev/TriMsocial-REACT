@@ -35,5 +35,8 @@
   }
 .button:hover {
     background-color: rgb(206, 206, 206);
-
+}
+.button:active {
+    box-shadow: 0 4px rgb(138, 138, 138);
+    transform: translateY(.5px);
 }

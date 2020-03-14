@@ -4,37 +4,23 @@ import {
     follow,
     toggleFollowingInProcess,
     setCurrentPage,
-    setUsers,
-    setUsersTotalCount,
-    toggleIsLoader,
-    unfollow
+    unfollow, getUsersThunkCreator,
+    unfollowThunkCreator,
+    followThunkCreator
 } from "../../../redux/users_reducer";
-import * as axios from "axios";
 import AllUsers from "./AllUsers";
 import Loader from "../../common/Loader/Loader";
-import {allUsersAPI} from "../../../api/api";
 
 class AllUsersContainer extends React.Component {
     componentDidMount() {
         if (this.props.users.length === 0) {
-            this.props.toggleIsLoader(true)
-
-            allUsersAPI.getAllUsers(this.props.currentPage, this.props.countUsersOnPage).then(response => {
-                this.props.toggleIsLoader(false)
-                this.props.setUsers(response.items)
-                this.props.setUsersTotalCount(response.totalCount)
-            })
+            this.props.getUsersThunkCreator(this.props.currentPage, this.props.countUsersOnPage)
         }
     }
-    onPageChanged = (pageNamber) => {
-        this.props.setCurrentPage(pageNamber);
-        this.props.toggleIsLoader(true);
 
-        allUsersAPI.getAllUsers(pageNamber, this.props.countUsersOnPage).then(response => {
-                this.props.toggleIsLoader(false)
-                this.props.setUsers(response.items)
-            })
-    };
+     onPageChanged = (pageNamber) => {
+         this.props.getUsersThunkCreator(pageNamber, this.props.countUsersOnPage)
+     };
 
     render() {
         return <>
@@ -48,7 +34,10 @@ class AllUsersContainer extends React.Component {
                       currentPage={this.props.currentPage}
                       onPageChanged={this.onPageChanged}
                       toggleFollowingInProcess={this.props.toggleFollowingInProcess}
-                      followingInProcess={this.props.followingInProcess}/>
+                      followingInProcess={this.props.followingInProcess}
+                      unfollowThunkCreator={this.props.unfollowThunkCreator}
+                      followThunkCreator={this.props.followThunkCreator}
+                      isLogin={this.props.isLogin}/>
         </>
     }
 }
@@ -61,9 +50,12 @@ let mapStateToProps = (state) => {
         countPages: state.usersPage.countPages,
         currentPage: state.usersPage.currentPage,
         isLoader: state.usersPage.isLoader,
-        followingInProcess: state.usersPage.followingInProcess
+        followingInProcess: state.usersPage.followingInProcess,
+        isLogin: state.auth.isLogin
     }
 }
 
 export default connect(mapStateToProps,
-    {follow, unfollow, setUsers, setCurrentPage, setUsersTotalCount, toggleIsLoader, toggleFollowingInProcess })(AllUsersContainer)
+    {follow, unfollow, setCurrentPage,
+       toggleFollowingInProcess,
+        getUsersThunkCreator, unfollowThunkCreator, followThunkCreator })(AllUsersContainer)

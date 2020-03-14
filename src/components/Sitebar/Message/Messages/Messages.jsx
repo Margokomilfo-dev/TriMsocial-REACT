@@ -3,6 +3,7 @@ import React from 'react'
 import s from './Messages.module.css'
 import User_messages from './User_messages/User_messages'
 import { addMessActionCreator, onMessTextChangeActionCreator } from '../../../../redux/message_reducer';
+import {Redirect} from "react-router-dom";
 
 let Messages = (props) => {
 
@@ -17,6 +18,9 @@ let Messages = (props) => {
         props.onMessTextChange(newMessageText);
     }
     
+    if (!props.isLogin) {
+        return <Redirect to={'/login'}/>
+    }
 
     return (
         <div className={s.messages_wrapper}>

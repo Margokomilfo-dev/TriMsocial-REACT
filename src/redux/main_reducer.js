@@ -1,3 +1,5 @@
+import {allUsersAPI, headerAPI, mainAPI} from "../api/api";
+
 let ADD_POST = 'ADD-POST',
     POST_TEXT_CHANGE = 'POST-TEXT-CHANGE',
     SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -67,4 +69,17 @@ let mainReducer = (state = inicialization, action) => {
 export const addPost = () => ({ type: ADD_POST });
 export const postTextChange = (newPostText) => ({ type: POST_TEXT_CHANGE, newPostText });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
+
+export const setUserThunkCreator = (userId) => {
+    return (dispatch) => {
+        mainAPI.getUserProfile(userId)
+            .then(response => {
+                dispatch(setUserProfile(response));
+            })
+    }
+};
+
+
+
 export default mainReducer;
+

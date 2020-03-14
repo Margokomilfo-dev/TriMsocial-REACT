@@ -43,5 +43,5 @@
   
 .button:active {
     box-shadow: 0 4px rgb(138, 138, 138);
-    transform: translateY(2px);
+    transform: translateY(.5px);
   }

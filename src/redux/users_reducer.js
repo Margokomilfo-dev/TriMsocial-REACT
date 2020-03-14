@@ -1,3 +1,5 @@
+import {allUsersAPI} from "../api/api";
+
 let FOLLOW = 'FOLLOW',
     UNFOLLOW = 'UNFOLLOW',
     SETUSERS = 'SETUSERS',
@@ -12,7 +14,7 @@ let inicialization = {
     totalUsersCount: '',
     currentPage: 1,
     countPages: '',
-    isLoader: true,
+    isLoader: false,
     followingInProcess: []
 }
 
@@ -86,5 +88,43 @@ export const setCurrentPage = (page) => ({type: SETCURRENTPAGE, page});
 export const setUsersTotalCount = (count) => ({type: SETUSERSTOTALCOUNT, count});
 export const toggleIsLoader = (isLoader) => ({type: TOGGLEISLOADER, isLoader});
 export const toggleFollowingInProcess = (isLoader, userId) => ({type: TOGGLE_FOLLOWING_IN_PROCESS, isLoader, userId});
+
+export const getUsersThunkCreator = (currentPage, countUsersOnPage) => {
+    return (dispatch) => {
+        dispatch(setCurrentPage(currentPage));
+        dispatch(toggleIsLoader(true));
+        allUsersAPI.getAllUsers(currentPage, countUsersOnPage).then(response => {
+            dispatch(toggleIsLoader(false));
+            dispatch(setUsers(response.items));
+            dispatch(setUsersTotalCount(response.totalCount));
+        })
+    }
+};
+
+export const unfollowThunkCreator = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingInProcess(true, userId));
+        allUsersAPI.followDelete(userId).then(response => {
+            if (response.resultCode === 0 ) {
+                dispatch(unfollow(userId));
+            }
+            dispatch(toggleFollowingInProcess(false, userId));
+        });
+    }
+};
+
+export const followThunkCreator = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleFollowingInProcess(true, userId));
+        allUsersAPI.followPost(userId).then(response => {
+            if (response.resultCode === 0) {
+                dispatch(follow(userId));
+            }
+            dispatch(toggleFollowingInProcess(false, userId));
+        });
+    }
+};
+
+
 
 export default usersReducer;

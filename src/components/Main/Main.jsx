@@ -4,10 +4,14 @@ import s from './Main.module.css'
 import Main_left from './Main_left/Main_left'
 import Main_right from './Main_right/Main_right'
 import Loader from "../common/Loader/Loader";
+import {Redirect} from "react-router-dom";
 
 let Main = (props) => { //postData
     if(!props.profile) {
         return <Loader/>
+    }
+    if (!props.isLogin) {
+        return <Redirect to={'/login'}/>
     }
     return(
         <div className = {s.main}>

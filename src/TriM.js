@@ -15,6 +15,7 @@ import Groups from './components/Sitebar/Groups/Groups.jsx'
 import AllUsersContainer from "./components/Sitebar/AllUsers/AllUsersContainer";
 import MainContainer from "./components/Main/MainContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Header/Login/Login";
 
 
 function TriM(props) {
@@ -29,7 +30,7 @@ function TriM(props) {
                                                          state ={props.state} />} />
           <Route path = '/message' render = {() => <Message store = {props.store}
                                                             userData = {props.state.messagePage.userData}/>} />
-
+          <Route path = '/login' render = {() => <Login />} />
           <Route path = '/users' render = {() => <AllUsersContainer />} />
           <Route path = '/photos' render = {() => <Photos />} />  
           <Route path = '/friends' render = {() => <Friends />}/> 

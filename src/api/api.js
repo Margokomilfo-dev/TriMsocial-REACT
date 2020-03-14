@@ -37,3 +37,18 @@ export const mainAPI = {
             })
     }
 };
+export const headerAPI = {
+    me () {
+        return instance.get(`auth/me`)
+            .then(response => {
+                return response.data
+            })
+    },
+    getURLPhoto (userId) {
+        return instance.get(`profile/` + userId)
+            .then(response => {
+                return response.data;
+            })
+    }
+
+};

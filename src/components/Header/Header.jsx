@@ -26,12 +26,9 @@ let Header = (props) => {
                             <div className={s.signup_register}>
                                 {props.isLogin
                                         ? <div> {props.login }<a href='#' onClick={props.authCheckOut}> Check out </a> </div>
-                                        : <div><NavLink  to="/profile"> Sigh Up </NavLink> <a href='#'>Register</a></div>
+                                        : <div><NavLink  to="/login"> Sigh Up </NavLink></div>
                                 }
                             </div>
-
-
-
                         </div>
 
 

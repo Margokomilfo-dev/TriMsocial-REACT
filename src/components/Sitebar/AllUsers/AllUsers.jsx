@@ -1,16 +1,20 @@
 import React from 'react'
 import s from './AllUsers.module.css'
 import photo from './pic/nophoto.png'
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import * as axios from "axios";
 import {allUsersAPI} from "../../../api/api";
 
 const AllUsers = (props) => {
+    debugger
     let pages = [],
         countPages = Math.ceil(props.totalUsersCount / props.countUsersOnPage);
 
     for (let i = 1; i <= countPages; i++) {
         pages.push(i);
+    }
+    if (!props.isLogin) {
+        return <Redirect to={'/login'}/>
     }
     return (
         <div>
@@ -26,30 +30,10 @@ const AllUsers = (props) => {
                         <div>
                             {u.followed
                                 ? <button disabled={props.followingInProcess.some(id => id === u.id)} className={`${s.unfollow} ${s.button}`} onClick={() => {
-                                    props.toggleFollowingInProcess(true, u.id)
-                                    let id = `${u.id}`;
-
-                                    allUsersAPI.followDelete(id).then(response => {
-                                        if (response.resultCode === 0 ) {
-                                            props.unfollow(u.id);
-                                        }
-                                        props.toggleFollowingInProcess(false, u.id)
-                                    });
-
-
+                                    props.unfollowThunkCreator(u.id)
                                 }}>Unfollow</button>
                                 : <button  disabled={props.followingInProcess.some(id => id === u.id)} className={`${s.follow} ${s.button}`} onClick={() => {
-                                    props.toggleFollowingInProcess(true, u.id)
-                                    let id = `${u.id}`;
-
-                                    allUsersAPI.followPost(id).then(response => {
-                                        if (response.resultCode === 0) {
-                                            props.follow(u.id);
-                                        }
-                                        props.toggleFollowingInProcess(false, u.id)
-                                    });
-
-
+                                    props.followThunkCreator(u.id)
                                 }}>Follow</button>
                             }
                         </div>
