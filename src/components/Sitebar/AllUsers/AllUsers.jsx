@@ -1,9 +1,7 @@
 import React from 'react'
 import s from './AllUsers.module.css'
 import photo from './pic/nophoto.png'
-import {NavLink, Redirect} from "react-router-dom";
-import * as axios from "axios";
-import {allUsersAPI} from "../../../api/api";
+import {NavLink} from "react-router-dom";
 
 const AllUsers = (props) => {
     debugger
@@ -12,9 +10,6 @@ const AllUsers = (props) => {
 
     for (let i = 1; i <= countPages; i++) {
         pages.push(i);
-    }
-    if (!props.isLogin) {
-        return <Redirect to={'/login'}/>
     }
     return (
         <div>

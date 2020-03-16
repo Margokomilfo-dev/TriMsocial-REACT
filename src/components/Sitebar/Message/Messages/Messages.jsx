@@ -17,10 +17,6 @@ let Messages = (props) => {
         let newMessageText = textMessPoint.current.value;
         props.onMessTextChange(newMessageText);
     }
-    
-    if (!props.isLogin) {
-        return <Redirect to={'/login'}/>
-    }
 
     return (
         <div className={s.messages_wrapper}>

@@ -1,8 +1,9 @@
-/* eslint-disable react/jsx-pascal-case */
 import React from 'react'
-import { addMessActionCreator, onMessTextChangeActionCreator } from '../../../../redux/message_reducer';
+import { addMess, onMessTextChange } from '../../../../redux/message_reducer';
 import Messages from "./Messages";
 import {connect} from "react-redux";
+import {withAuthRedirect} from "../../../../redux/HOC";
+import {compose} from "redux";
 
 
 const mapStateToProps = (state) => {
@@ -11,22 +12,11 @@ const mapStateToProps = (state) => {
         newMessageText: state.messagePage.newMessageText,
         isLogin: state.auth.isLogin
     }
-}
+};
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addMess: () => {
-            dispatch(addMessActionCreator());
-        },
-        onMessTextChange: (text) => {
-            dispatch(onMessTextChangeActionCreator(text));
-        }
-    }
-}
-
-const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(Messages);
-
-
-export default MessagesContainer
+export default compose(
+    connect(mapStateToProps, {addMess, onMessTextChange}),
+    withAuthRedirect
+)(Messages)
 
 

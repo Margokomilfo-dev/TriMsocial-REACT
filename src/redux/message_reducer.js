@@ -42,6 +42,6 @@ let messageReducer = (state = inicialization, action) => {
     }
 }
 
-export const addMessActionCreator = () => ({type: ADD_MESS});
-export const onMessTextChangeActionCreator = (newMessageText) => ({type: ON_MESS_TEXT_CHANGE, text: newMessageText});
+export const addMess = () => ({type: ADD_MESS});
+export const onMessTextChange = (newMessageText) => ({type: ON_MESS_TEXT_CHANGE, text: newMessageText});
 export default messageReducer;

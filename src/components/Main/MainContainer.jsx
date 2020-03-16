@@ -3,6 +3,8 @@ import Main from "./Main";
 import {connect} from "react-redux"
 import {setUserProfile, setUserThunkCreator} from "../../redux/main_reducer";
 import {withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../redux/HOC";
+import {compose} from "redux";
 
 class MainContainer extends React.Component {
     componentDidMount() {
@@ -10,8 +12,8 @@ class MainContainer extends React.Component {
         if (!userId) { userId = 2}
         this.props.setUserThunkCreator(userId)
     }
-
     render(){
+
         return(
             <Main {...this.props} profile={this.props.profile}/>
         )
@@ -19,10 +21,11 @@ class MainContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-        profile: state.mainPage.profile,
-        isLogin: state.auth.isLogin
+        profile: state.mainPage.profile
 });
 
-let WithURLDataMainContainer = withRouter(MainContainer);
-
-export default connect (mapStateToProps, {setUserProfile, setUserThunkCreator})(WithURLDataMainContainer)
+export default compose(
+    connect (mapStateToProps, {setUserProfile, setUserThunkCreator}),
+    withRouter,
+    withAuthRedirect
+)(MainContainer)

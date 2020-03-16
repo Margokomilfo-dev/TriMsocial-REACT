@@ -10,6 +10,8 @@ import {
 } from "../../../redux/users_reducer";
 import AllUsers from "./AllUsers";
 import Loader from "../../common/Loader/Loader";
+import {withAuthRedirect} from "../../../redux/HOC";
+import {compose} from "redux";
 
 class AllUsersContainer extends React.Component {
     componentDidMount() {
@@ -17,11 +19,9 @@ class AllUsersContainer extends React.Component {
             this.props.getUsersThunkCreator(this.props.currentPage, this.props.countUsersOnPage)
         }
     }
-
-     onPageChanged = (pageNamber) => {
+    onPageChanged = (pageNamber) => {
          this.props.getUsersThunkCreator(pageNamber, this.props.countUsersOnPage)
      };
-
     render() {
         return <>
             {this.props.isLoader ? <Loader/> : null}
@@ -55,7 +55,8 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps,
-    {follow, unfollow, setCurrentPage,
-       toggleFollowingInProcess,
-        getUsersThunkCreator, unfollowThunkCreator, followThunkCreator })(AllUsersContainer)
+export default compose(
+    connect(mapStateToProps,{follow, unfollow, setCurrentPage, toggleFollowingInProcess,
+        getUsersThunkCreator, unfollowThunkCreator, followThunkCreator }),
+    withAuthRedirect
+)(AllUsersContainer)

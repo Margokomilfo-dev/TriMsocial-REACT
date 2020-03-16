@@ -10,9 +10,6 @@ let Main = (props) => { //postData
     if(!props.profile) {
         return <Loader/>
     }
-    if (!props.isLogin) {
-        return <Redirect to={'/login'}/>
-    }
     return(
         <div className = {s.main}>
             <div className = {s.main_wrapper}>
