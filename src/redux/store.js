@@ -4,13 +4,6 @@ import messageReducer from "./message_reducer";
 let store = {
     _data: {
         mainPage: {
-            personData:
-            {
-                fio: 'Ivanova Ivanna', first_surname: 'Sidorova', nickname: '@ivasha',
-                status: 'Никогда не жалуйтесь на судьбу! Ей с вами, может быть, тоже не очень-то и приятно=)',
-                birthday_date: '12.12.1984', relationship: 'married', country: 'New Zealand',
-                city: 'Aucland', profession: 'actress'
-            },
             newPostText: '',
             postData:
                 [

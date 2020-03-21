@@ -2,17 +2,12 @@ import {allUsersAPI, headerAPI, mainAPI} from "../api/api";
 
 let ADD_POST = 'ADD-POST',
     POST_TEXT_CHANGE = 'POST-TEXT-CHANGE',
-    SET_USER_PROFILE = 'SET_USER_PROFILE';
+    SET_USER_PROFILE = 'SET_USER_PROFILE',
+    SET_USER_STATUS = 'SET_USER_STATUS';
 
 
 let inicialization = {
-    personData:
-    {
-        fio: 'Ivanova Ivanna', first_surname: 'Sidorova', nickname: '@ivasha',
-        status: 'Никогда не жалуйтесь на судьбу! Ей с вами, может быть, тоже не очень-то и приятно=)',
-        birthday_date: '12.12.1984', relationship: 'married', country: 'New Zealand',
-        city: 'Aucland', profession: 'actress'
-    },
+    personData: {},
     newPostText: '',
     postData:
         [
@@ -30,7 +25,9 @@ let inicialization = {
             { src: '', alt: '', name: 'Leo' },
             { src: '', alt: '', name: 'Vladimir' }
         ],
-    profile: null
+    profile: null,
+    status: ''
+    //'Никогда не жалуйтесь на судьбу! Ей с вами, может быть, тоже не очень-то и приятно=)'
 }
 
 let mainReducer = (state = inicialization, action) => {
@@ -60,6 +57,12 @@ let mainReducer = (state = inicialization, action) => {
                 profile: action.profile
             }
         }
+        case SET_USER_STATUS: {
+            return {
+                ...state,
+                status: action.status
+            }
+        }
 
         default:
             return state;
@@ -69,6 +72,7 @@ let mainReducer = (state = inicialization, action) => {
 export const addPost = () => ({ type: ADD_POST });
 export const postTextChange = (newPostText) => ({ type: POST_TEXT_CHANGE, newPostText });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
+export const setUserStatus= (status) => ({ type: SET_USER_STATUS, status });
 
 export const setUserThunkCreator = (userId) => {
     return (dispatch) => {
@@ -78,7 +82,19 @@ export const setUserThunkCreator = (userId) => {
             })
     }
 };
-
+export const getUserStatusThunkCreator = (userId) => (dispatch) => {
+        mainAPI.getUserStatus(userId)
+            .then(response => {
+                dispatch(setUserStatus(response));
+            })
+    };
+export const updateUserStatusThunkCreator = (status) => (dispatch) => {
+        mainAPI.updateUserStatus(status)
+            .then(response => {
+                if (response.resultCode === 0)
+                dispatch(setUserStatus(status));
+            })
+    };
 
 
 export default mainReducer;

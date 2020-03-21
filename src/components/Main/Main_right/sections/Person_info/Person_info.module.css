@@ -14,17 +14,6 @@
     font-weight: 500;
 }
 
-.status textarea {
-    width: calc(100% - 20px);
-    margin: 10px 0;
-    border: none;
-    border-radius: 20px;
-    resize: none;
-    padding: 10px;
-    font-size: 16px;
-    background-color: rgba(214,214,214,.3);
-    outline: none;
-}
 .titles {
     display: inline-block;
     padding: 2px 0;

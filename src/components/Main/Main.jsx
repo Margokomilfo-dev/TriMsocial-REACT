@@ -14,12 +14,16 @@ let Main = (props) => { //postData
         <div className = {s.main}>
             <div className = {s.main_wrapper}>
                <Main_left store = {props.store}
-                            friendData = {props.state.mainPage.friendData}
+                          friendData = {props.state.mainPage.friendData}
+
                           profile = {props.profile}/>
 
                <Main_right  store = {props.store}
                             personData = {props.state.mainPage.personData}
+
                             profile = {props.profile}
+                            status={props.status}
+                            updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}
                             />
                 
             </div> {/*main_wrapper*/}   

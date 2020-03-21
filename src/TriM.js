@@ -15,7 +15,7 @@ import Groups from './components/Sitebar/Groups/Groups.jsx'
 import AllUsersContainer from "./components/Sitebar/AllUsers/AllUsersContainer";
 import MainContainer from "./components/Main/MainContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Main/Login/Login";
+import Login from "./components/Header/Login/Login";
 
 
 function TriM(props) {
