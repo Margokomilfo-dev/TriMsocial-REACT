@@ -27,6 +27,12 @@ class Status extends React.Component {
             alert('max 300 symbols!')
         }
     }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({status: this.props.status})
+        }
+    }
+
     render() {
         return (
             <div className={s.status}>

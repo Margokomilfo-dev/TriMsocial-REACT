@@ -6,32 +6,47 @@ import Main_left from "../../../Main_left/Main_left";
 
 class Person_info extends React.Component {
     state= {
-        fio: 'Ivanova Ivanna',
-        first_surname: 'Sidorova',
-        nickname: '@ivasha',
+        fio: '',
+        first_surname: '',
+        nicknameInst: 'margocha_pr',
+        httpVk: '',
+        httpTwitter: '',
         status: 'Никогда не жалуйтесь на судьбу! Ей с вами, может быть, тоже не очень-то и приятно=)',
         statusMod: false,
-        birthday_date: '12.12.1984',
+        birthday_date: '29.10.1988',
         relationship: 'married',
         country: 'New Zealand',
         city: 'Aucland',
-        profession: 'actress'
+        profession: 'Frontend Developer'
     }
     render() {
+        debugger
         if (!this.props.profile) {return <Loader/>}
         return (
             <div className={s.section_person_info}>
                 <div className={s.main_info}>
                     <div className={s.fio}> {this.props.profile.fullName} <span
                         className={s.first_surname}> {this.state.first_surname} </span></div>
-                    <div className={s.nick}>nick-name: <span className={s.nickname}>{this.state.nickname}</span></div>
 
                     <div className={s.status}>
                         <Status status={this.props.status}
                                 updateUserStatusThunkCreator={this.props.updateUserStatusThunkCreator}/>
                     </div>
+
+                    <div className={s.link}>  Instagram : <span className={s.nickname}>{`@${this.state.nicknameInst}`}</span></div>
+                    <div className={s.link}>
+                        <span className={s.link_name}> Facebook: </span>
+                        <span className={s.http}>{this.props.profile.contacts.facebook}</span>
+                    </div>
+                    <div className={s.link}> <span className={s.link_name}> VK: </span><span className={s.http}>{this.props.profile.contacts.vk}</span></div>
+                    <div className={s.link}><span className={s.link_name}> Twitter: </span><span className={s.http}>{this.props.profile.contacts.twitter}</span></div>
+                    <div className={s.link}><span className={s.link_name}> Instagram: </span> <span className={s.http}>{this.props.profile.contacts.instagram}</span></div>
+                    <div className={s.link}><span className={s.link_name}> Youtube: </span> <span className={s.http}>{this.props.profile.contacts.youtube}</span></div>
+                    <div className={s.link}><span className={s.link_name}> GitHub: </span><span className={s.http}>{this.props.profile.contacts.github}</span></div>
+                    <div className={s.link}><span className={s.link_name}> MainLink: </span><span className={s.http}>{this.props.profile.contacts.mainlink}</span></div>
                     <hr/>
                     <div>
+
                         <span className={s.titles}> Birthday:</span>
                         <span className={s.birthday_date}>{this.state.birthday_date}</span>
                     </div>

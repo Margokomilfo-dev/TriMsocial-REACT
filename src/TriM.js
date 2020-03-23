@@ -16,6 +16,7 @@ import AllUsersContainer from "./components/Sitebar/AllUsers/AllUsersContainer";
 import MainContainer from "./components/Main/MainContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Header/Login/Login";
+import Main from "./components/Main/Main";
 
 
 function TriM(props) {
@@ -26,12 +27,12 @@ function TriM(props) {
         <Sitebar />
         <div className='main_wrapper'>
           <Last_seen last_seen = 'Online...' />
-          <Route path = '/profile/:userId?' render = {() => <MainContainer store = {props.store}
+          <Route path = '/profile/:userId?/' render = {() => <MainContainer store = {props.store}
                                                          state ={props.state} />} />
           <Route path = '/message' render = {() => <Message store = {props.store}
                                                             userData = {props.state.messagePage.userData}/>} />
-          <Route path = '/login' render = {() => <Login />} />
           <Route path = '/users' render = {() => <AllUsersContainer />} />
+          <Route path = '/login' render = {() => <Login />} />
           <Route path = '/photos' render = {() => <Photos />} />  
           <Route path = '/friends' render = {() => <Friends />}/> 
           <Route path = '/news' render = {() => <News />}/> 

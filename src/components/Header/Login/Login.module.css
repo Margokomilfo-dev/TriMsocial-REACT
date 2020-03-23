@@ -15,17 +15,28 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-content: center;
 }
 .form input{
     margin-top: 5px;
     padding-left: 10px;
     height: 30px;
-    width: 400px;
     border: 1px solid #a7a7a7;
     border-radius: 10px;
     font-size: 16px;
     background-color: rgba(214, 214, 214, 0.3);
     outline: none;
+}
+.checkbox {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.checkbox input {
+    width: 20px;
+    height: 20px;
+    margin: 10px 5px 0 0;
+    padding-right: 10px;
 }
 .form button{
     margin: 20px 20px 20px 0;
