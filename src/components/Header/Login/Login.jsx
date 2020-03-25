@@ -37,7 +37,7 @@ let LoginForm = (props) => {
     )
 };
 
-let LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
+let LoginReduxForm = reduxForm({form: 'loginForm'})(LoginForm)
 
 let Login = (props) => {
     let onSubmit = (formData) => {console.log(formData)};

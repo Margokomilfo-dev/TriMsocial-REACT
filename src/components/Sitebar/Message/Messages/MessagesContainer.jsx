@@ -1,5 +1,5 @@
 import React from 'react'
-import { addMess, onMessTextChange } from '../../../../redux/message_reducer';
+import { addMess } from '../../../../redux/message_reducer';
 import Messages from "./Messages";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../../../redux/HOC";
@@ -15,7 +15,7 @@ const mapStateToProps = (state) => {
 };
 
 export default compose(
-    connect(mapStateToProps, {addMess, onMessTextChange}),
+    connect(mapStateToProps, {addMess}),
     withAuthRedirect
 )(Messages)
 

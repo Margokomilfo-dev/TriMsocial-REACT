@@ -1,8 +1,7 @@
 import React from 'react'
-import { postTextChange, addPost } from '../../../../../redux/main_reducer'
+import {addPost} from '../../../../../redux/main_reducer'
 import Wall from './Wall'
 import {connect} from "react-redux";
-import Main from "../../../Main";
 
 class WallContainer extends React.Component {
     render(){
@@ -11,13 +10,13 @@ class WallContainer extends React.Component {
         )
     }
 }
-
 const mapStateToProps = (state) => {
     return {
         postData : state.mainPage.postData,
-        newPostText : state.mainPage.newPostText
+        newPostText : state.mainPage.newPostText,
+        data: state.mainPage.postData.data
     }
 }
 
-export default connect(mapStateToProps, {addPost, postTextChange})(WallContainer)
+export default connect(mapStateToProps, {addPost})(WallContainer)
 

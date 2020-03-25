@@ -1,19 +1,18 @@
 import {allUsersAPI, headerAPI, mainAPI} from "../api/api";
 
 let ADD_POST = 'ADD-POST',
-    POST_TEXT_CHANGE = 'POST-TEXT-CHANGE',
     SET_USER_PROFILE = 'SET_USER_PROFILE',
-    SET_USER_STATUS = 'SET_USER_STATUS';
+    SET_USER_STATUS = 'SET_USER_STATUS',
+    SET_DATA = 'SET_DATA'
 
 
 let inicialization = {
     personData: {},
-    newPostText: '',
     postData:
         [
             { header: 'some text...', content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo vitae delectus culpa est in eius quis illum ipsum quibusdam, possimus doloremque officia at ut, aspernatur voluptatum laborum blanditiis repellat rerum.', data: '22.22.22' },
-            { header: 'some text...', content: 'Your text.', data: '22.22.22' },
-            { header: 'some text...', content: 'and it too', data: '22.22.22' },
+            { header: 'some text...', content: 'Your text.', data: '22/02/2020' },
+            { header: 'some text...', content: 'and it too', data: '22/02/2020' },
         ],
     friendData:
         [
@@ -35,21 +34,13 @@ let mainReducer = (state = inicialization, action) => {
         case ADD_POST: {
             let newPostData = {
                 header: 'some text...',
-                content: state.newPostText,
-                data: '22.22.22'
+                content: action.value,
+                data: action.curData
             }
             return{
                 ...state,
                 postData: [newPostData, ...state.postData],
-                newPostText: ''
             };
-        }
-
-        case POST_TEXT_CHANGE: {
-            return {
-                ...state,
-                newPostText: action.newPostText
-             }
         }
         case SET_USER_PROFILE: {
             return {
@@ -69,8 +60,7 @@ let mainReducer = (state = inicialization, action) => {
     }
 }
 
-export const addPost = () => ({ type: ADD_POST });
-export const postTextChange = (newPostText) => ({ type: POST_TEXT_CHANGE, newPostText });
+export const addPost = (value, curData) => ({ type: ADD_POST, value, curData });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 export const setUserStatus= (status) => ({ type: SET_USER_STATUS, status });
 

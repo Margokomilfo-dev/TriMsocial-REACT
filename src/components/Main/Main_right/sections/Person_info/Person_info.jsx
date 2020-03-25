@@ -20,7 +20,6 @@ class Person_info extends React.Component {
         profession: 'Frontend Developer'
     }
     render() {
-        debugger
         if (!this.props.profile) {return <Loader/>}
         return (
             <div className={s.section_person_info}>
