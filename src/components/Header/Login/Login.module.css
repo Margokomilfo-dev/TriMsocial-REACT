@@ -18,9 +18,10 @@
     align-content: center;
 }
 .form input{
-    margin-top: 5px;
+    margin: 10px;
     padding-left: 10px;
     height: 30px;
+    width: 300px;
     border: 1px solid #a7a7a7;
     border-radius: 10px;
     font-size: 16px;
@@ -72,4 +73,15 @@
 }
 .header_bottom {
     font-size: 13px;
+}
+.commonError {
+    background-color: red;
+    color: white;
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+    padding: 5px;
+}
+.form .loginButton {
+    font-weight: 900;
 }

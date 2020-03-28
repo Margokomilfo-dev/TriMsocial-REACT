@@ -16,7 +16,6 @@ let Header = (props) => {
                         <input type="text" name="fname" placeholder='searcs...'/>
                     </div>
 
-
                         <div className = {s.signup}>
                             <div className={s.userPhoto}>
                                         { props.userPhoto
@@ -25,12 +24,11 @@ let Header = (props) => {
                             </div>
                             <div className={s.signup_register}>
                                 {props.isLogin
-                                        ? <div> {props.login }<a href='#' onClick={props.authCheckOut}> Check out </a> </div>
+                                        ? <div> {props.login }<a href='#' onClick={props.logout}> Check out </a> </div>
                                         : <div><NavLink  to="/login"> Sigh Up </NavLink></div>
                                 }
                             </div>
                         </div>
-
 
                 </div>
             </div>

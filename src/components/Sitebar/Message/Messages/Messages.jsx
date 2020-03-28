@@ -12,7 +12,6 @@ function AddMessageForm(props) {
         </form>
     )
 }
-
 let AddMessageReduxForm = reduxForm({form: 'addMessageForm'})(AddMessageForm)
 
 let Messages = (props) => {
@@ -25,7 +24,6 @@ let Messages = (props) => {
         <div className={s.messages_wrapper}>
             <div className={s.messages}>
                 {messageItems}
-
             </div>
             <AddMessageReduxForm onSubmit={addNewMess}/>
         </div>

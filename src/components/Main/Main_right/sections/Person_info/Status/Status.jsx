@@ -39,7 +39,6 @@ class Status extends React.Component {
                 {!this.state.statusMod
                     ? <span onDoubleClick={this.onChangeStatus}>{ this.props.status || 'No status...' }</span>
                     : <textarea onChange={this.onChangeUserStatus} value={this.state.status} onBlur={this.offChangeStatus} autoFocus={true}/>}
-
             </div>
 
         )

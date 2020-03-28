@@ -10,15 +10,17 @@ import {
 import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../redux/HOC";
 import {compose} from "redux";
+import Loader from "../common/Loader/Loader";
 
 class MainContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId
-        if (!userId) { userId = 6314}
+        if (!userId) { userId = this.props.userId}
         this.props.setUserThunkCreator(userId);
         this.props.getUserStatusThunkCreator(userId)
     }
     render(){
+        if (!this.props.isLogin) return <Loader/>
         return(
             <Main {...this.props}
                   profile={this.props.profile}
@@ -31,7 +33,9 @@ class MainContainer extends React.Component {
 
 let mapStateToProps = (state) => ({
         profile: state.mainPage.profile,
-        status: state.mainPage.status
+        status: state.mainPage.status,
+        userId: state.auth.id,
+        isLogin: state.auth.isLogin
 });
 
 export default compose(

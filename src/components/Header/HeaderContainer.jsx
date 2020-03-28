@@ -2,7 +2,7 @@ import React from 'react'
 import Header from "./Header";
 import {connect} from "react-redux";
 import {
-    authCheckOut,
+    logout,
     setAuthAndUserURLPhotoThunkCreator,
 } from "../../redux/auth_reducer";
 
@@ -25,4 +25,4 @@ let mapStateToProps = (state) => ({
     userPhoto: state.auth.userPhoto
 });
 
-export default connect (mapStateToProps, { authCheckOut, setAuthAndUserURLPhotoThunkCreator})(HeaderContainer)
+export default connect (mapStateToProps, {logout, setAuthAndUserURLPhotoThunkCreator})(HeaderContainer)
