@@ -5,6 +5,7 @@ import {NavLink} from "react-router-dom";
 import noPhoto from '../Main/Main_right/sections/Wall/Post/noPhoto.png'
 
 let Header = (props) => {
+
     return (
         <div className = {s.header}>
             <div className = {s.header_wrapper}>
@@ -24,7 +25,7 @@ let Header = (props) => {
                             </div>
                             <div className={s.signup_register}>
                                 {props.isLogin
-                                        ? <div> {props.login }<a href='#' onClick={props.logout}> Check out </a> </div>
+                                        ? <div> {props.login} <NavLink  to="/login" onClick={props.logout}> Check out </NavLink></div>
                                         : <div><NavLink  to="/login"> Sigh Up </NavLink></div>
                                 }
                             </div>

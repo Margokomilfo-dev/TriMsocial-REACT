@@ -1,8 +1,7 @@
 import React from 'react'
 import s from './Person_info.module.css'
 import Loader from "../../../../common/Loader/Loader";
-import Status from "./Status/Status";
-import Main_left from "../../../Main_left/Main_left";
+import StatusWithHooks from "./Status/StatusWithHooks";
 
 class Person_info extends React.Component {
     state= {
@@ -28,8 +27,8 @@ class Person_info extends React.Component {
                         className={s.first_surname}> {this.state.first_surname} </span></div>
 
                     <div className={s.status}>
-                        <Status status={this.props.status}
-                                updateUserStatusThunkCreator={this.props.updateUserStatusThunkCreator}/>
+                        <StatusWithHooks status={this.props.status}
+                                updateUserStatus={this.props.updateUserStatus}/>
                     </div>
 
                     <div className={s.link}>  Instagram : <span className={s.nickname}>{`@${this.state.nicknameInst}`}</span></div>

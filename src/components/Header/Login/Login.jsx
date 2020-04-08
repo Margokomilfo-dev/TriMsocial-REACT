@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form'
 import {Input, validate} from "../../Validations";
 import {login, setCapcha} from "../../../redux/auth_reducer";
 import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 
 let LoginForm = (props) => {
     return (
@@ -31,7 +31,7 @@ let LoginForm = (props) => {
                     <div className={s.go}>
                         <button type='button' disabled={props.pristine || props.submitting} onClick={props.reset}>Clear Values</button>
                         <button type='submit' className={s.loginButton}>Login</button>
-                        <a href="">Forgot the password</a>
+                        <NavLink to='/'>Forgot the password</NavLink>
                     </div>
 
 

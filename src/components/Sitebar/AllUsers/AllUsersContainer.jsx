@@ -10,8 +10,14 @@ import {
 } from "../../../redux/users_reducer";
 import AllUsers from "./AllUsers";
 import Loader from "../../common/Loader/Loader";
-import {withAuthRedirect} from "../../../redux/HOC";
 import {compose} from "redux";
+import {
+    getCountPages,
+    getCountUsersOnPage,
+    getCurrentPage, getFollowingInProcess, getIsLoader, getIsLogin,
+    getTotalUsersCount,
+    getUsers
+} from "../../../redux/selectors";
 
 class AllUsersContainer extends React.Component {
     componentDidMount() {
@@ -44,19 +50,18 @@ class AllUsersContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        countUsersOnPage: state.usersPage.countUsersOnPage,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        countPages: state.usersPage.countPages,
-        currentPage: state.usersPage.currentPage,
-        isLoader: state.usersPage.isLoader,
-        followingInProcess: state.usersPage.followingInProcess,
-        isLogin: state.auth.isLogin
+        users: getUsers(state),
+        countUsersOnPage: getCountUsersOnPage(state),
+        totalUsersCount: getTotalUsersCount(state),
+        countPages: getCountPages(state),
+        currentPage: getCurrentPage(state),
+        isLoader: getIsLoader(state),
+        followingInProcess: getFollowingInProcess(state),
+        isLogin: getIsLogin(state)
     }
 }
 
 export default compose(
     connect(mapStateToProps,{follow, unfollow, setCurrentPage, toggleFollowingInProcess,
-        getUsersThunkCreator, unfollowThunkCreator, followThunkCreator }),
-    withAuthRedirect
+        getUsersThunkCreator, unfollowThunkCreator, followThunkCreator })
 )(AllUsersContainer)

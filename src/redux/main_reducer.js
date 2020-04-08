@@ -1,18 +1,18 @@
-import {allUsersAPI, headerAPI, mainAPI} from "../api/api";
+import {mainAPI} from "../api/api";
 
 let ADD_POST = 'ADD-POST',
     SET_USER_PROFILE = 'SET_USER_PROFILE',
     SET_USER_STATUS = 'SET_USER_STATUS',
-    SET_DATA = 'SET_DATA'
+    DELETE_POST = 'DELETE_POST'
 
 
 let inicialization = {
     personData: {},
     postData:
         [
-            { header: 'some text...', content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo vitae delectus culpa est in eius quis illum ipsum quibusdam, possimus doloremque officia at ut, aspernatur voluptatum laborum blanditiis repellat rerum.', data: '22.22.22' },
-            { header: 'some text...', content: 'Your text.', data: '22/02/2020' },
-            { header: 'some text...', content: 'and it too', data: '22/02/2020' },
+            { id: 1, header: 'some text...', content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo vitae delectus culpa est in eius quis illum ipsum quibusdam, possimus doloremque officia at ut, aspernatur voluptatum laborum blanditiis repellat rerum.', data: '22.22.22' },
+            { id: 2, header: 'some text...', content: 'Your text.', data: '22/02/2020' },
+            { id: 3, header: 'some text...', content: 'and it too', data: '22/02/2020' },
         ],
     friendData:
         [
@@ -54,6 +54,12 @@ let mainReducer = (state = inicialization, action) => {
                 status: action.status
             }
         }
+        case DELETE_POST: {
+            return {
+                ...state,
+                postData: state.postData.filter(p => p.id !== action.postId)
+            }
+        }
 
         default:
             return state;
@@ -63,8 +69,9 @@ let mainReducer = (state = inicialization, action) => {
 export const addPost = (value, curData) => ({ type: ADD_POST, value, curData });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 export const setUserStatus= (status) => ({ type: SET_USER_STATUS, status });
+export const deletePost= (postId) => ({ type: DELETE_POST, postId });
 
-export const setUserThunkCreator = (userId) => {
+export const setUser = (userId) => {
     return (dispatch) => {
         mainAPI.getUserProfile(userId)
             .then(response => {
@@ -72,13 +79,13 @@ export const setUserThunkCreator = (userId) => {
             })
     }
 };
-export const getUserStatusThunkCreator = (userId) => (dispatch) => {
+export const getUserStatus = (userId) => (dispatch) => {
         mainAPI.getUserStatus(userId)
             .then(response => {
                 dispatch(setUserStatus(response));
             })
     };
-export const updateUserStatusThunkCreator = (status) => (dispatch) => {
+export const updateUserStatus = (status) => (dispatch) => {
         mainAPI.updateUserStatus(status)
             .then(response => {
                 if (response.resultCode === 0)

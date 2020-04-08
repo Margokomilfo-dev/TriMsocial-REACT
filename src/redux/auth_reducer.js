@@ -1,13 +1,12 @@
 import {headerAPI} from "../api/api";
 import {withAuthRedirect} from "./HOC";
 import {stopSubmit} from "redux-form";
-import {validate} from "../components/Validations";
 
 let SET_USER_DATA = 'SET_USER_DATA',
     SET_USERS_PHOTO = 'SET_USERS_PHOTO',
     CAPCHA = 'CAPCHA'
 
-let inicialization = {
+let auth = {
     id: null,
     login: null,
     email: null,
@@ -17,7 +16,7 @@ let inicialization = {
     urlCapcha: ''
 }
 
-const authReducer = (state = inicialization, action) => {
+const authReducer = (state = auth, action) => {
     switch (action.type) {
         case SET_USER_DATA: {
             return {
@@ -48,18 +47,18 @@ export const setUserURLPhoto = (url) => ({type: SET_USERS_PHOTO, url});
 export const setCapcha = (url) => ({type: CAPCHA, url});
 
 
-export const setAuthAndUserURLPhotoThunkCreator = () => {
+export const setAuthAndUserURLPhoto = () => {
     return (dispatch) => {
-        headerAPI.me().then(response => {
-            if (response.resultCode === 0) {
-                let {id, email, login} = response.data;
-                dispatch(setAuthUserData(id,login, email, true));
-                //------------------------
-                let userId = response.data.id;
-                headerAPI.getURLPhoto(userId).then(response => {
-                    dispatch(setUserURLPhoto(response.photos.small));
-                })
-            }
+        return headerAPI.me().then(response => {
+                if (response.resultCode === 0) {
+                    let {id, email, login} = response.data;
+                    dispatch(setAuthUserData(id,login, email, true));
+                    //------------------------
+                    let userId = response.data.id;
+                    headerAPI.getURLPhoto(userId).then(response => {
+                        dispatch(setUserURLPhoto(response.photos.small));
+                    })
+                }
         })
     }
 }
@@ -77,7 +76,7 @@ export const login = (email, password, rememberMe, capcha) => {
                     dispatch(setAuthUserData(null,null, null, false));
                 })
             } else {
-                let message = response.messages.length
+                let message = response.messages
                 dispatch(stopSubmit('loginForm', {_error: message}))
             }
         })

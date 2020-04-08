@@ -73,7 +73,7 @@ const usersReducer = (state = inicialization, action) => {
                 ...state,
                 followingInProcess: action.isLoader
                     ? [...state.followingInProcess, action.userId]
-                    : state.followingInProcess.filter(id => id != action.userId)
+                    : state.followingInProcess.filter(id => id !== action.userId)
             }
         }
         default:

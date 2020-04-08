@@ -2,9 +2,8 @@
 import React from 'react'
 import s from './Main.module.css'
 import Main_left from './Main_left/Main_left'
-import Main_right from './Main_right/Main_right'
+import MainRight from './Main_right/MainRight'
 import Loader from "../common/Loader/Loader";
-import {Redirect} from "react-router-dom";
 
 let Main = (props) => { //postData
     if(!props.profile) {
@@ -18,12 +17,12 @@ let Main = (props) => { //postData
 
                           profile = {props.profile}/>
 
-               <Main_right  store = {props.store}
-                            personData = {props.state.mainPage.personData}
+               <MainRight store = {props.store}
+                          personData = {props.state.mainPage.personData}
 
-                            profile = {props.profile}
-                            status={props.status}
-                            updateUserStatusThunkCreator={props.updateUserStatusThunkCreator}
+                          profile = {props.profile}
+                          status={props.status}
+                          updateUserStatus={props.updateUserStatus}
                             />
                 
             </div> {/*main_wrapper*/}   

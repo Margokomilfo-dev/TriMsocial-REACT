@@ -1,10 +1,8 @@
-import React from 'react'
 import { addMess } from '../../../../redux/message_reducer';
 import Messages from "./Messages";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../../../redux/HOC";
 import {compose} from "redux";
-
 
 const mapStateToProps = (state) => {
     return {

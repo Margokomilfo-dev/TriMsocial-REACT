@@ -1,8 +1,10 @@
 import React from 'react'
 
-let Friends = (props) => {
+let Friends = () => {
     return (
-        <div>Friends</div>
+        <div>
+            Friends will be here!!
+        </div>
     )
 }
 export default Friends
