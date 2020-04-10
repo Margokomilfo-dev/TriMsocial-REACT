@@ -1,6 +1,6 @@
 import {setAuthAndUserURLPhoto} from "./auth_reducer";
 
-let INITIALISED_SUCCESS = 'INITIALISED_SUCCESS'
+let INITIALISED_SUCCESS = 'TriM/trim/INITIALISED_SUCCESS'
 
 let trim = {
     initialed: false

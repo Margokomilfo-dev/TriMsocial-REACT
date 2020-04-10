@@ -1,4 +1,4 @@
-let ADD_MESS = 'ADD-MESS'
+let ADD_MESS = 'TriM/message/ADD-MESS'
 let inicialization = {
     userData: [
         { name: 'Margo', id: 1 },

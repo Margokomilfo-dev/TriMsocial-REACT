@@ -1,12 +1,12 @@
 import React from 'react'
 import {connect} from "react-redux"
 import {
-    follow,
+    followSuccess,
     toggleFollowingInProcess,
     setCurrentPage,
-    unfollow, getUsersThunkCreator,
-    unfollowThunkCreator,
-    followThunkCreator
+    unfollowSuccess, getUsersTC,
+    unfollowTC,
+    followTC
 } from "../../../redux/users_reducer";
 import AllUsers from "./AllUsers";
 import Loader from "../../common/Loader/Loader";
@@ -21,12 +21,15 @@ import {
 
 class AllUsersContainer extends React.Component {
     componentDidMount() {
+        let {currentPage, countUsersOnPage} = this.props
         if (this.props.users.length === 0) {
-            this.props.getUsersThunkCreator(this.props.currentPage, this.props.countUsersOnPage)
+            this.props.getUsersTC(currentPage, countUsersOnPage)
         }
     }
     onPageChanged = (pageNamber) => {
-         this.props.getUsersThunkCreator(pageNamber, this.props.countUsersOnPage)
+
+        let {countUsersOnPage} = this.props
+         this.props.getUsersTC(pageNamber, countUsersOnPage)
      };
     render() {
         return <>
@@ -41,8 +44,8 @@ class AllUsersContainer extends React.Component {
                       onPageChanged={this.onPageChanged}
                       toggleFollowingInProcess={this.props.toggleFollowingInProcess}
                       followingInProcess={this.props.followingInProcess}
-                      unfollowThunkCreator={this.props.unfollowThunkCreator}
-                      followThunkCreator={this.props.followThunkCreator}
+                      unfollowTC={this.props.unfollowTC}
+                      followTC={this.props.followTC}
                       isLogin={this.props.isLogin}/>
         </>
     }
@@ -62,6 +65,6 @@ let mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps,{follow, unfollow, setCurrentPage, toggleFollowingInProcess,
-        getUsersThunkCreator, unfollowThunkCreator, followThunkCreator })
+    connect(mapStateToProps,{followSuccess, unfollowSuccess, setCurrentPage, toggleFollowingInProcess,
+        getUsersTC, unfollowTC, followTC })
 )(AllUsersContainer)

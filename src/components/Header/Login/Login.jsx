@@ -1,60 +1,57 @@
 import React from 'react'
 import s from './Login.module.css'
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import {Input, validate} from "../../Validations";
 import {login, setCapcha} from "../../../redux/auth_reducer";
 import {connect} from "react-redux";
 import {NavLink, Redirect} from "react-router-dom";
+import {createField} from "../../../object_helpers/object_helpers";
 
-let LoginForm = (props) => {
+let LoginForm = ({handleSubmit, error, capcha, urlCapcha, pristine, submitting, reset}) => {
     return (
         <div>
             <div className={s.check_in}>
-                <form className={s.form} onSubmit={props.handleSubmit}>
-                    <Field component={Input} name='email' placeholder='email'/>
-                    <Field component={Input} name='password' placeholder='password' type='password'/>
-
-                    <div className={s.checkbox}>
-                        <Field component='input' type='checkbox'  name='rememberMe'/> remember me
-                    </div>
+                <form className={s.form} onSubmit={handleSubmit}>
+                    {createField(null, Input, 'email', 'email', 'email', null )}
+                    {createField(null, Input, 'password', 'password', 'password', null )}
+                    {createField(s.checkbox, Input, 'checkbox', 'rememberMe', null, 'remember me ')}
                     {/*---------------common_error-------------------*/}
-                    {props.error &&
+                    {error &&
                     <div className={s.commonError}>
-                        {props.error}
+                        {error}
                     </div>}
                     {/*---------------capcha-------------------------*/}
-                    {!props.capcha &&
+                    {!capcha &&
                     <div className={s.capcha}>
-                        <img src={props.urlCapcha} alt=""/>
+                        <img src={urlCapcha} alt=""/>
+                        {/*{createField(null, Input, 'text', 'capcha', 'capcha', null )}*/}
                         {/*<Field component={Input} name='capcha' placeholder='capcha' type='text'/>*/}
                     </div>}
                     <div className={s.go}>
-                        <button type='button' disabled={props.pristine || props.submitting} onClick={props.reset}>Clear Values</button>
+                        <button type='button' disabled={pristine || submitting} onClick={reset}>Clear Values</button>
                         <button type='submit' className={s.loginButton}>Login</button>
                         <NavLink to='/'>Forgot the password</NavLink>
                     </div>
-
-
                 </form>
             </div>
         </div>
     )
 };
 
-let RegisterForm = (props) => {
+let RegisterForm = ({handleSubmit,pristine,submitting,reset }) => {
     return (
         <div className={s.register}>
             <div className={s.header}>
                 <div className={s.header_top}>Впервые в 3Msocial? </div>
                 <div className={s.header_bottom}>Моментальная регистрация </div>
             </div>
-            <form className={s.form} onSubmit={props.handleSubmit}>
-                <Field component={Input} type='text' name='registerEmail' placeholder='email'/>
-                <Field component={Input} type='password' name='registerPassword1' placeholder='password' />
-                <Field component={Input} type='password' name='registerPassword2' placeholder='password'/>
+            <form className={s.form} onSubmit={handleSubmit}>
+                {createField(null, Input, 'text', 'registerEmail', "email", null)}
+                {createField(null, Input, 'password', 'registerPassword1', 'password', null )}
+                {createField(null, Input, 'password', 'registerPassword2', 'password', null )}
                 <div className={s.go}>
                     <button type='submit' className={s.loginButton}>Login</button>
-                    <button type='button' disabled={props.pristine || props.submitting} onClick={props.reset}>Clear Values</button>
+                    <button type='button' disabled={pristine || submitting} onClick={reset}>Clear Values</button>
                 </div>
             </form>
         </div>
@@ -64,19 +61,19 @@ let RegisterForm = (props) => {
 let LoginReduxForm = reduxForm({form: 'loginForm', validate})(LoginForm)
 let RegisterReduxForm = reduxForm({form: 'registerForm', validate})(RegisterForm)
 
-let Login = (props) => {
+let Login = ({login, isLogin, urlCapcha}) => {
     let onSubmit = (formData) => {
-        props.login(formData.email, formData.password, formData.rememberMe)
+        login(formData.email, formData.password, formData.rememberMe)
 
     };
 
-    if(props.isLogin){
+    if(isLogin){
         return <Redirect to='/profile'/>
     }
 
     return (
         <div className = {s.login}>
-            <LoginReduxForm onSubmit={onSubmit} urlCapcha={props.urlCapcha}/>
+            <LoginReduxForm onSubmit={onSubmit} urlCapcha={urlCapcha}/>
             <RegisterReduxForm onSubmit={onSubmit}/>
 
         </div>

@@ -27,12 +27,10 @@ class TriM extends React.Component {
     componentDidMount() {
         this.props.initializationTriM();
     }
-
     render() {
         if (!this.props.initialed) {
             return <Loader/>
         }
-
         return (
             <>
                 <div className='container'>
