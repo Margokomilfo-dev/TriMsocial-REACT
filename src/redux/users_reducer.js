@@ -10,7 +10,7 @@ let FOLLOW = 'TriM/users/FOLLOW',
 
 let inicialization = {
     users: [],
-    countUsersOnPage: 5,
+    countUsersOnPage: 6,
     totalUsersCount: '',
     currentPage: 1,
     countPages: '',
