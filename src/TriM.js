@@ -25,12 +25,14 @@ const Message = React.lazy(() => import('./components/Sitebar/Message/Message.js
 const AllUsersContainer = React.lazy(() => import('./components/Sitebar/AllUsers/AllUsersContainer'));
 //import AllUsersContainer from "./components/Sitebar/AllUsers/AllUsersContainer";
 const Login = React.lazy(() => import('./components/Header/Login/Login'));
+
 //import Login from "./components/Header/Login/Login";
 
 class TriM extends React.Component {
     componentDidMount() {
         this.props.initializationTriM();
     }
+
     render() {
         if (!this.props.initialed) {
             return <Loader/>
@@ -43,31 +45,23 @@ class TriM extends React.Component {
                         <Sitebar/>
                         <div className='main_wrapper'>
                             {this.props.isLogin ? (<Last_seen last_seen='Online...'/>) :
-                                (<Last_seen last_seen={`You aren't autorized...`}/>) }
-                            <Route path='/profile/:userId?/' render={() => <MainContainer store={this.props.store}
-                                                                                          state={this.props.state}/>}/>
-                            <Route path='/message' render={() =>
-                                <React.Suspense fallback={<Loader/>}>
-                                    <Message store={this.props.store} userData={this.props.state.messagePage.userData}/>
-                                </React.Suspense>}/>
+                                (<Last_seen last_seen={`You aren't autorized...`}/>)}
 
-                            <Route path='/users' render={() =>
-                                <React.Suspense fallback={<Loader/>}>
-                                    <AllUsersContainer/>
-                                </React.Suspense>}/>
-
-
-                            <Route path='/login' render={() =>
-                                <React.Suspense fallback={<Loader/>}>
-                                    <Login/>
-                                </React.Suspense>}/>
-
-                            <Route path='/photos' render={() => <Photos/>}/>
-                            <Route path='/friends' render={() => <Friends/>}/>
-                            <Route path='/news' render={() => <News/>}/>
-                            <Route path='/music' render={() => <Music/>}/>
-                            <Route path='/muvies' render={() => <Muvies/>}/>
-                            <Route path='/groups' render={() => <Groups/>}/>
+                            <React.Suspense fallback={<Loader/>}>
+                                <Route path='/profile/:userId?/' render={() => <MainContainer store={this.props.store}
+                                                                                              state={this.props.state}/>}/>
+                                <Route path='/message' render={() =>
+                                    <Message store={this.props.store}
+                                             userData={this.props.state.messagePage.userData}/>}/>
+                                <Route path='/users' render={() => <AllUsersContainer/>}/>
+                                <Route path='/login' render={() => <Login/>}/>
+                                <Route path='/photos' render={() => <Photos/>}/>
+                                <Route path='/friends' render={() => <Friends/>}/>
+                                <Route path='/news' render={() => <News/>}/>
+                                <Route path='/music' render={() => <Music/>}/>
+                                <Route path='/muvies' render={() => <Muvies/>}/>
+                                <Route path='/groups' render={() => <Groups/>}/>
+                            </React.Suspense>
                         </div>
                         {/* main_wrapper */}
                     </div>
