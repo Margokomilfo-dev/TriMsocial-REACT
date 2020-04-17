@@ -32,6 +32,10 @@ let LoginForm = ({handleSubmit, error, capcha, urlCapcha, pristine, submitting, 
                         <button type='submit' className={s.loginButton}>Login</button>
                         <NavLink to='/'>Forgot the password</NavLink>
                     </div>
+                    данные тестового аккаунта:
+                    Email: free@samuraijs.com
+
+                    Password: free
                 </form>
             </div>
         </div>

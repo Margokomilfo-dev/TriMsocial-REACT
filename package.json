@@ -2,6 +2,7 @@
   "name": "my_network",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://margokomilfo-dev.github.io/TriMsocial-REACT",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
@@ -20,7 +21,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,6 +42,7 @@
   },
   "devDependencies": {
     "axios": "^0.19.2",
+    "gh-pages": "^2.2.0",
     "react-redux": "^7.1.3"
   }
 }

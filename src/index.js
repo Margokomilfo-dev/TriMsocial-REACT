@@ -4,13 +4,13 @@ import ReactDOM from 'react-dom';
 import store from './redux/store_redux';
 import './index.css';
 import TriM from './TriM';
-import {BrowserRouter} from 'react-router-dom';
+import {HashRouter} from 'react-router-dom';
 import {Provider} from "react-redux";
 
 ReactDOM.render(
-    <BrowserRouter>
+    <HashRouter>
         <Provider store={store}>
             <TriM state={store.getState()} dispatch={store.dispatch.bind(store)}/>
         </Provider>
-    </BrowserRouter>, document.getElementById('root'));
+    </HashRouter>, document.getElementById('root'));
 
