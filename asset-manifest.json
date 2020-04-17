@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.css": "/TriMsocial-REACT/static/css/main.348eb9c0.chunk.css",
-    "main.js": "/TriMsocial-REACT/static/js/main.e129cce6.chunk.js",
-    "main.js.map": "/TriMsocial-REACT/static/js/main.e129cce6.chunk.js.map",
+    "main.css": "/TriMsocial-REACT/static/css/main.5f690501.chunk.css",
+    "main.js": "/TriMsocial-REACT/static/js/main.fd993417.chunk.js",
+    "main.js.map": "/TriMsocial-REACT/static/js/main.fd993417.chunk.js.map",
     "runtime-main.js": "/TriMsocial-REACT/static/js/runtime-main.a581f340.js",
     "runtime-main.js.map": "/TriMsocial-REACT/static/js/runtime-main.a581f340.js.map",
-    "static/js/2.c20048c8.chunk.js": "/TriMsocial-REACT/static/js/2.c20048c8.chunk.js",
-    "static/js/2.c20048c8.chunk.js.map": "/TriMsocial-REACT/static/js/2.c20048c8.chunk.js.map",
+    "static/js/2.f5ae9691.chunk.js": "/TriMsocial-REACT/static/js/2.f5ae9691.chunk.js",
+    "static/js/2.f5ae9691.chunk.js.map": "/TriMsocial-REACT/static/js/2.f5ae9691.chunk.js.map",
     "static/css/3.22960b66.chunk.css": "/TriMsocial-REACT/static/css/3.22960b66.chunk.css",
     "static/js/3.f5c6a48f.chunk.js": "/TriMsocial-REACT/static/js/3.f5c6a48f.chunk.js",
     "static/js/3.f5c6a48f.chunk.js.map": "/TriMsocial-REACT/static/js/3.f5c6a48f.chunk.js.map",
@@ -17,13 +17,13 @@
     "static/js/5.b38ff980.chunk.js": "/TriMsocial-REACT/static/js/5.b38ff980.chunk.js",
     "static/js/5.b38ff980.chunk.js.map": "/TriMsocial-REACT/static/js/5.b38ff980.chunk.js.map",
     "index.html": "/TriMsocial-REACT/index.html",
-    "precache-manifest.e15333ca352da3764d02e83186df3d20.js": "/TriMsocial-REACT/precache-manifest.e15333ca352da3764d02e83186df3d20.js",
+    "precache-manifest.9cbb6d0359143eac399c8df261115896.js": "/TriMsocial-REACT/precache-manifest.9cbb6d0359143eac399c8df261115896.js",
     "service-worker.js": "/TriMsocial-REACT/service-worker.js",
     "static/css/3.22960b66.chunk.css.map": "/TriMsocial-REACT/static/css/3.22960b66.chunk.css.map",
     "static/css/4.5bc508a5.chunk.css.map": "/TriMsocial-REACT/static/css/4.5bc508a5.chunk.css.map",
     "static/css/5.703f550d.chunk.css.map": "/TriMsocial-REACT/static/css/5.703f550d.chunk.css.map",
-    "static/css/main.348eb9c0.chunk.css.map": "/TriMsocial-REACT/static/css/main.348eb9c0.chunk.css.map",
-    "static/js/2.c20048c8.chunk.js.LICENSE.txt": "/TriMsocial-REACT/static/js/2.c20048c8.chunk.js.LICENSE.txt",
+    "static/css/main.5f690501.chunk.css.map": "/TriMsocial-REACT/static/css/main.5f690501.chunk.css.map",
+    "static/js/2.f5ae9691.chunk.js.LICENSE.txt": "/TriMsocial-REACT/static/js/2.f5ae9691.chunk.js.LICENSE.txt",
     "static/media/loader.gif": "/TriMsocial-REACT/static/media/loader.1d519361.gif",
     "static/media/logo.png": "/TriMsocial-REACT/static/media/logo.fe6b73b0.png",
     "static/media/message.png": "/TriMsocial-REACT/static/media/message.63de91b9.png",
@@ -31,8 +31,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.a581f340.js",
-    "static/js/2.c20048c8.chunk.js",
-    "static/css/main.348eb9c0.chunk.css",
-    "static/js/main.e129cce6.chunk.js"
+    "static/js/2.f5ae9691.chunk.js",
+    "static/css/main.5f690501.chunk.css",
+    "static/js/main.fd993417.chunk.js"
   ]
 }
