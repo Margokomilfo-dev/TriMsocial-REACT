@@ -10,3 +10,10 @@
 .main_wrapper {
     width: 85%;
 }
+.loading {
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: green;
+}

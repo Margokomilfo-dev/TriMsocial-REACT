@@ -34,7 +34,6 @@ let LoginForm = ({handleSubmit, error, capcha, urlCapcha, pristine, submitting, 
                     </div>
                     данные тестового аккаунта:
                     Email: free@samuraijs.com
-
                     Password: free
                 </form>
             </div>

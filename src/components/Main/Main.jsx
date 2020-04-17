@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-pascal-case */
+
 import React from 'react'
 import s from './Main.module.css'
 import Main_left from './Main_left/Main_left'

@@ -1,6 +1,6 @@
 import React from 'react'
 import './TriM.js'
-import './TriM.css'
+import  s from './TriM.module.css'
 import Sitebar from './components/Sitebar/Sitebar.jsx'
 import {Route, withRouter} from 'react-router-dom'
 import Last_seen from './components/Last_seen/Last_seen.jsx'
@@ -35,15 +35,15 @@ class TriM extends React.Component {
 
     render() {
         if (!this.props.initialed) {
-            return <Loader/>
+            return <div className={s.loading}>loading...</div>
         }
         return (
             <>
                 <div className='container'>
                     <HeaderContainer/>
-                    <div className='wrapper'>
+                    <div className={s.wrapper}>
                         <Sitebar/>
-                        <div className='main_wrapper'>
+                        <div className={s.main_wrapper}>
                             {this.props.isLogin ? (<Last_seen last_seen='Online...'/>) :
                                 (<Last_seen last_seen={`You aren't autorized...`}/>)}
 

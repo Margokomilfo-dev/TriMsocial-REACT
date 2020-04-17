@@ -1,8 +1,9 @@
 import React from 'react'
 import s from './Header.module.css'
 import logo from './logo.png'
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import noPhoto from '../Main/Main_right/sections/Wall/Post/noPhoto.png'
+import Loader from "../common/Loader/Loader";
 
 let Header = ({userPhoto, isLogin, login, logout}) => {
     return (
@@ -23,8 +24,8 @@ let Header = ({userPhoto, isLogin, login, logout}) => {
                         </div>
                         <div className={s.signup_register}>
                             {isLogin
-                                ? <div> {login} <NavLink to="/login" onClick={logout}> Check out </NavLink></div>
-                                : <div><NavLink to="/login"> Sigh Up </NavLink></div>
+                                ? <div> {login} <NavLink to="/login" onClick={logout}> <button className={s.button}> Check out </button> </NavLink></div>
+                                : <div><NavLink to="/login"><button className={s.button}> Sigh Up </button> </NavLink></div>
                             }
                         </div>
                     </div>
