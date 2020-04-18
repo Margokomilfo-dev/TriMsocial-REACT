@@ -3,7 +3,6 @@ import s from './Header.module.css'
 import logo from './logo.png'
 import {NavLink, Redirect} from "react-router-dom";
 import noPhoto from '../Main/Main_right/sections/Wall/Post/noPhoto.png'
-import Loader from "../common/Loader/Loader";
 
 let Header = ({userPhoto, isLogin, login, logout}) => {
     return (

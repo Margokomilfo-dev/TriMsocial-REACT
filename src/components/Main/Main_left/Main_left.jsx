@@ -9,7 +9,9 @@ let Main_left = (props) => {
         <div className={s.main_left}>
 
             <div className={s.section}>
-                <Ava profile={props.profile}/>
+                <Ava profile={props.profile}
+                     isOwner={props.isOwner}
+                     savePhoto = {props.savePhoto}/>
             </div> {/*section*/}
 
             <div className={s.section}>

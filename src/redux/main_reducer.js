@@ -3,7 +3,8 @@ import {mainAPI} from "../api/api";
 let ADD_POST = 'TriM/main/ADD-POST',
     SET_USER_PROFILE = 'TriM/main/SET_USER_PROFILE',
     SET_USER_STATUS = 'TriM/main/SET_USER_STATUS',
-    DELETE_POST = 'TriM/main/DELETE_POST'
+    DELETE_POST = 'TriM/main/DELETE_POST',
+    SAVE_PHOTO_SUCCESS = 'TriM/main/SAVE_PHOTO_SUCCESS'
 
 
 let inicialization = {
@@ -77,7 +78,13 @@ let mainReducer = (state = inicialization, action) => {
                 postData: state.postData.filter(p => p.id !== action.postId)
             }
         }
-
+        case SAVE_PHOTO_SUCCESS: {
+            debugger
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photos}
+            }
+        }
         default:
             return state;
     }
@@ -87,6 +94,7 @@ export const addPost = (value, curData) => ({type: ADD_POST, value, curData});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const setUserStatus = (status) => ({type: SET_USER_STATUS, status});
 export const deletePost = (postId) => ({type: DELETE_POST, postId});
+export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
 
 export const setUser = (userId) => async (dispatch) => {
     let response = await mainAPI.getUserProfile(userId)
@@ -102,6 +110,12 @@ export const updateUserStatus = (status) => async (dispatch) => {
     let response = await mainAPI.updateUserStatus(status)
     if (response.resultCode === 0)
         dispatch(setUserStatus(status));
+}
+export const savePhoto = (file) => async (dispatch) => {
+    debugger
+    let response = await mainAPI.savePhoto(file)
+    if (response.resultCode === 0)
+        dispatch(savePhotoSuccess(response.data.photos));
 }
 
 export default mainReducer;

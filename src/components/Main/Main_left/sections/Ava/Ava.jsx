@@ -4,7 +4,13 @@ import noPhoto from './noPhoto.png'
 // import photo from './ava.jpg'
 
 
-let Ava = (props) => {
+let Ava = ( {savePhoto, ...props}) => {
+debugger
+    const onMainPhotoChanged = (e) => {
+        if (e.target.files.length) {
+            savePhoto(e.target.files[0])
+        }
+    }
     return (
         <div className = {s.photo}>
             <div className={s.img}>
@@ -12,7 +18,9 @@ let Ava = (props) => {
                 <img src={props.profile.photos.large != null ? props.profile.photos.large : noPhoto} alt={noPhoto}/>
             </div>
             <div>
-                <button className = {s.button}>Edit</button>
+                {props.isOwner &&
+                    <input type={"file"} onChange={onMainPhotoChanged}/>
+                }
             </div>
 
         </div>

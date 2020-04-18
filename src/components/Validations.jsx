@@ -13,8 +13,8 @@ export let validate = (values) => {
 
     if (!values.password) {
         errors.password = 'Required'
-    } else if (values.password.length < 5 || values.password.length > 15) {
-        errors.password = 'Must be 5-15 characters'
+    } else if (values.password.length < 4 || values.password.length > 15) {
+        errors.password = 'Must be 4-15 characters'
     }
 
     if (!values.registerLogin) {
@@ -25,14 +25,14 @@ export let validate = (values) => {
 
     if (!values.registerPassword1) {
         errors.registerPassword1 = 'Required'
-    } else if (values.registerPassword1.length < 5 || values.registerPassword1.length > 15) {
-        errors.registerPassword1 = 'Must be 5-15 characters'
+    } else if (values.registerPassword1.length < 4 || values.registerPassword1.length > 15) {
+        errors.registerPassword1 = 'Must be 4-15 characters'
     }
 
     if (!values.registerPassword2) {
         errors.registerPassword2 = 'Required'
-    } else if (values.registerPassword2.length < 5 || values.registerPassword2.length > 15) {
-        errors.registerPassword2 = 'Must be 5-15 characters'
+    } else if (values.registerPassword2.length < 4 || values.registerPassword2.length > 15) {
+        errors.registerPassword2 = 'Must be 4-15 characters'
     }
 
    // !!values.registerPassword1 && !!values.registerPassword2 && (values.registerPassword1 !== values.registerPassword2) &&(values.registerPassword1.length > 5 && values.registerPassword1.length < 15 ) && (values.registerPassword2.length > 5 && values.registerPassword2.length < 15 ))
@@ -41,10 +41,10 @@ export let validate = (values) => {
         errors.registerPassword2 = 'not the same'
     } else if(!values.registerPassword1) {
         errors.registerPassword1 = 'Required'
-    } else if(values.registerPassword1.length < 5 || values.registerPassword1.length > 15 ) {
-        errors.registerPassword1 = 'Must be 5-15 characters'
-    } else if(values.registerPassword2.length < 5 || values.registerPassword2.length > 15 ) {
-    errors.registerPassword2 = 'Must be 5-15 characters'
+    } else if(values.registerPassword1.length < 4 || values.registerPassword1.length > 15 ) {
+        errors.registerPassword1 = 'Must be 4-15 characters'
+    } else if(values.registerPassword2.length < 4 || values.registerPassword2.length > 15 ) {
+    errors.registerPassword2 = 'Must be 4-15 characters'
     }  else if(!values.registerPassword2){
         errors.registerPassword2 = 'Required'
     } else {

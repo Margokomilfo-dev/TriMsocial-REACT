@@ -13,7 +13,9 @@ let Main = (props) => { //postData
         <div className = {s.main}>
             <div className = {s.main_wrapper}>
                <Main_left store = {props.store}
+                          isOwner = {props.isOwner}
                           friendData = {props.state.mainPage.friendData}
+                          savePhoto = {props.savePhoto}
 
                           profile = {props.profile}/>
 
