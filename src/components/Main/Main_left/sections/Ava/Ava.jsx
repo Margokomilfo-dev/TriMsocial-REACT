@@ -5,7 +5,6 @@ import noPhoto from './noPhoto.png'
 
 
 let Ava = ( {savePhoto, ...props}) => {
-debugger
     const onMainPhotoChanged = (e) => {
         if (e.target.files.length) {
             savePhoto(e.target.files[0])

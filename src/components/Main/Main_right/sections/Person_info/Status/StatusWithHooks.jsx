@@ -28,9 +28,14 @@ const StatusWithHooks = (props) => {
 
     return (
         <div className={s.status}>
-            {!statusMod
+            {!props.isOwner &&
+                <span >{ props.status }</span>}
+            {props.isOwner &&
+            (!statusMod
                 ? <span onDoubleClick={onChangeStatus}>{ props.status || 'No status...' }</span>
-                : <textarea onChange={onChangeUserStatus} value={status} onBlur={offChangeStatus} autoFocus={true}/>}
+                : <textarea onChange={onChangeUserStatus} value={status} onBlur={offChangeStatus} autoFocus={true}/>)
+
+            }
         </div>
     )
 }

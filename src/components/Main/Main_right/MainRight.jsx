@@ -10,6 +10,7 @@ let MainRight = (props) => {
 
             <div className = {s.section}>
                 <PersonInfo state = {props.personData}
+                            isOwner = {props.isOwner}
 
                             profile={props.profile}
                             status={props.status}

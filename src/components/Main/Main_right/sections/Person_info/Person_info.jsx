@@ -28,7 +28,8 @@ class Person_info extends React.Component {
 
                     <div className={s.status}>
                         <StatusWithHooks status={this.props.status}
-                                updateUserStatus={this.props.updateUserStatus}/>
+                                updateUserStatus={this.props.updateUserStatus}
+                                isOwner = {this.props.isOwner}/>
                     </div>
 
                     <div className={s.link}>  Instagram : <span className={s.nickname}>{`@${this.state.nicknameInst}`}</span></div>
