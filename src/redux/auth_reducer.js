@@ -37,6 +37,7 @@ const authReducer = (state = auth, action) => {
                 urlCapcha: action.url
             }
         }
+
         default:
             return state;
     }
@@ -64,6 +65,7 @@ export const setAuthAndUserURLPhoto = () => async (dispatch) => {
 }
 
 export const login = (email, password, rememberMe, capcha) => async (dispatch) => {
+    debugger
     let response = await headerAPI.login(email, password, rememberMe)
     if (response.resultCode === 0) {
         let {id, email, login} = response.data;

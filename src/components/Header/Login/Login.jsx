@@ -6,6 +6,7 @@ import {login, setCapcha} from "../../../redux/auth_reducer";
 import {connect} from "react-redux";
 import {NavLink, Redirect} from "react-router-dom";
 import {createField} from "../../../object_helpers/object_helpers";
+import {initializationTriM} from "../../../redux/trim_reducer";
 
 let LoginForm = ({handleSubmit, error, capcha, urlCapcha, pristine, submitting, reset}) => {
     return (
@@ -64,24 +65,39 @@ let RegisterForm = ({handleSubmit,pristine,submitting,reset }) => {
 let LoginReduxForm = reduxForm({form: 'loginForm', validate})(LoginForm)
 let RegisterReduxForm = reduxForm({form: 'registerForm', validate})(RegisterForm)
 
-let Login = ({login, isLogin, urlCapcha}) => {
-    let onSubmit = (formData) => {
-        login(formData.email, formData.password, formData.rememberMe)
+class Login extends React.Component{
 
-    };
-
-    if(isLogin){
-        return <Redirect to='/profile'/>
+    componentDidMount() {
+        //this.props.initializationTriM();
     }
 
-    return (
-        <div className = {s.login}>
-            <LoginReduxForm onSubmit={onSubmit} urlCapcha={urlCapcha}/>
-            <RegisterReduxForm onSubmit={onSubmit}/>
+    onSubmit = (formData) => {
+        this.props.login(formData.email, formData.password, formData.rememberMe)
+    };
 
-        </div>
-    )
-};
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.isLogin !== prevProps.isLogin) {
+        this.props.initializationTriM()
+        }
+    }
+
+    render() {
+        // if (this.props.isLogin) {
+        //     return <Redirect to={'/profile'}/>
+        //}
+        if (this.props.isLogin) {
+            return <Redirect to={'/profile'}/>
+        }
+        return (
+
+            <div className = {s.login}>
+                <LoginReduxForm onSubmit={this.onSubmit} urlCapcha={this.props.urlCapcha}/>
+                <RegisterReduxForm onSubmit={this.onSubmit}/>
+
+            </div>
+        )
+    }
+}
 
 let mapStateToProps = (state) => ({
     isLogin: state.auth.isLogin,
@@ -89,4 +105,4 @@ let mapStateToProps = (state) => ({
     urlCapcha: state.auth.urlCapcha,
 
 });
-export default connect (mapStateToProps, {login, setCapcha})(Login)
+export default connect (mapStateToProps, {login, setCapcha, initializationTriM})(Login)
