@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "dcb40e9f6c7b845cf24b5f3a0a59d7ec",
+    "revision": "4285be85a8710131cea4869dc98b345f",
     "url": "/TriMsocial-REACT/index.html"
   },
   {
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/TriMsocial-REACT/static/css/5.eca422aa.chunk.css"
   },
   {
-    "revision": "629bbd7c258cab892b03",
+    "revision": "b10bdf7d982e9ba039bd",
     "url": "/TriMsocial-REACT/static/css/main.6dc58d60.chunk.css"
   },
   {
@@ -40,8 +40,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/TriMsocial-REACT/static/js/5.dcb8ddfc.chunk.js"
   },
   {
-    "revision": "629bbd7c258cab892b03",
-    "url": "/TriMsocial-REACT/static/js/main.f7a64c59.chunk.js"
+    "revision": "b10bdf7d982e9ba039bd",
+    "url": "/TriMsocial-REACT/static/js/main.0021e8e7.chunk.js"
   },
   {
     "revision": "8282f014cef71b57859a",
