@@ -11,6 +11,8 @@ let MainRight = (props) => {
             <div className = {s.section}>
                 <PersonInfo state = {props.personData}
                             isOwner = {props.isOwner}
+                            saveNewData={props.saveNewData}
+                            userId = {props.userId}
 
                             profile={props.profile}
                             status={props.status}

@@ -35,6 +35,12 @@ export const mainAPI = {
                 return response.data
             })
     },
+    saveNewData(profile) {
+        return instance.put(`profile`, profile)
+            .then(response => {
+                return response.data
+            })
+    },
     getUserStatus(userId){
         return instance.get(`profile/status/` + userId)
             .then(response => {
@@ -47,10 +53,7 @@ export const mainAPI = {
                 return response.data
             })
     },
-
-
     savePhoto(photoFile){
-        debugger
         const formData = new FormData();
         formData.append('image', photoFile)
 

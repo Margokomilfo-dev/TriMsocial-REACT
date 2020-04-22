@@ -22,6 +22,8 @@ let Main = (props) => { //postData
                <MainRight store = {props.store}
                           personData = {props.state.mainPage.personData}
                           isOwner = {props.isOwner}
+                          saveNewData ={props.saveNewData}
+                          userId = {props.userId}
 
                           profile = {props.profile}
                           status={props.status}

@@ -82,9 +82,6 @@ class Login extends React.Component{
     }
 
     render() {
-        // if (this.props.isLogin) {
-        //     return <Redirect to={'/profile'}/>
-        //}
         if (this.props.isLogin) {
             return <Redirect to={'/profile'}/>
         }

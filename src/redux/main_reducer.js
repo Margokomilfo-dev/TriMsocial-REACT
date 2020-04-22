@@ -112,10 +112,15 @@ export const updateUserStatus = (status) => async (dispatch) => {
         dispatch(setUserStatus(status));
 }
 export const savePhoto = (file) => async (dispatch) => {
-    debugger
     let response = await mainAPI.savePhoto(file)
     if (response.resultCode === 0)
         dispatch(savePhotoSuccess(response.data.photos));
+}
+export const saveNewData = (profile) => async (dispatch, getState) => {
+    const userId = getState().auth.id
+    let response = await mainAPI.saveNewData(profile)
+    if (response.resultCode === 0)
+        dispatch(setUser(userId));
 }
 
 export default mainReducer;

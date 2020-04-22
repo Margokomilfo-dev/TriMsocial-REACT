@@ -5,7 +5,7 @@ import {
     getUserStatus,
     setUserProfile,
     setUser,
-    updateUserStatus, savePhoto
+    updateUserStatus, savePhoto, saveNewData
 } from "../../redux/main_reducer";
 import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../redux/HOC";
@@ -39,6 +39,7 @@ class MainContainer extends React.Component {
                   status={this.props.status}
                   updateUserStatus={this.props.updateUserStatus}
                   isOwner = {!this.props.match.params.userId}
+                  userId = {this.props.userId}
                   savePhoto = {this.props.savePhoto}
             />
         )
@@ -55,7 +56,7 @@ let mapStateToProps = (state) => ({
 
 export default compose(
     connect (mapStateToProps, {setUserProfile, setUser,
-                            getUserStatus, updateUserStatus, savePhoto}),
+                            getUserStatus, updateUserStatus, savePhoto, saveNewData}),
     withRouter,
     withAuthRedirect
 )(MainContainer)

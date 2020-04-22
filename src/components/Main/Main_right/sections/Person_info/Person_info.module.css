@@ -1,9 +1,12 @@
 .main_info {
     margin: 0 auto;
+    position: relative;
+    padding-bottom: 20px;
 }
 .fio {
     font-size: 24px;
     font-weight: 500;
+    margin-top: -10px;
 }
 .link {
     font-size: 16px;
@@ -18,11 +21,8 @@
     color: grey;
     text-decoration: underline;
 }
-.nickname {
-    font-style: italic;
+.titlesDate {
     font-weight: 500;
-    color: black;
-
 }
 
 .titles {
@@ -30,4 +30,32 @@
     padding: 2px 0;
     width: 200px;
     color: #808080;
+}
+.button {
+    margin: 20px 20px 20px 0;
+    width: 120px;
+    height: 30px;
+    padding: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: black;
+    background-color: #d6d6d6;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px #999;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: calc(100% - 50px);
+}
+
+.button:hover {
+    background-color: rgb(206, 206, 206);
+}
+.button:active {
+    box-shadow: 0 4px rgb(138, 138, 138);
+    transform: translateY(.3px);
 }
