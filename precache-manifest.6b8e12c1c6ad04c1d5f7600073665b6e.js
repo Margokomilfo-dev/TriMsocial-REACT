@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8c646e72efb8a7d435f49efbe9dbffe1",
+    "revision": "51aff97f2cd6fbfd5345ce6fce7fe54c",
     "url": "/TriMsocial-REACT/index.html"
   },
   {
@@ -12,7 +12,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/TriMsocial-REACT/static/css/4.5bc508a5.chunk.css"
   },
   {
-    "revision": "f7f16253313a8ffe5149",
+    "revision": "a47b5afa2dba3e2a9942",
     "url": "/TriMsocial-REACT/static/css/5.eca422aa.chunk.css"
   },
   {
@@ -36,16 +36,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/TriMsocial-REACT/static/js/4.f3153619.chunk.js"
   },
   {
-    "revision": "f7f16253313a8ffe5149",
-    "url": "/TriMsocial-REACT/static/js/5.eec7eb5f.chunk.js"
+    "revision": "a47b5afa2dba3e2a9942",
+    "url": "/TriMsocial-REACT/static/js/5.e9f8d215.chunk.js"
   },
   {
     "revision": "8004327d23f51bc54fc8",
     "url": "/TriMsocial-REACT/static/js/main.a8a9e706.chunk.js"
   },
   {
-    "revision": "1d30dba35f8babbfb4c5",
-    "url": "/TriMsocial-REACT/static/js/runtime-main.c67934d6.js"
+    "revision": "6c3828d751e021600eb2",
+    "url": "/TriMsocial-REACT/static/js/runtime-main.9163c82c.js"
   },
   {
     "revision": "1d5193615710cf4181fc8014143a7701",
