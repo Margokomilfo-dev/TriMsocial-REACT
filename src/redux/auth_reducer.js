@@ -4,7 +4,7 @@ import {stopSubmit} from "redux-form";
 
 let SET_USER_DATA = 'TriM/auth/SET_USER_DATA',
     SET_USERS_PHOTO = 'TriM/auth/SET_USERS_PHOTO',
-    CAPCHA = 'TriM/auth/CAPCHA'
+    CAPTCHA = 'TriM/auth/CAPTCHA'
 
 let auth = {
     id: null,
@@ -12,8 +12,8 @@ let auth = {
     email: null,
     isLogin: false,
     userPhoto: null,
-    capcha: false,
-    urlCapcha: ''
+    captcha: false,
+    urlCaptcha: ''
 }
 
 const authReducer = (state = auth, action) => {
@@ -30,11 +30,11 @@ const authReducer = (state = auth, action) => {
                 userPhoto: action.url
             }
         }
-        case CAPCHA: {
+        case CAPTCHA: {
             return {
                 ...state,
-                capcha: true,
-                urlCapcha: action.url
+                captcha: true,
+                urlCaptcha: action.url
             }
         }
 
@@ -48,7 +48,7 @@ export const setAuthUserData = (id, login, email, isLogin) => ({
     data: {id, login, email, isLogin}
 });
 export const setUserURLPhoto = (url) => ({type: SET_USERS_PHOTO, url});
-export const setCapcha = (url) => ({type: CAPCHA, url});
+export const setCaptcha = (url) => ({type: CAPTCHA, url});
 
 
 export const setAuthAndUserURLPhoto = () => async (dispatch) => {
@@ -64,17 +64,16 @@ export const setAuthAndUserURLPhoto = () => async (dispatch) => {
     }
 }
 
-export const login = (email, password, rememberMe, capcha) => async (dispatch) => {
+export const login = (email, password, rememberMe, captcha) => async (dispatch) => {
     debugger
-    let response = await headerAPI.login(email, password, rememberMe)
+    let response = await headerAPI.login(email, password, rememberMe, captcha)
     if (response.resultCode === 0) {
         let {id, email, login} = response.data;
         dispatch(setAuthUserData(id, login, email, true));
     } else if (response.resultCode === 10) {
-        headerAPI.capcha().then(response => {
-            dispatch(setCapcha(response.url))
-            dispatch(setAuthUserData(null, null, null, false));
-        })
+       dispatch(getCaptcha())
+        let message = response.messages
+        dispatch(stopSubmit('loginForm', {_error: message}))
     } else {
         let message = response.messages
         dispatch(stopSubmit('loginForm', {_error: message}))
@@ -82,11 +81,15 @@ export const login = (email, password, rememberMe, capcha) => async (dispatch) =
 }
 
 export const logout = () => async (dispatch) => {
-        let response = await headerAPI.logout()
-        if (response.resultCode === 0) {
-            dispatch(setAuthUserData(null, null, null, false));
-            withAuthRedirect()
-        }
+    let response = await headerAPI.logout()
+    if (response.resultCode === 0) {
+        dispatch(setAuthUserData(null, null, null, false));
     }
+}
+
+export const getCaptcha = () => async (dispatch) => {
+    let response = await headerAPI.captcha()
+    dispatch(setCaptcha(response.url))
+}
 
 export default authReducer;

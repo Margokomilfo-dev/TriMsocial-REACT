@@ -2,13 +2,13 @@ import React from 'react'
 import s from './Login.module.css'
 import { reduxForm } from 'redux-form'
 import {Input, validate} from "../../Validations";
-import {login, setCapcha} from "../../../redux/auth_reducer";
+import {login, setCaptcha} from "../../../redux/auth_reducer";
 import {connect} from "react-redux";
 import {NavLink, Redirect} from "react-router-dom";
 import {createField} from "../../../object_helpers/object_helpers";
 import {initializationTriM} from "../../../redux/trim_reducer";
 
-let LoginForm = ({handleSubmit, error, capcha, urlCapcha, pristine, submitting, reset}) => {
+let LoginForm = ({handleSubmit, error, captcha, urlCaptcha, pristine, submitting, reset}) => {
     return (
         <div>
             <div className={s.check_in}>
@@ -21,13 +21,10 @@ let LoginForm = ({handleSubmit, error, capcha, urlCapcha, pristine, submitting, 
                     <div className={s.commonError}>
                         {error}
                     </div>}
-                    {/*---------------capcha-------------------------*/}
-                    {!capcha &&
-                    <div className={s.capcha}>
-                        <img src={urlCapcha} alt=""/>
-                        {/*{createField(null, Input, 'text', 'capcha', 'capcha', null )}*/}
-                        {/*<Field component={Input} name='capcha' placeholder='capcha' type='text'/>*/}
-                    </div>}
+                    {/*---------------captcha-------------------------*/}
+                    {captcha && <div className={s.captcha}><img src={urlCaptcha} alt=""/></div>}
+                    {captcha && <div>{createField(null, Input, 'text', 'captcha', 'captcha', null)}</div>}
+
                     <div className={s.go}>
                         <button type='button' disabled={pristine || submitting} onClick={reset}>Clear Values</button>
                         <button type='submit' className={s.loginButton}>Login</button>
@@ -48,6 +45,7 @@ let RegisterForm = ({handleSubmit,pristine,submitting,reset }) => {
             <div className={s.header}>
                 <div className={s.header_top}>Впервые в 3Msocial? </div>
                 <div className={s.header_bottom}>Моментальная регистрация </div>
+                <div>DOESN'T WORK!!!</div>
             </div>
             <form className={s.form} onSubmit={handleSubmit}>
                 {createField(null, Input, 'text', 'registerEmail', "email", null)}
@@ -72,7 +70,8 @@ class Login extends React.Component{
     }
 
     onSubmit = (formData) => {
-        this.props.login(formData.email, formData.password, formData.rememberMe)
+        debugger
+        this.props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -88,7 +87,7 @@ class Login extends React.Component{
         return (
 
             <div className = {s.login}>
-                <LoginReduxForm onSubmit={this.onSubmit} urlCapcha={this.props.urlCapcha}/>
+                <LoginReduxForm onSubmit={this.onSubmit} urlCaptcha={this.props.urlCaptcha} captcha={this.props.captcha} />
                 <RegisterReduxForm onSubmit={this.onSubmit}/>
 
             </div>
@@ -98,8 +97,9 @@ class Login extends React.Component{
 
 let mapStateToProps = (state) => ({
     isLogin: state.auth.isLogin,
-    capcha: state.auth.capcha,
-    urlCapcha: state.auth.urlCapcha,
+    captcha: state.auth.captcha,
+    urlCaptcha: state.auth.urlCaptcha
+
 
 });
-export default connect (mapStateToProps, {login, setCapcha, initializationTriM})(Login)
+export default connect (mapStateToProps, {login, setCaptcha, initializationTriM})(Login)

@@ -14,8 +14,9 @@ let Person_info = ({profile, status, updateUserStatus, isOwner, fullName, userId
         return <Loader/>
     }
     let onSubmit = (formData) => {
-        saveNewData(formData)
-        setEditMod(false)
+        saveNewData(formData).then(() => {
+            setEditMod(false)
+        })
     };
     return (
         <div className={s.section_person_info}>
@@ -28,9 +29,11 @@ let Person_info = ({profile, status, updateUserStatus, isOwner, fullName, userId
                 </div>
                 <hr/>
                 {editMod
-                    ? <PersonInfoDataFormReduxForm initialValues={profile} onSubmit={onSubmit} profile={profile} />
+                    ? <PersonInfoDataFormReduxForm initialValues={profile} onSubmit={onSubmit} profile={profile}/>
                     : <PersonInfoData profile={profile} isOwner={isOwner}
-                                      goToEditMod={() => {setEditMod(true)}}/>
+                                      goToEditMod={() => {
+                                          setEditMod(true)
+                                      }}/>
                 }
             </div>
             {/*main_info*/}
@@ -42,32 +45,63 @@ let Person_info = ({profile, status, updateUserStatus, isOwner, fullName, userId
 const PersonInfoData = ({profile, isOwner, goToEditMod}) => {
     return (
         <div>
-            <div><u>About me</u>: {profile.aboutMe}</div>
-            <div><u>Looking for a job</u>: {profile.lookingForAJob ? "yes" : "no"}</div>
+            <div className={s.infoBlock}>
+                <div className={s.infoTitles}> About me:</div>
+                <div className={s.infoText}>{profile.aboutMe}</div>
+                <div className={s.infoTitles}>Looking for a job:</div>
+                <div className={s.infoText}>{profile.lookingForAJob ? "yes" : "no"}</div>
+                {profile.lookingForAJob &&
+                <div className={s.infoTitles}>My professional skills:</div>}
+                {profile.lookingForAJob &&
+                <div className={s.infoText}>{profile.lookingForAJobDescription}</div>}
 
-            {profile.lookingForAJob &&
-            <div><u>My professional skills</u>: {profile.lookingForAJobDescription}</div>}
-            <div><u>Contacts</u>: {Object.keys(profile.contacts).map(key => {
-                return <Contact key={key} contactKey={key} contactValue={profile.contacts[key]}/>})}
+                <div><span className={s.infoTitles}>Contacts:</span>
+                    {Object.keys(profile.contacts).map(key => {
+                        return <Contact key={key} contactKey={key} contactValue={profile.contacts[key]}/>
+                    })}
+                </div>
+                {isOwner && <button className={s.button} onClick={goToEditMod}>Edit</button>}
             </div>
-            {isOwner && <button className={s.button} onClick={goToEditMod}>Edit</button>}
-            </div>
+        </div>
+
+
     )
 }
-const PersonInfoDataForm = ({handleSubmit, profile}) => {
+const PersonInfoDataForm = ({handleSubmit, profile, error}) => {
     return (
         <form onSubmit={handleSubmit}>
-
-            <div><u>full name</u>: {createField(null, Input, 'textarea', 'fullName', 'Full name', null )}</div>
-            <div><u>About me</u>:  {createField(null, Input, 'textarea', 'aboutMe', 'About me', null )}</div>
-            <div><u>Looking for a job</u>: {createField(null, Input, 'checkbox', 'lookingForAJob', null, null )}</div>
-            <div><u>My professional skills</u>: {createField(null, Input, 'textarea', 'lookingForAJobDescription', 'Your skills', null )}</div>
-            <div><u>Contacts: </u> {Object.keys(profile.contacts).map(key => {
-                return <div>
-                    {key}: {createField(null, Input, 'textarea', 'contacts.'+ key, 'Key', null )}
-                </div>})}
+            {/*---------------common_error-------------------*/}
+            {error &&
+            <div className={s.commonError}>
+                {error}
+            </div>}
+            {/*---------------common_error-------------------*/}
+            <div>
+                <span className={s.infoTitles}>Full name:</span>
+                <div className={s.input}>{createField(null, Input, 'textarea', 'fullName', 'Full name', null)}</div>
             </div>
-            <button className={s.button}>Save</button><br/>
+            <div>
+                <span className={s.infoTitles}>About me:</span>
+                <div className={s.input}>{createField(null, Input, 'textarea', 'aboutMe', 'About me', null)}</div>
+            </div>
+            <div>
+                <span className={s.infoTitles}>Looking for a job:</span>
+                <div className={s.input}>{createField(null, Input, 'checkbox', 'lookingForAJob', null, null)}</div>
+            </div>
+            <div>
+                <span className={s.infoTitles}>My professional skills:</span>
+                <div className={s.input}>{createField(null, Input, 'textarea', 'lookingForAJobDescription', 'Your skills', null)}</div>
+            </div>
+            <div>
+                <span className={s.infoTitles}>Contacts:</span>{Object.keys(profile.contacts).map(key => {
+                return <div>
+                    {key}: <span className={s.input}>{createField(null, Input, 'textarea', 'contacts.' + key, key, null)}</span>
+                </div>
+            })}
+            </div>
+
+            <button className={s.button}>Save</button>
+            <br/>
         </form>
     )
 }
@@ -76,8 +110,9 @@ let PersonInfoDataFormReduxForm = reduxForm({form: 'personInfo'})(PersonInfoData
 
 const Contact = ({contactKey, contactValue}) => {
     return (
-        <div className={s.link}>
-            <span className={s.link_name}>{contactKey}:</span><span className={s.http}>{contactValue}</span>
+        <div className={s.link_blok}>
+            <div className={s.contactKey}>{contactKey}:</div>
+            <div className={s.contactValue}>{contactValue}</div>
         </div>
     )
 }

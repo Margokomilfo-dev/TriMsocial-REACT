@@ -17,31 +17,27 @@
     border-radius: 20px;
 
 }
-.button {
-    display: block;
-    margin: 0 auto;
-    width: 70%;
-    height: 25px;
-    padding: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    color: black;
-    background-color: #d6d6d6;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 4px #999;
-    margin-bottom: 10px;
-  }
-  
-.button:hover {
-    background-color: rgb(206, 206, 206);
-
+.file_load input[type="file"] {
+    height: 0;
+    overflow: hidden;
+    width: 0;
 }
-  
-.button:active {
-    box-shadow: 0 4px rgb(138, 138, 138);
-    transform: translateY(.5px);
-  }
+
+.file_load input[type="file"]{
+    background: #D6D6D6;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s;
+    height: 35px;
+    width: 270px;
+    padding-top: 37px;
+}
+
+.file_load input[type="file"]:hover {
+    background-color: #FD000D;
+}
+
+

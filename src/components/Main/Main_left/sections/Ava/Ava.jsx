@@ -16,9 +16,9 @@ let Ava = ( {savePhoto, ...props}) => {
                 {/*<img src={photo} alt={photo}/>*/}
                 <img src={props.profile.photos.large != null ? props.profile.photos.large : noPhoto} alt={noPhoto}/>
             </div>
-            <div>
+            <div className={s.file_load}>
                 {props.isOwner &&
-                    <input type={"file"} onChange={onMainPhotoChanged}/>
+                    <input type="file" id="file" onChange={onMainPhotoChanged}/>
                 }
             </div>
 

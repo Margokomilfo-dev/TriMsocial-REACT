@@ -1,4 +1,5 @@
 import {mainAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 let ADD_POST = 'TriM/main/ADD-POST',
     SET_USER_PROFILE = 'TriM/main/SET_USER_PROFILE',
@@ -119,8 +120,13 @@ export const savePhoto = (file) => async (dispatch) => {
 export const saveNewData = (profile) => async (dispatch, getState) => {
     const userId = getState().auth.id
     let response = await mainAPI.saveNewData(profile)
-    if (response.resultCode === 0)
+    if (response.resultCode === 0) {
         dispatch(setUser(userId));
+    } else {
+        let message = response.messages
+        dispatch(stopSubmit('personInfo', {_error: message}))
+        return Promise.reject(message[0])
+    }
 }
 
 export default mainReducer;
