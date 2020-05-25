@@ -21,28 +21,6 @@ let inicialization = {
             {id: 2, header: 'some text...', content: 'Your text.', data: '22/02/2020'},
             {id: 3, header: 'some text...', content: 'and it too', data: '22/02/2020'},
         ],
-    friendData:
-        [
-            {
-                src: 'https://img.favpng.com/15/3/24/kion-simba-lion-nala-disney-junior-png-favpng-yPCg6Bur9WV3jCagMjxL54mn1.jpg',
-                alt: 'Leo',
-                name: 'Leo'
-            },
-            {
-                src: 'https://i.insider.com/5aa10ca0d877e618008b4678?width=1100&format=jpeg&auto=webp',
-                alt: 'Leo',
-                name: 'Mia'
-            },
-            {
-                src: 'https://i2.wp.com/tbso.ca/wp-content/uploads/2019/05/5a-FS-Lion-King-and-Animals.png?fit=300%2C300&ssl=1',
-                alt: 'Vladimir',
-                name: 'Vladimir'
-            },
-            {src: '', alt: '', name: 'Mia'},
-            {src: '', alt: '', name: 'Margo'},
-            {src: '', alt: '', name: 'Leo'},
-            {src: '', alt: '', name: 'Vladimir'}
-        ],
     profile: null,
     status: ''
     //'Никогда не жалуйтесь на судьбу! Ей с вами, может быть, тоже не очень-то и приятно=)'
@@ -80,12 +58,12 @@ let mainReducer = (state = inicialization, action) => {
             }
         }
         case SAVE_PHOTO_SUCCESS: {
-            debugger
             return {
                 ...state,
                 profile: {...state.profile, photos: action.photos}
             }
         }
+
         default:
             return state;
     }

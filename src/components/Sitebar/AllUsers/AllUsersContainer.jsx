@@ -6,7 +6,7 @@ import {
     setCurrentPage,
     unfollowSuccess, getUsersTC,
     unfollowTC,
-    followTC
+    followTC, setFriendsData
 } from "../../../redux/users_reducer";
 import AllUsers from "./AllUsers";
 import Loader from "../../common/Loader/Loader";
@@ -46,7 +46,8 @@ class AllUsersContainer extends React.Component {
                       followingInProcess={this.props.followingInProcess}
                       unfollowTC={this.props.unfollowTC}
                       followTC={this.props.followTC}
-                      isLogin={this.props.isLogin}/>
+                      isLogin={this.props.isLogin}
+                      setFriendsData={this.props.setFriendsData}/>
         </>
     }
 }
@@ -66,5 +67,5 @@ let mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps,{followSuccess, unfollowSuccess, setCurrentPage, toggleFollowingInProcess,
-        getUsersTC, unfollowTC, followTC })
+        getUsersTC, unfollowTC, followTC, setFriendsData })
 )(AllUsersContainer)

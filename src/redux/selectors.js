@@ -58,3 +58,6 @@ export const getIsLoader = (state) => {
 export const getFollowingInProcess = (state) => {
     return state.usersPage.followingInProcess
 }
+export const getFriendData = (state) => {
+    return state.usersPage.friendData
+}

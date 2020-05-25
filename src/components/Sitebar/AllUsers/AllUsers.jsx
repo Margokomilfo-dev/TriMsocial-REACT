@@ -1,6 +1,7 @@
 import React from 'react'
 import Paginator from "./Paginator/Paginator";
 import UserForAllUsers from "./UserForAllUsers/UserForAllUsers";
+import {setFriendsData} from "../../../redux/users_reducer";
 
 const AllUsers = (props) => {
 
@@ -12,7 +13,8 @@ const AllUsers = (props) => {
                 <div key={u.id}>
                     <UserForAllUsers user={u} followingInProcess={props.followingInProcess}
                                      unfollowTC={props.unfollowTC}
-                                     followTC={props.followTC}/>
+                                     followTC={props.followTC}
+                                     setFriendsData={props.setFriendsData}/>
                 </div>)
             }
         </div>

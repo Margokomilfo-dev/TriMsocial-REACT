@@ -2,10 +2,13 @@ import React from 'react'
 import s from './UserForAllUsers.module.css'
 import photo from '../pic/nophoto.png'
 import {NavLink} from "react-router-dom";
+import {setFriendsData} from "../../../../redux/users_reducer";
 
 const UserForAllUsers = ({user, followingInProcess, unfollowTC, followTC}) => {
+    debugger
     let u = user
     return (
+
         <div className={s.user_container}>
             <div className={s.left}>
                 <div className={s.photo}>
@@ -21,7 +24,7 @@ const UserForAllUsers = ({user, followingInProcess, unfollowTC, followTC}) => {
                         }}>Unfollow</button>
                         : <button disabled={followingInProcess.some(id => id === u.id)}
                                   className={`${s.follow} ${s.button}`} onClick={() => {
-                                      followTC(u.id)
+                                      followTC(u.id, u.name, u.photos.small)
                         }}>Follow</button>
                     }
                 </div>
