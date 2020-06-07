@@ -6,7 +6,7 @@ import {
     setCurrentPage,
     unfollowSuccess, getUsersTC,
     unfollowTC,
-    followTC, setFriendsData
+    followTC
 } from "../../../redux/users_reducer";
 import AllUsers from "./AllUsers";
 import Loader from "../../common/Loader/Loader";
@@ -27,7 +27,6 @@ class AllUsersContainer extends React.Component {
         }
     }
     onPageChanged = (pageNamber) => {
-
         let {countUsersOnPage} = this.props
          this.props.getUsersTC(pageNamber, countUsersOnPage)
      };
@@ -46,8 +45,7 @@ class AllUsersContainer extends React.Component {
                       followingInProcess={this.props.followingInProcess}
                       unfollowTC={this.props.unfollowTC}
                       followTC={this.props.followTC}
-                      isLogin={this.props.isLogin}
-                      setFriendsData={this.props.setFriendsData}/>
+                      isLogin={this.props.isLogin}/>
         </>
     }
 }
@@ -67,5 +65,5 @@ let mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps,{followSuccess, unfollowSuccess, setCurrentPage, toggleFollowingInProcess,
-        getUsersTC, unfollowTC, followTC, setFriendsData })
+        getUsersTC, unfollowTC, followTC })
 )(AllUsersContainer)

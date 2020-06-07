@@ -1,4 +1,6 @@
 import {allUsersAPI} from "../api/api";
+import {setAuthAndUserURLPhoto} from "./auth_reducer";
+import {initializedSuccess} from "./trim_reducer";
 
 let FOLLOW = 'TriM/users/FOLLOW',
     UNFOLLOW = 'TriM/users/UNFOLLOW',
@@ -49,9 +51,20 @@ const usersReducer = (state = inicialization, action) => {
         }
         case SET_FRIENDS: {
             debugger
-            return {
-                ...state,
-                friendData: [...state.friendData, action.data]
+            let newFriend = {
+                name: action.data.name,
+                src: action.data.src
+            }
+             return {
+                 ...state,
+               //  friendData: state.friendData.map( u => {
+               //      if(u.name === action.data.name && u.src === action.data.src) {
+               //          return {...u}
+               //      } else {
+               //          return {newFriend}
+               //      }
+               // })
+                friendData: [...state.friendData, action.data ]
             }
         }
         case UNFOLLOW: {
@@ -110,7 +123,6 @@ export const setUsersTotalCount = (count) => ({type: SETUSERSTOTALCOUNT, count})
 export const toggleIsLoader = (isLoader) => ({type: TOGGLEISLOADER, isLoader});
 export const toggleFollowingInProcess = (isLoader, userId) => ({type: TOGGLE_FOLLOWING_IN_PROCESS, isLoader, userId});
 export const setFriendsData = (name, src) => ({type: SET_FRIENDS, data: {name, src}});
-export const deleteFriendsData = (name, src) => ({type: SET_FRIENDS, data: {name, src}});
 
 
 export const getUsersTC = (currentPage, countUsersOnPage) => async (dispatch) => {
@@ -122,11 +134,11 @@ export const getUsersTC = (currentPage, countUsersOnPage) => async (dispatch) =>
     dispatch(setUsersTotalCount(response.totalCount))
 };
 
-const followUnfollow = async (dispatch, userId, apiMethod, actionCreator) => {
+const followUnfollow = async (dispatch, userId, apiMethod, actionCreatur) => {
     dispatch(toggleFollowingInProcess(true, userId));
     let response = await apiMethod(userId)
     if (response.resultCode === 0) {
-        dispatch(actionCreator(userId));
+        dispatch(actionCreatur(userId));
     }
     dispatch(toggleFollowingInProcess(false, userId));
 };
@@ -136,9 +148,16 @@ export const unfollowTC = (userId) => async (dispatch) => {
 
 };
 
-export const followTC = (userId, name, src) => async (dispatch) => {
-    dispatch(setFriendsData(name, src))
-    followUnfollow(dispatch, userId, allUsersAPI.followPost, followSuccess)
-}
+
+export const followTC  = (userId, name, src) => async (dispatch) => {
+    debugger
+    dispatch(toggleFollowingInProcess(true, userId));
+    let response = await allUsersAPI.followPost(userId)
+    if (response.resultCode === 0) {
+        dispatch(followSuccess(userId));
+    }
+    dispatch(toggleFollowingInProcess(false, userId));
+};
+
 
 export default usersReducer;

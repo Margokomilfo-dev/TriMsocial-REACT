@@ -12,6 +12,7 @@ import {withAuthRedirect} from "../../redux/HOC";
 import {compose} from "redux";
 import Loader from "../common/Loader/Loader";
 import {getId, getIsLogin, getProfile, getStatus} from "../../redux/selectors";
+import {initializationTriM} from "../../redux/trim_reducer";
 
 class MainContainer extends React.Component {
     refreshProfile() {
@@ -41,6 +42,7 @@ class MainContainer extends React.Component {
                   isOwner = {!this.props.match.params.userId}
                   userId = {this.props.userId}
                   savePhoto = {this.props.savePhoto}
+                  initializationTriM = {this.props.initializationTriM}
             />
         )
     }
@@ -56,7 +58,7 @@ let mapStateToProps = (state) => ({
 
 export default compose(
     connect (mapStateToProps, {setUserProfile, setUser,
-                            getUserStatus, updateUserStatus, savePhoto, saveNewData}),
+                            getUserStatus, updateUserStatus, savePhoto, saveNewData, initializationTriM}),
     withRouter,
     withAuthRedirect
 )(MainContainer)

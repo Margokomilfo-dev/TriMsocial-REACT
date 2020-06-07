@@ -7,8 +7,8 @@ export let validate = (values) => {
     if (!values.email) {
         errors.email = 'Required'
     } else
-        if (values.email.length < 5 || values.email.length > 20) {
-        errors.email = 'Must be 5-20 characters or less'
+        if (values.email.length < 5 || values.email.length > 30) {
+        errors.email = 'Must be 5-30 characters or less'
     }
 
     if (!values.password) {

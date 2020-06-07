@@ -1,38 +1,46 @@
-
 import React from 'react'
 import s from './Main.module.css'
 import Main_left from './Main_left/Main_left'
 import MainRight from './Main_right/MainRight'
 import Loader from "../common/Loader/Loader";
 
-let Main = (props) => { //postData
-    if(!props.profile) {
-        return <Loader/>
-    }
-    return(
-        <div className = {s.main}>
-            <div className = {s.main_wrapper}>
-               <Main_left store = {props.store}
-                          isOwner = {props.isOwner}
-                          friendData = {props.state.mainPage.friendData}
-                          savePhoto = {props.savePhoto}
 
-                          profile = {props.profile}/>
+class Main extends React.Component {
 
-               <MainRight store = {props.store}
-                          personData = {props.state.mainPage.personData}
-                          isOwner = {props.isOwner}
-                          saveNewData ={props.saveNewData}
-                          userId = {props.userId}
+    render() {
+        if (!this.props.profile) {
+            return <Loader/>
+        }
 
-                          profile = {props.profile}
-                          status={props.status}
-                          updateUserStatus={props.updateUserStatus}
-                            />
-                
-            </div> {/*main_wrapper*/}   
-        </div> 
+        return (
+            <div className={s.main}>
+                <div className={s.main_wrapper}>
+                    <Main_left store={this.props.store}
+                               isOwner={this.props.isOwner}
+                               friendData={this.props.state.mainPage.friendData}
+                               savePhoto={this.props.savePhoto}
+
+                               profile={this.props.profile}/>
+
+                    <MainRight store={this.props.store}
+                               personData={this.props.state.mainPage.personData}
+                               isOwner={this.props.isOwner}
+                               saveNewData={this.props.saveNewData}
+                               userId={this.props.userId}
+
+                               profile={this.props.profile}
+                               status={this.props.status}
+                               updateUserStatus={this.props.updateUserStatus}
+                    />
+
+                </div>
+                {/*main_wrapper*/}
+            </div>
         )
     }
+}
+
+
 
 export default Main
+

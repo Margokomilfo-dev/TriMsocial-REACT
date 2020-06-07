@@ -1,6 +1,6 @@
 .friends_items{
     width: 80px;
-    height: 100px;
+    height: 115px;
     padding: 4px;
     display: flex;
     align-items: center;
@@ -17,7 +17,6 @@
 .friends_photo img{
     width: 100%;
     height: 100%;
-    border-radius: 100%;
 }
 .friends_name {
     text-align: center;

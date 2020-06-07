@@ -30,38 +30,41 @@ let LoginForm = ({handleSubmit, error, captcha, urlCaptcha, pristine, submitting
                         <button type='submit' className={s.loginButton}>Login</button>
                         <NavLink to='/'>Forgot the password</NavLink>
                     </div>
-                    данные тестового аккаунта:
-                    Email: free@samuraijs.com
-                    Password: free
+                    <div>
+                        <u>data of test account:</u><br/>
+                        <b>Email:</b> margokomilfo@mail.ru<br/>
+                        <b>Password:</b> 123456789
+                    </div>
+
                 </form>
             </div>
         </div>
     )
 };
 
-let RegisterForm = ({handleSubmit,pristine,submitting,reset }) => {
-    return (
-        <div className={s.register}>
-            <div className={s.header}>
-                <div className={s.header_top}>Впервые в 3Msocial? </div>
-                <div className={s.header_bottom}>Моментальная регистрация </div>
-                <div>DOESN'T WORK!!!</div>
-            </div>
-            <form className={s.form} onSubmit={handleSubmit}>
-                {createField(null, Input, 'text', 'registerEmail', "email", null)}
-                {createField(null, Input, 'password', 'registerPassword1', 'password', null )}
-                {createField(null, Input, 'password', 'registerPassword2', 'password', null )}
-                <div className={s.go}>
-                    <button type='submit' className={s.loginButton}>Login</button>
-                    <button type='button' disabled={pristine || submitting} onClick={reset}>Clear Values</button>
-                </div>
-            </form>
-        </div>
-    )
-}
+// let RegisterForm = ({handleSubmit,pristine,submitting,reset }) => {
+//     return (
+//         <div className={s.register}>
+//             <div className={s.header}>
+//                 <div className={s.header_top}>Впервые в 3Msocial? </div>
+//                 <div className={s.header_bottom}>Моментальная регистрация </div>
+//                 <div>DOESN'T WORK!!!</div>
+//             </div>
+//             <form className={s.form} onSubmit={handleSubmit}>
+//                 {createField(null, Input, 'text', 'registerEmail', "email", null)}
+//                 {createField(null, Input, 'password', 'registerPassword1', 'password', null )}
+//                 {createField(null, Input, 'password', 'registerPassword2', 'password', null )}
+//                 <div className={s.go}>
+//                     <button type='submit' className={s.loginButton}>Login</button>
+//                     <button type='button' disabled={pristine || submitting} onClick={reset}>Clear Values</button>
+//                 </div>
+//             </form>
+//         </div>
+//     )
+// }
 
 let LoginReduxForm = reduxForm({form: 'loginForm', validate})(LoginForm)
-let RegisterReduxForm = reduxForm({form: 'registerForm', validate})(RegisterForm)
+// let RegisterReduxForm = reduxForm({form: 'registerForm', validate})(RegisterForm)
 
 class Login extends React.Component{
 
@@ -82,13 +85,13 @@ class Login extends React.Component{
 
     render() {
         if (this.props.isLogin) {
-            return <Redirect to={'/profile'}/>
+            return <Redirect to={'/welcome'}/>
         }
         return (
 
             <div className = {s.login}>
                 <LoginReduxForm onSubmit={this.onSubmit} urlCaptcha={this.props.urlCaptcha} captcha={this.props.captcha} />
-                <RegisterReduxForm onSubmit={this.onSubmit}/>
+                {/*<RegisterReduxForm onSubmit={this.onSubmit}/>*/}
 
             </div>
         )

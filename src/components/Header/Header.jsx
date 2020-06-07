@@ -17,14 +17,20 @@ let Header = ({userPhoto, isLogin, login, logout}) => {
                     </div>
                     <div className={s.signup}>
                         <div className={s.userPhoto}>
-                            {userPhoto
+                            {isLogin &&
+                            (userPhoto
                                 ? <img src={userPhoto} alt=""/>
-                                : <img className={s.noPhoto} src={noPhoto} alt=""/>}
+                                : <img className={s.noPhoto} src={noPhoto} alt=""/>)}
+
                         </div>
                         <div className={s.signup_register}>
                             {isLogin
-                                ? <div> {login} <NavLink to="/login" onClick={logout}> <button className={s.button}> Check out </button> </NavLink></div>
-                                : <div><NavLink to="/login"><button className={s.button}> Sigh Up </button> </NavLink></div>
+                                ? <div> {login} <NavLink to="/login" onClick={logout}>
+                                    <button className={s.button}> Check out</button>
+                                </NavLink></div>
+                                : <div><NavLink to="/login">
+                                    <button className={s.button}> Sigh Up</button>
+                                </NavLink></div>
                             }
                         </div>
                     </div>

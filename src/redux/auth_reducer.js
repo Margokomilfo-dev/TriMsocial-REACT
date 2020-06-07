@@ -1,5 +1,4 @@
 import {headerAPI} from "../api/api";
-import {withAuthRedirect} from "./HOC";
 import {stopSubmit} from "redux-form";
 
 let SET_USER_DATA = 'TriM/auth/SET_USER_DATA',

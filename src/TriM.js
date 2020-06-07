@@ -19,6 +19,7 @@ import {compose} from "redux";
 import {initializationTriM} from "./redux/trim_reducer";
 import Loader from "./components/common/Loader/Loader";
 import {getInitialed, getIsLogin} from "./redux/selectors";
+import MainWelcome from "./components/Main/MainWelcome";
 
 const Message = React.lazy(() => import('./components/Sitebar/Message/Message.jsx'));
 // import Message from './components/Sitebar/Message/Message.jsx'
@@ -48,8 +49,10 @@ class TriM extends React.Component {
                                 (<Last_seen last_seen={`You aren't autorized...`}/>)}
 
                             <React.Suspense fallback={<Loader/>}>
+                                <Route path='/welcome' render={() => <MainWelcome />}/>
                                 <Route path='/profile/:userId?/' render={() => <MainContainer store={this.props.store}
                                                                                               state={this.props.state}/>}/>
+
                                 <Route path='/message' render={() =>
                                     <Message store={this.props.store}
                                              userData={this.props.state.messagePage.userData}/>}/>
