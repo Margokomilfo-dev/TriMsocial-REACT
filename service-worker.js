@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/TriMsocial-REACT/precache-manifest.0be8c8c6f0cc43a8918d6ead20e7f5d3.js"
+  "/TriMsocial-REACT/precache-manifest.49ab5ef456b16f671e94c4c810905ad4.js"
 );
 
 self.addEventListener('message', (event) => {
