@@ -19,7 +19,7 @@ import {compose} from "redux";
 import {initializationTriM} from "./redux/trim_reducer";
 import Loader from "./components/common/Loader/Loader";
 import {getInitialed, getIsLogin} from "./redux/selectors";
-import MainWelcome from "./components/Main/MainWelcome";
+import MainWelcome from "./components/Main/Welcome";
 
 const Message = React.lazy(() => import('./components/Sitebar/Message/Message.jsx'));
 // import Message from './components/Sitebar/Message/Message.jsx'
