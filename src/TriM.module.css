@@ -17,3 +17,14 @@
     font-weight: 500;
     color: green;
 }
+.page404 {
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.error {
+    font-size: 100px;
+    color: red;
+    font-weight: 500;
+}

@@ -126,12 +126,17 @@ export const setFriendsData = (name, src) => ({type: SET_FRIENDS, data: {name, s
 
 
 export const getUsersTC = (currentPage, countUsersOnPage) => async (dispatch) => {
-    dispatch(setCurrentPage(currentPage))
-    dispatch(toggleIsLoader(true))
-    let response = await allUsersAPI.getAllUsers(currentPage, countUsersOnPage)
-    dispatch(toggleIsLoader(false))
-    dispatch(setUsers(response.items))
-    dispatch(setUsersTotalCount(response.totalCount))
+    try {
+        dispatch(setCurrentPage(currentPage))
+        dispatch(toggleIsLoader(true))
+        let response = await allUsersAPI.getAllUsers(currentPage, countUsersOnPage)
+        dispatch(toggleIsLoader(false))
+        dispatch(setUsers(response.items))
+        dispatch(setUsersTotalCount(response.totalCount))
+    } catch(error){
+        debugger
+    }
+
 };
 
 const followUnfollow = async (dispatch, userId, apiMethod, actionCreatur) => {
@@ -150,7 +155,6 @@ export const unfollowTC = (userId) => async (dispatch) => {
 
 
 export const followTC  = (userId, name, src) => async (dispatch) => {
-    debugger
     dispatch(toggleFollowingInProcess(true, userId));
     let response = await allUsersAPI.followPost(userId)
     if (response.resultCode === 0) {

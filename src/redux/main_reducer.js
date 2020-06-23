@@ -76,8 +76,12 @@ export const deletePost = (postId) => ({type: DELETE_POST, postId});
 export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
 
 export const setUser = (userId) => async (dispatch) => {
-    let response = await mainAPI.getUserProfile(userId)
-    dispatch(setUserProfile(response));
+    try {
+        let response = await mainAPI.getUserProfile(userId)
+        dispatch(setUserProfile(response));
+    } catch(error) { //reject promise
+        debugger
+    }
 }
 
 export const getUserStatus = (userId) => async (dispatch) => {

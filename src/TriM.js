@@ -2,7 +2,7 @@ import React from 'react'
 import './TriM.js'
 import  s from './TriM.module.css'
 import Sitebar from './components/Sitebar/Sitebar.jsx'
-import {Route, withRouter} from 'react-router-dom'
+import {Redirect, Route, Switch, withRouter} from 'react-router-dom'
 import Last_seen from './components/Last_seen/Last_seen.jsx'
 import Photos from './components/Sitebar/Photos/Photos.jsx'
 import Friends from './components/Sitebar/Friends/Friends.jsx'
@@ -19,7 +19,7 @@ import {compose} from "redux";
 import {initializationTriM} from "./redux/trim_reducer";
 import Loader from "./components/common/Loader/Loader";
 import {getInitialed, getIsLogin} from "./redux/selectors";
-import MainWelcome from "./components/Main/Welcome";
+import MainWelcome from "./components/Main/Welcome/Welcome";
 
 const Message = React.lazy(() => import('./components/Sitebar/Message/Message.jsx'));
 // import Message from './components/Sitebar/Message/Message.jsx'
@@ -30,8 +30,15 @@ const Login = React.lazy(() => import('./components/Header/Login/Login'));
 //import Login from "./components/Header/Login/Login";
 
 class TriM extends React.Component {
+    catchAllUnhandledErrors = (reason, promise) => {
+        alert('some reject error')
+    }
     componentDidMount() {
-        this.props.initializationTriM();
+        this.props.initializationTriM()
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+    }
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
 
     render() {
@@ -49,21 +56,30 @@ class TriM extends React.Component {
                                 (<Last_seen last_seen={`You aren't autorized...`}/>)}
 
                             <React.Suspense fallback={<Loader/>}>
-                                <Route path='/welcome' render={() => <MainWelcome />}/>
-                                <Route path='/profile/:userId?/' render={() => <MainContainer store={this.props.store}
-                                                                                              state={this.props.state}/>}/>
+                                <Switch>
+                                    <Route path='/welcome' render={() => <MainWelcome />}/>
+                                    <Route path='/profile/:userId?/' render={() => <MainContainer store={this.props.store}
+                                                                                                  state={this.props.state}/>}/>
 
-                                <Route path='/message' render={() =>
-                                    <Message store={this.props.store}
-                                             userData={this.props.state.messagePage.userData}/>}/>
-                                <Route path='/users' render={() => <AllUsersContainer/>}/>
-                                <Route path='/login' render={() => <Login/>}/>
-                                <Route path='/photos' render={() => <Photos/>}/>
-                                <Route path='/friends' render={() => <Friends/>}/>
-                                <Route path='/news' render={() => <News/>}/>
-                                <Route path='/music' render={() => <Music/>}/>
-                                <Route path='/muvies' render={() => <Muvies/>}/>
-                                <Route path='/groups' render={() => <Groups/>}/>
+                                    <Route path='/message' render={() =>
+                                        <Message store={this.props.store}
+                                                 userData={this.props.state.messagePage.userData}/>}/>
+                                    <Route path='/users' render={() => <AllUsersContainer/>}/>
+                                    <Route path='/login' render={() => <Login/>}/>
+                                    <Route path='/photos' render={() => <Photos/>}/>
+                                    <Route path='/friends' render={() => <Friends/>}/>
+                                    <Route path='/news' render={() => <News/>}/>
+                                    <Route path='/music' render={() => <Music/>}/>
+                                    <Route path='/muvies' render={() => <Muvies/>}/>
+                                    <Route path='/groups' render={() => <Groups/>}/>
+                                    <Route exact path='/' render={() => <Redirect to={'/welcome'} />}/>
+                                    <Route path='*' render={() =>
+                                        <div className={s.page404}>
+                                            <div><span className={s.error}>404 <br/>
+                                            </span> NOT FOUND</div>
+                                        </div>}/>
+                                </Switch>
+
                             </React.Suspense>
                         </div>
                         {/* main_wrapper */}

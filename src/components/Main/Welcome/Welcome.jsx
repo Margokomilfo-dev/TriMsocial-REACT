@@ -1,7 +1,7 @@
 import React from 'react'
 import {Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import {getIsLogin} from "../../redux/selectors";
+import {getIsLogin} from "../../../redux/selectors";
 import s from './Welcome.module.css'
 
 
