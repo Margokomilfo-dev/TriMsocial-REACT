@@ -31,7 +31,7 @@ const Login = React.lazy(() => import('./components/Header/Login/Login'));
 
 class TriM extends React.Component {
     catchAllUnhandledErrors = (reason, promise) => {
-        alert('some reject error')
+        //alert('some reject error')
     }
     componentDidMount() {
         this.props.initializationTriM()

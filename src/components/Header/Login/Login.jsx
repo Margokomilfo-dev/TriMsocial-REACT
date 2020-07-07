@@ -1,12 +1,12 @@
 import React from 'react'
 import s from './Login.module.css'
-import { reduxForm } from 'redux-form'
 import {Input, validate} from "../../Validations";
 import {login, setCaptcha} from "../../../redux/auth_reducer";
 import {connect} from "react-redux";
 import {NavLink, Redirect} from "react-router-dom";
 import {createField} from "../../../object_helpers/object_helpers";
 import {initializationTriM} from "../../../redux/trim_reducer";
+import {reduxForm} from "redux-form";
 
 let LoginForm = ({handleSubmit, error, captcha, urlCaptcha, pristine, submitting, reset}) => {
     return (

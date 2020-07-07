@@ -17,7 +17,7 @@ let AddMessageReduxForm = reduxForm({form: 'addMessageForm'})(AddMessageForm)
 let Messages = (props) => {
     let messageItems = props.messageData.map(m => <User_messages message={m.message} key={m.id}/>)
     let addNewMess = (value) => {
-        props.addMess(value.for_message)
+        props.addMessTC(value.for_message)
         //textMessPoint.current.value === '' ? alert('Empty field! Try to write down again!') :  props.addMess();
     }
     return (

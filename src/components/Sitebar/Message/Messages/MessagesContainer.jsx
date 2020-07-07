@@ -1,4 +1,4 @@
-import { addMess } from '../../../../redux/message_reducer';
+import { addMessTC } from '../../../../redux/message_reducer';
 import Messages from "./Messages";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../../../redux/HOC";
@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 };
 
 export default compose(
-    connect(mapStateToProps, {addMess}),
+    connect(mapStateToProps, {addMessTC}),
     withAuthRedirect
 )(Messages)
 

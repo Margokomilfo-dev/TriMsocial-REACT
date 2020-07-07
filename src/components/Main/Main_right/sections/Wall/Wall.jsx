@@ -28,7 +28,8 @@ let Wall = (props) => {
         let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         let yyyy = today.getFullYear();
         today = mm + '/' + dd + '/' + yyyy;
-        props.addPost(values.for_post, today);
+        props.addPostTC(values.for_post, today);
+
         //     textPostPoint.current.value === '' ? alert('Empty field! Try to write down again!') :  props.addPost();
     }
 

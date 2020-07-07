@@ -1,5 +1,5 @@
 import React from 'react'
-import {addPost} from '../../../../../redux/main_reducer'
+import {addPostTC} from '../../../../../redux/main_reducer'
 import Wall from './Wall'
 import {connect} from "react-redux";
 
@@ -18,5 +18,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {addPost})(WallContainer)
+export default connect(mapStateToProps, {addPostTC})(WallContainer)
 

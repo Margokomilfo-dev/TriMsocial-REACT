@@ -1,12 +1,14 @@
 import {setAuthAndUserURLPhoto} from "./auth_reducer";
 
 let INITIALISED_SUCCESS = 'TriM/trim/INITIALISED_SUCCESS'
-
-let trim = {
+type TrimType = {
+    initialed: boolean
+}
+let trim: TrimType = {
     initialed: false
 }
 
-const trimReducer = (state = trim, action) => {
+const trimReducer = (state = trim, action: any):TrimType  => {
     switch (action.type) {
         case INITIALISED_SUCCESS: {
             return {
@@ -19,7 +21,10 @@ const trimReducer = (state = trim, action) => {
     }
 }
 
-export const initializedSuccess = () => ({type: INITIALISED_SUCCESS});
+type InitializedSuccessActionType = {
+    type: typeof INITIALISED_SUCCESS // 'INITIALISED_SUCCESS'
+}
+export const initializedSuccess = (): InitializedSuccessActionType => ({type: INITIALISED_SUCCESS});
 
 
 // export const initializationTriM = () => {
@@ -31,7 +36,7 @@ export const initializedSuccess = () => ({type: INITIALISED_SUCCESS});
 //     }
 // }
 export const initializationTriM = () => {
-    return (dispatch) => {
+    return (dispatch: any) => {
         let promise = dispatch(setAuthAndUserURLPhoto())
         promise.then(() => {
            dispatch(initializedSuccess())

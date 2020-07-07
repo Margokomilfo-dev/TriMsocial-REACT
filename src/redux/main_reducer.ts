@@ -1,5 +1,6 @@
 import {mainAPI} from "../api/api";
-import {stopSubmit} from "redux-form";
+import {stopSubmit, reset} from "redux-form";
+import {PostDataType, ProfileType, PhotosType} from "./types";
 
 let ADD_POST = 'TriM/main/ADD-POST',
     SET_USER_PROFILE = 'TriM/main/SET_USER_PROFILE',
@@ -7,12 +8,12 @@ let ADD_POST = 'TriM/main/ADD-POST',
     DELETE_POST = 'TriM/main/DELETE_POST',
     SAVE_PHOTO_SUCCESS = 'TriM/main/SAVE_PHOTO_SUCCESS'
 
+//type PersonDataType = {}
 
 let inicialization = {
-    personData: {},
+    //personData: {} ,
     postData:
-        [
-            {
+        [   {
                 id: 1,
                 header: 'some text...',
                 content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo vitae delectus culpa est in eius quis illum ipsum quibusdam, possimus doloremque officia at ut, aspernatur voluptatum laborum blanditiis repellat rerum.',
@@ -20,20 +21,27 @@ let inicialization = {
             },
             {id: 2, header: 'some text...', content: 'Your text.', data: '22/02/2020'},
             {id: 3, header: 'some text...', content: 'and it too', data: '22/02/2020'},
-        ],
-    profile: null,
+        ]as Array<PostDataType>,
+    profile: null as ProfileType | null,
     status: ''
     //'Никогда не жалуйтесь на судьбу! Ей с вами, может быть, тоже не очень-то и приятно=)'
 }
+type InicializationType = typeof inicialization
 
-let mainReducer = (state = inicialization, action) => {
+let mainReducer = (state = inicialization, action: any): InicializationType => {
     switch (action.type) {
         case ADD_POST: {
-            let newPostData = {
+            type NewPostDataType = {
+                id: number
+                header: string
+                content: string
+                data: any
+            }
+            let newPostData: NewPostDataType = {
                 header: 'some text...',
                 content: action.value,
                 data: action.curData
-            }
+            } as NewPostDataType
             return {
                 ...state,
                 postData: [newPostData, ...state.postData],
@@ -60,7 +68,7 @@ let mainReducer = (state = inicialization, action) => {
         case SAVE_PHOTO_SUCCESS: {
             return {
                 ...state,
-                profile: {...state.profile, photos: action.photos}
+                profile: {...state.profile, photos: action.photos}as any
             }
         }
 
@@ -68,38 +76,61 @@ let mainReducer = (state = inicialization, action) => {
             return state;
     }
 }
+type AddPostActionType = {
+    type: typeof ADD_POST
+    value: string
+    curData: string
+}
+export const addPost = (value: string, curData: string): AddPostActionType => ({type: ADD_POST, value, curData});
 
-export const addPost = (value, curData) => ({type: ADD_POST, value, curData});
-export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
-export const setUserStatus = (status) => ({type: SET_USER_STATUS, status});
-export const deletePost = (postId) => ({type: DELETE_POST, postId});
-export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
+type SetUserProfileActionType = {
+    type: typeof SET_USER_PROFILE
+    profile: ProfileType
+}
+export const setUserProfile = (profile: ProfileType): SetUserProfileActionType => ({type: SET_USER_PROFILE, profile});
 
-export const setUser = (userId) => async (dispatch) => {
+type SetUserStatusActionType = {
+    type: typeof SET_USER_STATUS
+    status: string
+}
+export const setUserStatus = (status: string): SetUserStatusActionType => ({type: SET_USER_STATUS, status});
+
+type DeletePostActionType = {
+    type: typeof DELETE_POST
+    postId: number
+}
+export const deletePost = (postId: number): DeletePostActionType => ({type: DELETE_POST, postId});
+
+type SavePhotoSuccessActionType = {
+    type: typeof SAVE_PHOTO_SUCCESS
+    photos: PhotosType
+}
+export const savePhotoSuccess = (photos: PhotosType): SavePhotoSuccessActionType => ({type: SAVE_PHOTO_SUCCESS, photos});
+
+export const setUser = (userId: number) => async (dispatch: any) => {
     try {
         let response = await mainAPI.getUserProfile(userId)
         dispatch(setUserProfile(response));
     } catch(error) { //reject promise
-        debugger
+
     }
 }
-
-export const getUserStatus = (userId) => async (dispatch) => {
+export const getUserStatus = (userId: number) => async (dispatch: any) => {
     let response = await mainAPI.getUserStatus(userId)
     dispatch(setUserStatus(response));
 }
 
-export const updateUserStatus = (status) => async (dispatch) => {
+export const updateUserStatus = (status: string) => async (dispatch: any) => {
     let response = await mainAPI.updateUserStatus(status)
     if (response.resultCode === 0)
         dispatch(setUserStatus(status));
 }
-export const savePhoto = (file) => async (dispatch) => {
+export const savePhoto = (file: any) => async (dispatch: any) => {
     let response = await mainAPI.savePhoto(file)
     if (response.resultCode === 0)
         dispatch(savePhotoSuccess(response.data.photos));
 }
-export const saveNewData = (profile) => async (dispatch, getState) => {
+export const saveNewData = (profile: ProfileType) => async (dispatch: any, getState: any) => {
     const userId = getState().auth.id
     let response = await mainAPI.saveNewData(profile)
     if (response.resultCode === 0) {
@@ -109,6 +140,11 @@ export const saveNewData = (profile) => async (dispatch, getState) => {
         dispatch(stopSubmit('personInfo', {_error: message}))
         return Promise.reject(message[0])
     }
+}
+
+export const addPostTC = (value: string, curData: string) => (dispatch: any) => {
+    dispatch(addPost(value, curData));
+    dispatch(reset('addPostForm'));
 }
 
 export default mainReducer;
