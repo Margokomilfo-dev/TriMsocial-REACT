@@ -1,10 +1,13 @@
 import {headerAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {TrimStateType} from "./store_redux";
+import { Dispatch } from "redux";
+import {ThunkAction} from "redux-thunk";
 
 
-let SET_USER_DATA = 'TriM/auth/SET_USER_DATA',
-    SET_USERS_PHOTO = 'TriM/auth/SET_USERS_PHOTO',
-    CAPTCHA = 'TriM/auth/CAPTCHA'
+const SET_USER_DATA = 'TriM/auth/SET_USER_DATA'
+const SET_USERS_PHOTO = 'TriM/auth/SET_USERS_PHOTO'
+const CAPTCHA = 'TriM/auth/CAPTCHA'
 
 let auth = {
     id: null as number | null,
@@ -13,12 +16,12 @@ let auth = {
     isLogin: false  as boolean,
     userPhoto: null as string | null ,
     captcha: false as boolean,
-    urlCaptcha: '' as string
+    urlCaptcha: '' as string | null
 }
 export type AuthType = typeof auth
 
 
-const authReducer = (state = auth, action: any):AuthType => {
+const authReducer = (state = auth, action: ActionsTypes):AuthType => {
     switch (action.type) {
         case SET_USER_DATA: {
             return {
@@ -44,6 +47,9 @@ const authReducer = (state = auth, action: any):AuthType => {
             return state;
     }
 }
+
+type ActionsTypes = SetAuthUserDataActionType | SetUserURLPhotoActionType | setCaptchaActionType
+
 type SetAuthUserDataDataActionType = {
     id: number | null
     login: string | null
@@ -71,7 +77,13 @@ type setCaptchaActionType = {
 }
 export const setCaptcha = (url: string | null):setCaptchaActionType => ({type: CAPTCHA, url});
 
-export const setAuthAndUserURLPhoto = () => async (dispatch: any) => {
+
+type GetStateType = () => TrimStateType
+type DispatchType = Dispatch<ActionsTypes>
+type ThunkActionType = ThunkAction<Promise<void>, TrimStateType, any, ActionsTypes>
+
+export const setAuthAndUserURLPhoto = () => async (dispatch: DispatchType, getState: GetStateType) => {
+
     let response1 = await headerAPI.me()
     if (response1.resultCode === 0) {
         let {id, email, login} = response1.data;
@@ -83,7 +95,10 @@ export const setAuthAndUserURLPhoto = () => async (dispatch: any) => {
     }
 }
 
-export const login = (email: string | null, password: string | null, rememberMe: boolean, captcha: string | null) => async (dispatch: any) => {
+export const login = (email: string | null,
+                      password: string | null,
+                      rememberMe: boolean,
+                      captcha: string | null): ThunkActionType => async (dispatch) => {
     let response = await headerAPI.login(email, password, rememberMe, captcha)
     if (response.resultCode === 0) {
         let {id, email, login} = response.data;
@@ -91,21 +106,23 @@ export const login = (email: string | null, password: string | null, rememberMe:
     } else if (response.resultCode === 10) {
        dispatch(getCaptcha())
         let message = response.messages
+        // @ts-ignore
         dispatch(stopSubmit('loginForm', {_error: message}))
     } else {
         let message = response.messages
-       dispatch(stopSubmit('loginForm', {_error: message}))
+       // @ts-ignore
+        dispatch(stopSubmit('loginForm', {_error: message}))
     }
 }
 
-export const logout = () => async (dispatch: any) => {
+export const logout = (): ThunkActionType => async (dispatch) => {
     let response = await headerAPI.logout()
     if (response.resultCode === 0) {
         dispatch(setAuthUserData(null, null, null, false));
     }
 }
 
-export const getCaptcha = () => async (dispatch: any) => {
+export const getCaptcha = (): ThunkActionType => async (dispatch) => {
     let response = await headerAPI.captcha()
     dispatch(setCaptcha(response.url))
 }

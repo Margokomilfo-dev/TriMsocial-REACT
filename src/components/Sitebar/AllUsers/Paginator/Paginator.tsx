@@ -1,8 +1,16 @@
-import React, {useState} from 'react'
+import React, {FC, useState} from 'react'
 import s from './Paginator.module.css'
 
-const Paginator = ({totalUsersCount, countUsersOnPage, currentPage, onPageChanged, portionSize = 10}) => {
-    let pages = [],
+type PropsType = {
+    totalUsersCount: number
+    countUsersOnPage: number
+    currentPage: number
+    onPageChanged: (pageNumber: number) => void
+    portionSize?: number
+}
+
+const Paginator: FC<PropsType> = ({totalUsersCount, countUsersOnPage, currentPage, onPageChanged, portionSize = 10}) => {
+    let pages: Array<number> = [],
         countPages = Math.ceil(totalUsersCount / countUsersOnPage);
 
     for (let i = 1; i <= countPages; i++) {
@@ -22,7 +30,7 @@ const Paginator = ({totalUsersCount, countUsersOnPage, currentPage, onPageChange
         setNumberPortion(numberPortion + 1)
     }
 
-    let mapPagesWithFilter = (spanClassName, keyId, page) => {
+    let mapPagesWithFilter = (spanClassName: any, keyId: number, page: number) => {
         return <span className={spanClassName} key={keyId}
                      onClick={() => {
                          if (page===0 || page===1 || page===2 || page===3){
@@ -45,6 +53,7 @@ const Paginator = ({totalUsersCount, countUsersOnPage, currentPage, onPageChange
             <>
                 {
                     pages.filter(p => p >= 0 && p < 4).map(p => {
+                        // @ts-ignore
                         return mapPagesWithFilter(currentPage === p && s.selectedPage, p.id, p)
                     })
                 }
@@ -55,6 +64,7 @@ const Paginator = ({totalUsersCount, countUsersOnPage, currentPage, onPageChange
             {/*------------------------------------------------------------------------------------------------*/}
             {
                 pages.filter(p => p >= leftPortionBoard && p <= rightPortionBoard).map(p => {
+                    // @ts-ignore
                     return mapPagesWithFilter(currentPage === p && s.selectedPage, p.id, p)
                 })
             }
@@ -65,6 +75,7 @@ const Paginator = ({totalUsersCount, countUsersOnPage, currentPage, onPageChange
                 <span className={s.drops}> ... </span>
                 {
                     pages.filter(p => p >= countPages - 1).map(p => {
+                        // @ts-ignore
                         return mapPagesWithFilter(currentPage === p && s.selectedPage, p.id, p)
                     })
                 }

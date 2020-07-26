@@ -1,24 +1,32 @@
 import {allUsersAPI} from "../api/api";
 import {setAuthAndUserURLPhoto} from "./auth_reducer";
 import {initializedSuccess} from "./trim_reducer";
+import {UserDataType} from "./types";
+import {TrimStateType} from "./store_redux";
+import {Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
 
-let FOLLOW = 'TriM/users/FOLLOW',
-    UNFOLLOW = 'TriM/users/UNFOLLOW',
-    SETUSERS = 'TriM/users/SETUSERS',
-    SETCURRENTPAGE = 'TriM/users/SETCURRENTPAGE',
-    SETUSERSTOTALCOUNT = 'TriM/users/SETUSERSTOTALCOUNT',
-    TOGGLEISLOADER = 'TriM/users/TOGGLEISLOADER',
-    TOGGLE_FOLLOWING_IN_PROCESS = 'TriM/users/TOGGLE_FOLLOWING_IN_PROCESS',
-    SET_FRIENDS = 'TriM/users/SET_FRIENDS'
+const FOLLOW = 'TriM/users/FOLLOW'
+const UNFOLLOW = 'TriM/users/UNFOLLOW'
+const SETUSERS = 'TriM/users/SETUSERS'
+const SETCURRENTPAGE = 'TriM/users/SETCURRENTPAGE'
+const SETUSERSTOTALCOUNT = 'TriM/users/SETUSERSTOTALCOUNT'
+const TOGGLEISLOADER = 'TriM/users/TOGGLEISLOADER'
+const TOGGLE_FOLLOWING_IN_PROCESS = 'TriM/users/TOGGLE_FOLLOWING_IN_PROCESS'
+const SET_FRIENDS = 'TriM/users/SET_FRIENDS'
 
+type FriendDataType = {
+    src: string
+    name: string
+}
 let inicialization = {
-    users: [],
+    users: [] as Array<UserDataType>,
     countUsersOnPage: 6,
-    totalUsersCount: '',
+    totalUsersCount: 0,
     currentPage: 1,
-    countPages: '',
+    countPages: 0,
     isLoader: false,
-    followingInProcess: [],
+    followingInProcess: [] as Array<number>,//Array of users ids
     friendData: [
             {
                 src: 'https://img.favpng.com/15/3/24/kion-simba-lion-nala-disney-junior-png-favpng-yPCg6Bur9WV3jCagMjxL54mn1.jpg',
@@ -33,10 +41,12 @@ let inicialization = {
                 name: 'Vladimir'
             }
 
-        ]
+        ] as Array<FriendDataType>,
+    followed: false
 }
+export type InicializationType = typeof inicialization
 
-const usersReducer = (state = inicialization, action) => {
+const usersReducer = (state = inicialization, action: ActionsTypes): InicializationType => {
     switch (action.type) {
         case FOLLOW: {
             return {
@@ -115,17 +125,64 @@ const usersReducer = (state = inicialization, action) => {
     }
 }
 
-export const followSuccess = (userid) => ({type: FOLLOW, userid});
-export const unfollowSuccess = (userid) => ({type: UNFOLLOW, userid});
-export const setUsers = (users) => ({type: SETUSERS, users});
-export const setCurrentPage = (page) => ({type: SETCURRENTPAGE, page});
-export const setUsersTotalCount = (count) => ({type: SETUSERSTOTALCOUNT, count});
-export const toggleIsLoader = (isLoader) => ({type: TOGGLEISLOADER, isLoader});
-export const toggleFollowingInProcess = (isLoader, userId) => ({type: TOGGLE_FOLLOWING_IN_PROCESS, isLoader, userId});
-export const setFriendsData = (name, src) => ({type: SET_FRIENDS, data: {name, src}});
+type ActionsTypes = FollowSuccessActionType | UnfollowSuccessActionType | SetUsersActionType |
+    SetCurrentPageActionType | SetUsersTotalCountActionType |ToggleIsLoaderActionType |
+    ToggleFollowingInProcessActionType | SetFriendsDataActionType
 
+type FollowSuccessActionType = {
+    type: typeof FOLLOW
+    userid: number
+}
+export const followSuccess = (userid: number):FollowSuccessActionType => ({type: FOLLOW, userid});
 
-export const getUsersTC = (currentPage, countUsersOnPage) => async (dispatch) => {
+type UnfollowSuccessActionType = {
+    type: typeof UNFOLLOW
+    userid: number
+}
+export const unfollowSuccess = (userid: number):UnfollowSuccessActionType => ({type: UNFOLLOW, userid});
+
+type SetUsersActionType = {
+    type: typeof SETUSERS
+    users: Array<UserDataType>
+}
+export const setUsers = (users: Array<UserDataType>):SetUsersActionType => ({type: SETUSERS, users});
+
+type SetCurrentPageActionType = {
+    type: typeof SETCURRENTPAGE
+    page: number
+}
+export const setCurrentPage = (page: number):SetCurrentPageActionType => ({type: SETCURRENTPAGE, page});
+
+type SetUsersTotalCountActionType = {
+    type: typeof SETUSERSTOTALCOUNT
+    count: number
+}
+export const setUsersTotalCount = (count: number):SetUsersTotalCountActionType => ({type: SETUSERSTOTALCOUNT, count});
+
+type ToggleIsLoaderActionType = {
+    type: typeof TOGGLEISLOADER
+    isLoader: boolean
+}
+export const toggleIsLoader = (isLoader: boolean):ToggleIsLoaderActionType => ({type: TOGGLEISLOADER, isLoader});
+
+type ToggleFollowingInProcessActionType = {
+    type: typeof TOGGLE_FOLLOWING_IN_PROCESS
+    isLoader: boolean
+    userId: number
+}
+export const toggleFollowingInProcess = (isLoader: boolean, userId: number): ToggleFollowingInProcessActionType => ({type: TOGGLE_FOLLOWING_IN_PROCESS, isLoader, userId});
+
+type SetFriendsDataActionType = {
+    type: typeof SET_FRIENDS
+    data: FriendDataType
+}
+export const setFriendsData = (name: string, src: string):SetFriendsDataActionType => ({type: SET_FRIENDS, data: {name, src}});
+
+type GetStateType = () => TrimStateType
+type DispatchType = Dispatch<ActionsTypes>
+type ThunkActionType = ThunkAction<Promise<void>, TrimStateType, any, ActionsTypes>
+
+export const getUsersTC = (currentPage: number, countUsersOnPage: number): ThunkActionType => async (dispatch) => {
     try {
         dispatch(setCurrentPage(currentPage))
         dispatch(toggleIsLoader(true))
@@ -134,27 +191,26 @@ export const getUsersTC = (currentPage, countUsersOnPage) => async (dispatch) =>
         dispatch(setUsers(response.items))
         dispatch(setUsersTotalCount(response.totalCount))
     } catch(error){
-        debugger
     }
 
 };
 
-const followUnfollow = async (dispatch, userId, apiMethod, actionCreatur) => {
+const followUnfollow = async (dispatch: DispatchType, userId: number, apiMethod: any, actionCreator: (userId: number) => UnfollowSuccessActionType | FollowSuccessActionType) => {
     dispatch(toggleFollowingInProcess(true, userId));
     let response = await apiMethod(userId)
     if (response.resultCode === 0) {
-        dispatch(actionCreatur(userId));
+        dispatch(actionCreator(userId));
     }
     dispatch(toggleFollowingInProcess(false, userId));
 };
 
-export const unfollowTC = (userId) => async (dispatch) => {
+export const unfollowTC = (userId: number) => async (dispatch: any) => {
     followUnfollow(dispatch, userId, allUsersAPI.followDelete, unfollowSuccess)
 
 };
 
 
-export const followTC  = (userId, name, src) => async (dispatch) => {
+export const followTC  = (userId: number) => async (dispatch: any) => {
     dispatch(toggleFollowingInProcess(true, userId));
     let response = await allUsersAPI.followPost(userId)
     if (response.resultCode === 0) {

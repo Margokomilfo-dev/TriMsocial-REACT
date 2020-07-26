@@ -1,6 +1,12 @@
+export type TrimType = {
+    initialed: boolean
+}
 export type UserDataType = {
     id: number
     name: string
+    status: string
+    photos: PhotosType
+    followed: boolean
 }
 export type MessageDataType = {
     id: number
@@ -21,10 +27,11 @@ export type ProfileType = {
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
-    contacts: Array<ContactsType>
+    contacts: ContactsType
+    photos: PhotosType
 }
 export type PostDataType = {
-    id: number
+    id: number | null
     header: string
     content: string
     data: any

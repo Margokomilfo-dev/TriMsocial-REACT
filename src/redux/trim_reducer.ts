@@ -1,9 +1,8 @@
 import {setAuthAndUserURLPhoto} from "./auth_reducer";
+import { TrimType } from "./types";
 
 let INITIALISED_SUCCESS = 'TriM/trim/INITIALISED_SUCCESS'
-type TrimType = {
-    initialed: boolean
-}
+
 let trim: TrimType = {
     initialed: false
 }

@@ -1,12 +1,20 @@
-import React from 'react'
+import React, {FC} from 'react'
 import s from './UserForAllUsers.module.css'
 import photo from '../pic/nophoto.png'
+import {PhotosType, ProfileType, UserDataType} from "../../../../redux/types";
 import {NavLink} from "react-router-dom";
 
-const UserForAllUsers = ({user, followingInProcess, unfollowTC, followTC, addFriendTC}) => {
-    debugger
+type PropsType = {
+    user: UserDataType
+    followingInProcess: Array<number>
+    unfollowTC: (id: number) => void
+    followTC: (id: number, name: string, photos: string) => void
+ }
+const UserForAllUsers: FC<PropsType> = ({user, followingInProcess, unfollowTC, followTC}) => {
     let u = user
 
+
+    // @ts-ignore
     return (
 
         <div className={s.user_container}>
@@ -17,7 +25,7 @@ const UserForAllUsers = ({user, followingInProcess, unfollowTC, followTC, addFri
                     </NavLink>
                 </div>
                 <div>
-                    {u.followed
+                     {u.followed
                         ? <button disabled={followingInProcess.some(id => id === u.id)}
                                   className={`${s.unfollow} ${s.button}`} onClick={() => {
                             unfollowTC(u.id)

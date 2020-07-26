@@ -1,7 +1,16 @@
-import React from 'react'
+import React, {ChangeEvent} from 'react'
 import s from './Status.module.css'
 
-class Status extends React.Component {
+type StateType = {
+    status: string
+    statusMod: boolean
+}
+type PropsType = {
+    status: string
+    updateUserStatusThunkCreator: (status: string) => void
+}
+
+class Status extends React.Component< PropsType, StateType > {
     state = {
         status: this.props.status,
         statusMod: false
@@ -18,7 +27,7 @@ class Status extends React.Component {
         });
         this.props.updateUserStatusThunkCreator(this.state.status)
     }
-    onChangeUserStatus = (e) => {
+    onChangeUserStatus = (e: ChangeEvent<HTMLTextAreaElement>) => {
         if (this.state.status.length <= 300) {
             this.setState({status: e.currentTarget.value })
         }
@@ -27,7 +36,7 @@ class Status extends React.Component {
             alert('max 300 symbols!')
         }
     }
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps: PropsType, prevState:StateType) {
         if (prevProps.status !== this.props.status) {
             this.setState({status: this.props.status})
         }

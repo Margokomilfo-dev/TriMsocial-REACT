@@ -1,12 +1,15 @@
 import {mainAPI} from "../api/api";
 import {stopSubmit, reset} from "redux-form";
 import {PostDataType, ProfileType, PhotosType} from "./types";
+import {TrimStateType} from "./store_redux";
+import {Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
 
-let ADD_POST = 'TriM/main/ADD-POST',
-    SET_USER_PROFILE = 'TriM/main/SET_USER_PROFILE',
-    SET_USER_STATUS = 'TriM/main/SET_USER_STATUS',
-    DELETE_POST = 'TriM/main/DELETE_POST',
-    SAVE_PHOTO_SUCCESS = 'TriM/main/SAVE_PHOTO_SUCCESS'
+const ADD_POST = 'TriM/main/ADD-POST'
+const SET_USER_PROFILE = 'TriM/main/SET_USER_PROFILE'
+const SET_USER_STATUS = 'TriM/main/SET_USER_STATUS'
+const DELETE_POST = 'TriM/main/DELETE_POST'
+const SAVE_PHOTO_SUCCESS = 'TriM/main/SAVE_PHOTO_SUCCESS'
 
 //type PersonDataType = {}
 
@@ -28,7 +31,7 @@ let inicialization = {
 }
 type InicializationType = typeof inicialization
 
-let mainReducer = (state = inicialization, action: any): InicializationType => {
+let mainReducer = (state = inicialization, action: ActionsTypes): InicializationType => {
     switch (action.type) {
         case ADD_POST: {
             type NewPostDataType = {
@@ -68,7 +71,7 @@ let mainReducer = (state = inicialization, action: any): InicializationType => {
         case SAVE_PHOTO_SUCCESS: {
             return {
                 ...state,
-                profile: {...state.profile, photos: action.photos}as any
+                profile: {...state.profile, photos: action.photos} as ProfileType
             }
         }
 
@@ -76,6 +79,10 @@ let mainReducer = (state = inicialization, action: any): InicializationType => {
             return state;
     }
 }
+
+
+type ActionsTypes = AddPostActionType | SetUserProfileActionType | SetUserStatusActionType | DeletePostActionType | SavePhotoSuccessActionType
+
 type AddPostActionType = {
     type: typeof ADD_POST
     value: string
@@ -107,7 +114,11 @@ type SavePhotoSuccessActionType = {
 }
 export const savePhotoSuccess = (photos: PhotosType): SavePhotoSuccessActionType => ({type: SAVE_PHOTO_SUCCESS, photos});
 
-export const setUser = (userId: number) => async (dispatch: any) => {
+type GetStateType = () => TrimStateType
+type DispatchType = Dispatch<ActionsTypes>
+type ThunkActionType = ThunkAction<Promise<void>, TrimStateType, any, ActionsTypes>
+
+export const setUser = (userId: number | null): ThunkActionType => async (dispatch) => {
     try {
         let response = await mainAPI.getUserProfile(userId)
         dispatch(setUserProfile(response));
@@ -115,35 +126,37 @@ export const setUser = (userId: number) => async (dispatch: any) => {
 
     }
 }
-export const getUserStatus = (userId: number) => async (dispatch: any) => {
+export const getUserStatus = (userId: number): ThunkActionType=> async (dispatch) => {
     let response = await mainAPI.getUserStatus(userId)
     dispatch(setUserStatus(response));
 }
 
-export const updateUserStatus = (status: string) => async (dispatch: any) => {
+export const updateUserStatus = (status: string): ThunkActionType => async (dispatch) => {
     let response = await mainAPI.updateUserStatus(status)
     if (response.resultCode === 0)
         dispatch(setUserStatus(status));
 }
-export const savePhoto = (file: any) => async (dispatch: any) => {
+export const savePhoto = (file: any): ThunkActionType => async (dispatch) => {
     let response = await mainAPI.savePhoto(file)
     if (response.resultCode === 0)
         dispatch(savePhotoSuccess(response.data.photos));
 }
-export const saveNewData = (profile: ProfileType) => async (dispatch: any, getState: any) => {
+export const saveNewData = (profile: ProfileType): ThunkActionType => async (dispatch, getState: GetStateType) => {
     const userId = getState().auth.id
     let response = await mainAPI.saveNewData(profile)
     if (response.resultCode === 0) {
         dispatch(setUser(userId));
     } else {
         let message = response.messages
+        // @ts-ignore
         dispatch(stopSubmit('personInfo', {_error: message}))
         return Promise.reject(message[0])
     }
 }
 
-export const addPostTC = (value: string, curData: string) => (dispatch: any) => {
+export const addPostTC = (value: string, curData: string) => (dispatch: DispatchType, getState: GetStateType) => {
     dispatch(addPost(value, curData));
+    // @ts-ignore
     dispatch(reset('addPostForm'));
 }
 

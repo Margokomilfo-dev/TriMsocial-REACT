@@ -18,9 +18,14 @@ let reducers = combineReducers(
     }
 );
 
+type ReducersType = typeof reducers
+export type TrimStateType = ReturnType <ReducersType>
+
+// @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers,  composeEnhancers(applyMiddleware(thunk)));
 
-window.store = store
+// @ts-ignore
+window.__store__= store
 
-export default store; 
+export default store

@@ -18,17 +18,41 @@ import {
     getTotalUsersCount,
     getUsers
 } from "../../../redux/selectors";
+import {UserDataType} from "../../../redux/types";
+import {TrimStateType} from "../../../redux/store_redux";
 
-class AllUsersContainer extends React.Component {
+type MapStateToPropsType = {
+    users: Array<UserDataType>
+    countUsersOnPage: number
+    totalUsersCount: number
+    countPages: number
+    currentPage: number
+    isLoader: boolean
+    followingInProcess: Array<number>
+    isLogin: boolean
+
+}
+type MapDispatchToPropsType = {
+    toggleFollowingInProcess: (isLoader: boolean, userId: number) => void
+    getUsersTC: (currentPage: number, countUsersOnPage: number) => void
+    onPageChanged: (pageNumber: number) => void
+    unfollowTC: (id: number) => void
+    followTC: (id: number, name: string, photos: string) => void
+    addFriendTC: () => void
+
+}
+type PropsType = MapStateToPropsType & MapDispatchToPropsType
+
+class AllUsersContainer extends React.Component<PropsType> {
     componentDidMount() {
         let {currentPage, countUsersOnPage} = this.props
         if (this.props.users.length === 0) {
             this.props.getUsersTC(currentPage, countUsersOnPage)
         }
     }
-    onPageChanged = (pageNamber) => {
+    onPageChanged = (pageNumber: number) => {
         let {countUsersOnPage} = this.props
-         this.props.getUsersTC(pageNamber, countUsersOnPage)
+         this.props.getUsersTC(pageNumber, countUsersOnPage)
      };
     render() {
         return <>
@@ -37,11 +61,8 @@ class AllUsersContainer extends React.Component {
             <AllUsers countUsersOnPage={this.props.countUsersOnPage}
                       totalUsersCount={this.props.totalUsersCount}
                       users={this.props.users}
-                      follow={this.props.follow}
-                      unfollow={this.props.unfollow}
                       currentPage={this.props.currentPage}
                       onPageChanged={this.onPageChanged}
-                      toggleFollowingInProcess={this.props.toggleFollowingInProcess}
                       followingInProcess={this.props.followingInProcess}
                       unfollowTC={this.props.unfollowTC}
                       followTC={this.props.followTC}
@@ -50,7 +71,7 @@ class AllUsersContainer extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: TrimStateType): MapStateToPropsType => {
     return {
         users: getUsers(state),
         countUsersOnPage: getCountUsersOnPage(state),
@@ -64,6 +85,5 @@ let mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps,{followSuccess, unfollowSuccess, setCurrentPage, toggleFollowingInProcess,
-        getUsersTC, unfollowTC, followTC })
+    connect(mapStateToProps,{ setCurrentPage, toggleFollowingInProcess, getUsersTC, unfollowTC, followTC })
 )(AllUsersContainer)

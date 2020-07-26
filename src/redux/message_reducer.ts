@@ -1,10 +1,11 @@
 import {UserDataType, MessageDataType} from "./types";
 import {reset} from "redux-form";
 import {addPost} from "./main_reducer";
+import {TrimStateType} from "./store_redux";
+import {Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
 
-let ADD_MESS = 'TriM/message/ADD-MESS'
-
-
+const ADD_MESS = 'TriM/message/ADD-MESS'
 
 let inicialization = {
     userData: [
@@ -24,7 +25,7 @@ let inicialization = {
 }
 type InicializationType = typeof inicialization
 
-let messageReducer = (state = inicialization, action: any): InicializationType => {
+let messageReducer = (state = inicialization, action: ActionsTypes): InicializationType => {
     switch (action.type) {
         case ADD_MESS: {
             type NewMesDataType = {
@@ -43,14 +44,22 @@ let messageReducer = (state = inicialization, action: any): InicializationType =
             return state;
     }
 }
+type ActionsTypes = AddStringType
+
 type AddStringType = {
     type:typeof ADD_MESS
     value: string
 }
 export const addMess = (value: string): AddStringType=> ({type: ADD_MESS, value});
 
-export const addMessTC = (value: string) => (dispatch: any) => {
+
+type GetStateType = () => TrimStateType
+type DispatchType = Dispatch<ActionsTypes>
+type ThunkActionType = ThunkAction<any, TrimStateType, any, ActionsTypes>
+
+export const addMessTC = (value: string): ThunkActionType => (dispatch: any) => {
     dispatch(addMess(value));
     dispatch(reset('addMessageForm'));
 }
+
 export default messageReducer;
