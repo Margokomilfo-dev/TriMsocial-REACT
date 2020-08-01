@@ -37,7 +37,7 @@ let inicialization = {
                 name: 'Mia'
             },
             {
-                src: 'https://i2.wp.com/tbso.ca/wp-content/uploads/2019/05/5a-FS-Lion-King-and-Animals.png?fit=300%2C300&ssl=1',
+                src: 'https://images.fineartamerica.com/images-medium-large-5/male-lion-face-close-up-elle-walby.jpg',
                 name: 'Vladimir'
             }
 

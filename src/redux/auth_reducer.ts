@@ -1,4 +1,4 @@
-import {headerAPI} from "../api/api";
+import {headerAPI, ResultCodeForCaptchaEnum, ResultCodesEnum} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {TrimStateType} from "./store_redux";
 import { Dispatch } from "redux";
@@ -85,7 +85,7 @@ type ThunkActionType = ThunkAction<Promise<void>, TrimStateType, any, ActionsTyp
 export const setAuthAndUserURLPhoto = () => async (dispatch: DispatchType, getState: GetStateType) => {
 
     let response1 = await headerAPI.me()
-    if (response1.resultCode === 0) {
+    if (response1.resultCode === ResultCodesEnum.Success) {
         let {id, email, login} = response1.data;
         dispatch(setAuthUserData(id, login, email, true));
         //------------------------
@@ -95,15 +95,15 @@ export const setAuthAndUserURLPhoto = () => async (dispatch: DispatchType, getSt
     }
 }
 
-export const login = (email: string | null,
-                      password: string | null,
+export const login = (email: string,
+                      password: string,
                       rememberMe: boolean,
                       captcha: string | null): ThunkActionType => async (dispatch) => {
     let response = await headerAPI.login(email, password, rememberMe, captcha)
     if (response.resultCode === 0) {
         let {id, email, login} = response.data;
         dispatch(setAuthUserData(id, login, email, true));
-    } else if (response.resultCode === 10) {
+    } else if (response.resultCode === ResultCodeForCaptchaEnum.CaptchaIsRequired) {
        dispatch(getCaptcha())
         let message = response.messages
         // @ts-ignore
@@ -117,7 +117,7 @@ export const login = (email: string | null,
 
 export const logout = (): ThunkActionType => async (dispatch) => {
     let response = await headerAPI.logout()
-    if (response.resultCode === 0) {
+    if (response.resultCode === ResultCodesEnum.Success) {
         dispatch(setAuthUserData(null, null, null, false));
     }
 }

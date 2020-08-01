@@ -10,8 +10,10 @@ type PropsType = {
 }
 
 const Paginator: FC<PropsType> = ({totalUsersCount, countUsersOnPage, currentPage, onPageChanged, portionSize = 10}) => {
-    let pages: Array<number> = [],
-        countPages = Math.ceil(totalUsersCount / countUsersOnPage);
+    let pages: Array<number> = []
+        let countPages = Math.ceil(totalUsersCount / countUsersOnPage);
+
+
 
     for (let i = 1; i <= countPages; i++) {
         pages.push(i);

@@ -139,7 +139,7 @@ export const updateUserStatus = (status: string): ThunkActionType => async (disp
 export const savePhoto = (file: any): ThunkActionType => async (dispatch) => {
     let response = await mainAPI.savePhoto(file)
     if (response.resultCode === 0)
-        dispatch(savePhotoSuccess(response.data.photos));
+        dispatch(savePhotoSuccess(response.data));
 }
 export const saveNewData = (profile: ProfileType): ThunkActionType => async (dispatch, getState: GetStateType) => {
     const userId = getState().auth.id
