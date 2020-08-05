@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "da02a5c38675f68b1f9aff0c23e86bda",
+    "revision": "90c18c8d23c641d3ddd1ea80b348d176",
     "url": "/TriMsocial-REACT/index.html"
   },
   {
@@ -8,44 +8,44 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/TriMsocial-REACT/static/css/3.22960b66.chunk.css"
   },
   {
-    "revision": "29e5299bbf29860426cc",
+    "revision": "21e08198c01a98a2e865",
     "url": "/TriMsocial-REACT/static/css/4.5bc508a5.chunk.css"
   },
   {
-    "revision": "8758d012d5632ff25ddb",
+    "revision": "40f61204452f43ed396c",
     "url": "/TriMsocial-REACT/static/css/5.eca422aa.chunk.css"
   },
   {
-    "revision": "b192a93c94e99b7162e2",
+    "revision": "f98203ca2dd5f342f450",
     "url": "/TriMsocial-REACT/static/css/main.40222fe1.chunk.css"
   },
   {
-    "revision": "3fe7d9d002676be17a42",
-    "url": "/TriMsocial-REACT/static/js/2.5469c760.chunk.js"
+    "revision": "c2582575abd4425644a7",
+    "url": "/TriMsocial-REACT/static/js/2.2df16925.chunk.js"
   },
   {
     "revision": "115c29c453b61995b5be0af8c45bd83e",
-    "url": "/TriMsocial-REACT/static/js/2.5469c760.chunk.js.LICENSE.txt"
+    "url": "/TriMsocial-REACT/static/js/2.2df16925.chunk.js.LICENSE.txt"
   },
   {
     "revision": "b6e5d3996a4e666f1d7d",
     "url": "/TriMsocial-REACT/static/js/3.45c06ab1.chunk.js"
   },
   {
-    "revision": "29e5299bbf29860426cc",
-    "url": "/TriMsocial-REACT/static/js/4.556b82b9.chunk.js"
+    "revision": "21e08198c01a98a2e865",
+    "url": "/TriMsocial-REACT/static/js/4.cc27eefd.chunk.js"
   },
   {
-    "revision": "8758d012d5632ff25ddb",
-    "url": "/TriMsocial-REACT/static/js/5.a213adc7.chunk.js"
+    "revision": "40f61204452f43ed396c",
+    "url": "/TriMsocial-REACT/static/js/5.1166372c.chunk.js"
   },
   {
-    "revision": "b192a93c94e99b7162e2",
-    "url": "/TriMsocial-REACT/static/js/main.b10d9d3d.chunk.js"
+    "revision": "f98203ca2dd5f342f450",
+    "url": "/TriMsocial-REACT/static/js/main.44d1ae92.chunk.js"
   },
   {
-    "revision": "233a7dc16fc7a200a20c",
-    "url": "/TriMsocial-REACT/static/js/runtime-main.1e2fe149.js"
+    "revision": "482d5a65738ceddf06fe",
+    "url": "/TriMsocial-REACT/static/js/runtime-main.11fb7798.js"
   },
   {
     "revision": "1d5193615710cf4181fc8014143a7701",
