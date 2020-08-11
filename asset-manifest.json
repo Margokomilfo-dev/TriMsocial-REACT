@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/TriMsocial-REACT/static/css/main.40222fe1.chunk.css",
-    "main.js": "/TriMsocial-REACT/static/js/main.44d1ae92.chunk.js",
-    "main.js.map": "/TriMsocial-REACT/static/js/main.44d1ae92.chunk.js.map",
+    "main.js": "/TriMsocial-REACT/static/js/main.346c889f.chunk.js",
+    "main.js.map": "/TriMsocial-REACT/static/js/main.346c889f.chunk.js.map",
     "runtime-main.js": "/TriMsocial-REACT/static/js/runtime-main.11fb7798.js",
     "runtime-main.js.map": "/TriMsocial-REACT/static/js/runtime-main.11fb7798.js.map",
     "static/js/2.2df16925.chunk.js": "/TriMsocial-REACT/static/js/2.2df16925.chunk.js",
@@ -17,7 +17,7 @@
     "static/js/5.1166372c.chunk.js": "/TriMsocial-REACT/static/js/5.1166372c.chunk.js",
     "static/js/5.1166372c.chunk.js.map": "/TriMsocial-REACT/static/js/5.1166372c.chunk.js.map",
     "index.html": "/TriMsocial-REACT/index.html",
-    "precache-manifest.004a073f3c085bb3f76bb735130c0f10.js": "/TriMsocial-REACT/precache-manifest.004a073f3c085bb3f76bb735130c0f10.js",
+    "precache-manifest.9d83023381280e3ef0736c251db2471b.js": "/TriMsocial-REACT/precache-manifest.9d83023381280e3ef0736c251db2471b.js",
     "service-worker.js": "/TriMsocial-REACT/service-worker.js",
     "static/css/3.22960b66.chunk.css.map": "/TriMsocial-REACT/static/css/3.22960b66.chunk.css.map",
     "static/css/4.5bc508a5.chunk.css.map": "/TriMsocial-REACT/static/css/4.5bc508a5.chunk.css.map",
@@ -33,6 +33,6 @@
     "static/js/runtime-main.11fb7798.js",
     "static/js/2.2df16925.chunk.js",
     "static/css/main.40222fe1.chunk.css",
-    "static/js/main.44d1ae92.chunk.js"
+    "static/js/main.346c889f.chunk.js"
   ]
 }
