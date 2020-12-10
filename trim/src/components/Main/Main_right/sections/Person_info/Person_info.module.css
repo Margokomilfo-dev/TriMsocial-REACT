@@ -1,0 +1,101 @@
+.main_info {
+    margin: 0 auto;
+    position: relative;
+    padding-bottom: 20px;
+}
+.fio {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: -10px;
+}
+.button {
+    margin: 20px 20px 20px 0;
+    width: 120px;
+    height: 30px;
+    padding: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: black;
+    background-color: #d6d6d6;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px #999;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: calc(100% - 50px);
+}
+
+.button:hover {
+    background-color: rgb(206, 206, 206);
+}
+.button:active {
+    box-shadow: 0 4px rgb(138, 138, 138);
+    transform: translateY(.3px);
+}
+.commonError {
+    background-color: red;
+    color: white;
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+    padding: 5px;
+}
+.infoBlock {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+
+}
+.infoTitles{
+    font-weight: 500;
+    width: 325px;
+    text-decoration: underline;
+}
+.infoText{
+    margin-bottom: 10px;
+    color: #0e3a04;
+}
+.link_blok {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+}
+.contactKey {
+    margin-left: 10px;
+    font-weight: 500;
+    color: #7a0009;
+    width: 85px;
+}
+.contactValue {
+    color: grey;
+    font-family: "Courier New";
+    font-size: 12px;
+}
+.inputBlock {
+    margin-bottom: 10px;
+    width: 600px;
+
+}
+
+.input input {
+    width: calc(100% - 40px);
+    background-color: #F2F2F2;
+    padding: 10px 20px;
+    margin: 8px 0;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+
+.input input:hover {
+    background-color: white;
+}
+.input input[type=checkbox] {
+    display: block;
+    width: 20px;
+    height: 20px;
+}

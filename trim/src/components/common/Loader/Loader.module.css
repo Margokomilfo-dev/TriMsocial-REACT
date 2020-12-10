@@ -1,0 +1,19 @@
+.loader_wrapper{
+    height: 100%;
+    width: 1020px;
+    background-color: rgba(0,0,0,0.2);
+    overflow:hidden;
+    position:fixed;
+    top: 110px;
+    border-radius: 20px;
+
+}
+.loader {
+    display: flex;
+    justify-content: center;
+    padding-top: 20%;
+
+}
+.loader img {
+    height: 50px;
+}

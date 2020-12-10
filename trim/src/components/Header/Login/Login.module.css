@@ -1,0 +1,87 @@
+.login {
+    height: 500px;
+    width: 700px;
+    margin: 0 auto;
+}
+.check_in, .register  {
+    border: 1px solid #a7a7a7;
+    border-radius: 10px;
+    padding: 30px;
+    background: #fdfdfd;
+    margin-bottom: 30px;
+
+}
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+.form input{
+    margin: 10px;
+    padding-left: 10px;
+    height: 30px;
+    width: 300px;
+    border: 1px solid #a7a7a7;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: rgba(214, 214, 214, 0.3);
+    outline: none;
+}
+.checkbox {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.checkbox input {
+    width: 20px;
+    height: 20px;
+    margin: 10px 5px 0 0;
+    padding-right: 10px;
+}
+.form button{
+    margin: 20px 20px 20px 0;
+    width: 120px;
+    height: 30px;
+    padding: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: black;
+    background-color: #d6d6d6;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px #999;
+}
+.form button:hover {
+    background-color: rgb(206, 206, 206);
+}
+.form button:active {
+    box-shadow: 0 4px rgb(138, 138, 138);
+    transform: translateY(.3px);
+}
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.header_top {
+    font-size: 18px;
+    color: red;
+    font-weight: 500;
+}
+.header_bottom {
+    font-size: 13px;
+}
+.commonError {
+    background-color: red;
+    color: white;
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+    padding: 5px;
+}
+.form .loginButton {
+    font-weight: 900;
+}

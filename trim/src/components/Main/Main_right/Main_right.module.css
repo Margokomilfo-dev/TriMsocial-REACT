@@ -1,0 +1,15 @@
+.main_right {
+    width: 100%;
+}
+
+.section {
+    background-color: #fff;
+    width: calc(100% - 60px);
+    margin: 10px 0 0px 20px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.section:first-child {
+    margin-top: 0;
+}
