@@ -10,10 +10,10 @@ export const updateObjectInArray = (items, objPropName, itemId, newObjProps) => 
     })
 }
 
-export const createField = (className, component, type, name, placeholder, fieldText, defaultValue) => {
+export const createField = (className, component, type, name, placeholder, fieldText) => {
     return (
         <div className={className}>
-            <Field component ={component} type={type} name={name} placeholder={placeholder} defaultValue={defaultValue}/> {fieldText}
+            <Field component ={component} type={type} name={name} placeholder={placeholder}/> {fieldText}
         </div>
     )
 }

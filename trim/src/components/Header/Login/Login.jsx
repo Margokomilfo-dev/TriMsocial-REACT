@@ -13,8 +13,8 @@ let LoginForm = ({handleSubmit, error, captcha, urlCaptcha, pristine, submitting
         <div>
             <div className={s.check_in}>
                 <form className={s.form} onSubmit={handleSubmit}>
-                    {createField(null, Input, 'email', 'email', 'email', null,'margokomilfo@mail.ru' )}
-                    {createField(null, Input, 'password', 'password', 'password', null, '123456789')}
+                    {createField(null, Input, 'email', 'email', 'email', null)}
+                    {createField(null, Input, 'password', 'password', 'password', null)}
                     {createField(s.checkbox, Input, 'checkbox', 'rememberMe', null, 'remember me ')}
                     {/*---------------common_error-------------------*/}
                     {error &&
