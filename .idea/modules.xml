@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/my_network.iml" filepath="$PROJECT_DIR$/.idea/my_network.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/TriMsocial-REACT.iml" filepath="$PROJECT_DIR$/.idea/TriMsocial-REACT.iml" />
     </modules>
   </component>
 </project>
